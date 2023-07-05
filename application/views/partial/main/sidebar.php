@@ -31,7 +31,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url('userAccount') ?>" class="nav-link">
+            <a href="<?php echo base_url('userAdmin') ?>" class="nav-link">
               <i class="nav-icon fa fa-user"></i>
               <p>
                 User

@@ -64,3 +64,4 @@ $route['dashboard'] = 'Dashboard';
 
 //UserAccount
 $route['userAdmin'] = 'User/Admin';
+$route['addUser']   = 'User/AddUser';

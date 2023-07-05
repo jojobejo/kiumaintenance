@@ -8,8 +8,6 @@
 </script>
 <!-- Bootstrap 4 -->
 <script src="<?php echo base_url('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
-<!-- ChartJS -->
-<script src="<?php echo base_url('assets/plugins/chart.js/Chart.min.js') ?>"></script>
 <!-- jQuery Knob Chart -->
 <script src="<?php echo base_url('assets/plugins/jquery-knob/jquery.knob.min.js') ?>"></script>
 <!-- daterangepicker -->
@@ -38,10 +36,6 @@
 <script src="<?php echo base_url('assets/plugins/select2/js/select2.full.min.js') ?>"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/dist/js/adminlte.js') ?>"></script>
-<script src="../../plugins/chart.js/Chart.min.js"></script>
-<!-- FLOT CHARTS -->
-<script src="<?php echo base_url('assets/plugins/flot/jquery.flot.js') ?>"></script>
-<script src="<?php echo base_url('assets/plugins/flot/plugins/jquery.flot.pie.js') ?>"></script>
 
 
 </body>
