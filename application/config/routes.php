@@ -61,3 +61,6 @@ $route['logout']    = 'Auth/Logout';
 
 //Dashboard
 $route['dashboard'] = 'Dashboard';
+
+//UserAccount
+$route['userAdmin'] = 'User/Admin';
