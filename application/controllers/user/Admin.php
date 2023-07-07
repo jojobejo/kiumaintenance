@@ -41,4 +41,31 @@ class Admin extends CI_Controller
         $this->M_User->addUser($dataUser);
         redirect('userAdmin');
     }
+
+    public function editeUser()
+    {
+        $username   = $this->input->post();
+        $password   = $this->input->post();
+        $nm_user    = $this->input->post();
+        $kduser     = $this->input->post();
+        $departemen = $this->input->post();
+
+        $dataUser = array(
+            'kode_user' => $kduser,
+            'username'  => $username,
+            'password'  => $password,
+            'nama_user' => $nm_user,
+            'departemen' => $departemen
+        );
+
+        $this->M_User->editedUser($dataUser, $kduser);
+        redirect('userAdmin');
+    }
+
+    public function deleteUser()
+    {
+        $kduser = $this->input->post();
+        $this->M_User->deleteUser($kduser);
+        redirect('userAdmin');
+    }
 }
