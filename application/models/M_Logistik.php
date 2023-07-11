@@ -55,4 +55,16 @@ class M_Logistik extends CI_Model
         date_default_timezone_set('Asia/Jakarta');
         return 'KIU' . date('dmy') . $kd;
     }
+    function insert_detail_order_driver($data)
+    {
+        return $this->db->insert('tb_log_tracking', $data);
+    }
+    function insert_deliveri_order($data)
+    {
+        return $this->db->insert('tb_order', $data);
+    }
+    function get_all_do()
+    {
+        return $this->db->get('tb_order')->result();
+    }
 }

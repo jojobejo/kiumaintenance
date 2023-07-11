@@ -63,7 +63,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url('deleveriorder') ?>" class="nav-link">
+              <a href="<?php echo base_url('deliveriorder') ?>" class="nav-link">
                 <i class="nav-icon fa fa-shipping-fast"></i>
                 <p>
                   Deleveri Order
