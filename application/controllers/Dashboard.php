@@ -13,7 +13,7 @@ class Dashboard extends CI_Controller
 
     public function index()
     {
-        $data['page_title'] = 'KIU MAINTENANCE';
+        $data['page_title'] = 'KARISMA';
 
         $this->load->view('partial/main/header.php',$data);
         $this->load->view('content/body.php', $data);
