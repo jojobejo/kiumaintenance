@@ -8,7 +8,7 @@
 
         <?php $this->load->view('partial/main/navbar') ?>
         <?php $this->load->view('partial/main/sidebar') ?>
-        <?php $this->load->view('content/user/modalUser') ?>
+        <?php $this->load->view('content/inventaris/modalinventaris') ?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -26,40 +26,39 @@
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data All User</h3>
+                            <h3 class="card-title">Data Inventaris</h3>
                         </div>
-                        <div>
-                            <button type="button" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#modalAddUser">
-                                <i class="fas fa-plus"></i>
-                                Tambah User Baru
+                        <div class="ml-2">
+                            <button type="button" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#addInventaris">
+                                <i class="fas fa-shopping-cart"></i>
+                                Pembelian Inventaris Baru
                             </button>
                         </div>
                         <div class="card-body">
-                            <table id="tb_user" class="table table-bordered table-striped">
+                            <table id="tb_inventaris" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Nama User</th>
-                                        <th>Username</th>
+                                        <th>Kode Inventaris</th>
+                                        <th>Kategori Inventaris</th>
+                                        <th>Owner</th>
                                         <th>Departemen</th>
+                                        <th>Nama Komponen</th>
+                                        <th>Tanggal Pembelian</th>
+                                        <th>Status</th>
                                         <th>#</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($alluser as $u) : ?>
-                                        <tr>
-                                            <th><?= $u->nama_user ?></th>
-                                            <th><?= $u->username ?></th>
-                                            <th><?= $u->departemen ?></th>
-                                            <th>
-                                                <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#edituser<?= $u->id ?>">
-                                                    <i class="fa fa-solid fa-pencil-alt"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapususer<?= $u->id ?>">
-                                                    <i class="fa fa-solid fa-trash-alt"></i>
-                                                </a>
-                                            </th>
-                                        </tr>
-                                    <?php endforeach; ?>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

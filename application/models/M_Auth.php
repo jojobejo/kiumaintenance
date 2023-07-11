@@ -3,13 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 /**
  *
  */
-class Auth extends CI_Model
+class M_Auth extends CI_Model
 {
-    function __construct()
-    {
-        parent::__construct();
-    }
-
     function cek_username($username)
     {
         $this->db->where('username', $username);

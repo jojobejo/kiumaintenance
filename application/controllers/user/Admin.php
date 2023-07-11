@@ -15,6 +15,7 @@ class Admin extends CI_Controller
     {
         $data['page_title'] = 'User Account';
         $data['alluser']    = $this->M_User->getAll();
+        $data['kduser']     = $this->M_User->kduser();
 
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/user/admin.php', $data);
@@ -24,18 +25,20 @@ class Admin extends CI_Controller
 
     public function addUser()
     {
-        $kduser     = $this->input->post('kd_isis');
+        $kduser     = $this->input->post('kd_isi');
         $nmuser     = $this->input->post('nama_isi');
         $username   = $this->input->post('username_isi');
         $password   = $this->input->post('password_isi');
-        $departemen = $this->input->post('');
+        $departemen = $this->input->post('dep_isi');
+        $pass       = password_hash($password, PASSWORD_DEFAULT);
 
         $dataUser = array(
             'kode_user' => $kduser,
-            'username'  => $username,
-            'password'  => $password,
             'nama_user' => $nmuser,
-            'departemen' => $departemen
+            'departemen' => $departemen,
+            'username'  => $username,
+            'password'  => $pass,
+            'akses_lv'  => '2',
         );
 
         $this->M_User->addUser($dataUser);

@@ -6,6 +6,7 @@ class Auth extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->model('M_Auth');
     }
     function index()
     {
@@ -18,56 +19,38 @@ class Auth extends CI_Controller
         $username = $this->input->post('user_isi');
         $password = $this->input->post('pass_isi');
 
-        $check_username = $this->Loginmodel->cek_username($username)->num_rows();
+        $check_username = $this->M_Auth->cek_username($username)->num_rows();
         if ($check_username > 0) {
 
-            $check_password = $this->Loginmodel->cek_password($username);
+            $check_password = $this->M_Auth->cek_password($username);
 
             foreach ($check_password as $key) {
-                if ($key->username == $username && password_verify($password, $key->password) && $key->role == "admin") {
+                if ($key->username == $username && password_verify($password, $key->password)) {
                     $data_session = array(
-                        'id_user'   => $key->id_user,
-                        'username'  => $key->username,
-                        'nama_user' => $key->nama_user,
-                        'role'      => $key->role,
-                        'sektor'    => $key->sektor,
-                        'status'    => "is_login"
-                    );
-
-                    $this->session->set_userdata($data_session);
-                    redirect('admin');
-                } else if ($key->username == $username && password_verify($password, $key->password) && $key->role == "admin1") {
-                    $data_session = array(
-                        'id_user'       => $key->id_user,
-                        'username'      => $key->username,
-                        'nama_user'     => $key->nama_user,
-                        'role'          => $key->role,
-                        'sektor'        => $key->sektor,
-                        'team_opname'   => $key->team_opname,
-                        'status'    => "is_login"
+                        'id'          => $key->id,
+                        'username'    => $key->username,
+                        'nama_user'   => $key->nama_user,
+                        'akses_lv'    => $key->akses_lv,
+                        'departemen'  => $key->departemen,
+                        'status'      => "is_login"
                     );
                     $this->session->set_userdata($data_session);
-                    redirect('admin');
-                } else if ($key->username == $username && password_verify($password, $key->password) && $key->role == "user") {
-                    $data_session = array(
-                        'id_user'       => $key->id_user,
-                        'username'      => $key->username,
-                        'nama_user'     => $key->nama_user,
-                        'role'          => $key->role,
-                        'sektor'        => $key->sektor,
-                        'team_opname'   => $key->team_opname,
-                        'status'    => "is_login"
-                    );
-                    $this->session->set_userdata($data_session);
-                    redirect('def_user');
+                    redirect('dashboard');
                 } else {
                     $this->session->set_flashdata("gagal", "username / password salah!!!");
-                    redirect('login');
+                    redirect('Auth');
                 }
             }
         } else {
             $this->session->set_flashdata("gagal", "username salah");
-            redirect('login');
+            redirect('Auth');
         }
+    }
+
+    function logout()
+    {
+        $this->session->set_flashdata("logout", "Berhasil Log Out");
+        $this->session->sess_destroy();
+        redirect('Auth');
     }
 }

@@ -25,4 +25,12 @@ class M_Inventaris extends CI_Model
         $this->db->where('id_inven', $iduser);
         return $this->db->delete('tb_inventaris');
     }
+    public function getUser($kduser)
+    {
+        $this->db->select('*');
+        $this->db->limit('6');
+        $this->db->from('tb_user');
+        $this->db->like('nama_user', $kduser);
+        return $this->db->get()->result_array();
+    }
 }

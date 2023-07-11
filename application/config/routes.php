@@ -56,12 +56,20 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 //Auth Login
-$route['process']   = 'Auth/Process';
-$route['logout']    = 'Auth/Logout';
+$route['process']   = 'Auth/process';
+$route['logout']    = 'Auth/logout';
 
 //Dashboard
 $route['dashboard'] = 'Dashboard';
 
+//inventaris
+$route['inventaris']        = 'inventaris/C_Inventaris';
+$route['addinventaris']     = 'inventaris/C_Inventaris/addinventaris';
+$route['editinventaris']    = 'inventaris/C_Inventaris/editinventaris';
+$route['hapusinventaris']    = 'inventaris/C_Inventaris/hapusinventaris';
+$route['changeowner']       = 'inventaris/C_Inventaris/changeowner';
+$route['selectowner']       = 'inventaris/C_Inventaris/selectowner';
+
 //UserAccount
 $route['userAdmin'] = 'User/Admin';
-$route['addUser']   = 'User/AddUser';
+$route['addUser']   = 'User/Admin/addUser';
