@@ -21,16 +21,18 @@
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
+
             <!-- /.content-header -->
             <section class="content">
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <a href="<?= base_url('dashboard') ?>"><i class="fas fa-play fa-flip-horizontal mr-2"></i></a>
+                                <a href="<?= base_url('deliveriorder') ?>"><i class="fas fa-play fa-flip-horizontal mr-2"></i></a>
                                 <h3 class="card-title">Delivery Order</h3>
                             </div>
                         </div>
+
                         <div class="card-body">
                             <?php echo form_open_multipart('addorderdeliv'); ?>
                             <div id="kodeawal">
@@ -45,11 +47,14 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div id="driveroption">
                                 <div class="row">
                                     <div class="col-sm-2">
                                         <label for="noInv" class="">Nama Driver</label>
-                                        <input type="text" id="nm_driver_i[]" name="nm_driver_i[]" value="" class="form-control">
+                                        <select class="form-control select2bs4 select2Driver" name="nm_driver_i[]" id="nm_driver_i">
+                                            <option value="&nbsp" selected></option>
+                                        </select>
                                     </div>
                                     <div class="col-sm-1">
                                         <label for="noInv" class="">Kode Truk</label>
@@ -65,6 +70,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <label for="noInv" class=""></label><br>
                             <button type="button" name="add" id="add" class="btn btn-success btn-block"> <i class="fas fa-plus"></i></button>
                             <button type="submit" class="btn btn-primary btn-block">Simpan Data </button>

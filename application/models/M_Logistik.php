@@ -57,14 +57,52 @@ class M_Logistik extends CI_Model
     }
     function insert_detail_order_driver($data)
     {
-        return $this->db->insert('tb_log_tracking', $data);
+        return $this->db->insert('tb_det_tracking_driver', $data);
     }
     function insert_deliveri_order($data)
     {
-        return $this->db->insert('tb_order', $data);
+        return $this->db->insert('tb_order_tracking_driver', $data);
     }
     function get_all_do()
     {
-        return $this->db->get('tb_order')->result();
+        $this->db->select('*');
+        $this->db->select('COUNT(b.kd_driver) as jml_driver');
+        $this->db->select('COUNT(b.nm_toko) as jml_toko');
+        $this->db->from('tb_order_tracking_driver a');
+        $this->db->join('tb_det_tracking_driver b','b.kd_deliveri = a.kd_order');
+        return $this->db->get()->result();
+    }
+    public function get_driver($kduser)
+    {
+        $this->db->select('*');
+        $this->db->limit('6');
+        $this->db->from('tb_op_driver');
+        $this->db->like('nama_driver', $kduser);
+        return $this->db->get()->result_array();
+    }
+    function get_order($kd)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_order_tracking_driver');
+        $this->db->where('kd_order', $kd);
+        return $this->db->get()->result();
+    }
+    function get_det_deliv($kd)
+    {
+        $this->db->select('*');
+        $this->db->select('a.id as idorder');
+        $this->db->from('tb_det_tracking_driver a');
+        $this->db->join('tb_op_driver b', 'b.kd_driver = a.kd_driver');
+        $this->db->join('tb_op_plat c', 'c.nm_truk = a.kd_truk');
+        $this->db->where('kd_deliveri', $kd);
+        return $this->db->get()->result();
+    }
+    function insert_pnd_driver($data)
+    {
+        return $this->db->insert('tb_driver_pending', $data);
+    }
+    function delete_tr_detail_driver($id)
+    {
+        return $this->db->delete('tb_det_tracking_driver', array("id" => $id));
     }
 }

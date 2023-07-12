@@ -43,7 +43,6 @@
                                     <tr>
                                         <th>Kode Order</th>
                                         <th>Tanggal Order</th>
-                                        <th>Jumlah Armada</th>
                                         <th>Jumlah Toko</th>
                                         <th>#</th>
                                     </tr>
@@ -52,11 +51,10 @@
                                     <?php foreach ($deliveri as $d) : ?>
                                         <tr>
                                             <th><?= $d->kd_order ?></th>
-                                            <th><?= $d->tgl_order ?></th>
-                                            <th><?= $d->jml_driver ?></th>
+                                            <th><?= $d->tgl_jalan ?></th>
                                             <th> <?= $d->jml_toko ?></th>
                                             <th>
-                                                <a href="#" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#editdriver<?= $d->id ?>">
+                                                <a href="<?= base_url('detail_deliveri/') . $d->kd_order ?>" class="btn btn-primary btn-block btn-sm">
                                                     <i class="fa fa-solid fa-search"></i>
                                                 </a>
                                             </th>
