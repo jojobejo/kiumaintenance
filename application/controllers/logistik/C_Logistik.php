@@ -200,7 +200,7 @@ class C_Logistik extends CI_Controller
     {
         $data['page_title'] = 'KARISMA - LOGISTIK';
         $data['order_deliv'] = $this->M_Logistik->get_order($kd_deliveri);
-        $data['detail']   = $this->M_Logistik->get_det_deliv($kd_deliveri);
+        $data['detail']   = $this->M_Logistik->get_det_deliv($kd_deliveri)->result();
 
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/logistik/detailorder.php', $data);
@@ -232,5 +232,18 @@ class C_Logistik extends CI_Controller
         $this->M_Logistik->delete_tr_detail_driver($id);
 
         redirect('detail_deliveri/'.$kdorder);
+    }
+    public function det_driver($kdorder,$kddriver)
+    {
+        $data['page_title'] = 'KARISMA - LOGISTIK';
+        $data['order_deliv'] = $this->M_Logistik->get_order($kdorder);
+        $data['kd'] = $this->M_Logistik->get_kd($kdorder)->result();
+        $data['detail']   = $this->M_Logistik->get_det_jalan_driver($kdorder,$kddriver)->result();
+
+        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('content/logistik/detaildriver.php', $data);
+        $this->load->view('partial/main/footer.php');
+        $this->load->view('content/logistik/ajaxlogistik.php');
+        $this->load->view('content/logistik/modaldetaildriverorder.php');
     }
 }

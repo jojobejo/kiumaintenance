@@ -89,6 +89,7 @@ $route['tambahorderdriver']     = 'logistik/C_Logistik/tambahorderdriver';
 $route['addorderdeliv']     = 'logistik/C_Logistik/addorderdeliv';
 $route['select2driver']     = 'logistik/C_Logistik/select2driver';
 $route['detail_deliveri/(:any)'] = 'logistik/C_Logistik/det_deliveri/$1';
+$route['detail_deliveri/(:any)/(:any)'] = 'logistik/C_Logistik/det_driver/$1/$2';
 $route['add_pending_driver']     = 'logistik/C_Logistik/add_pending_driver';
 
 //UserAccount

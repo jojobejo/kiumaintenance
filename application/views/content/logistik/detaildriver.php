@@ -8,6 +8,7 @@
 
         <?php $this->load->view('partial/main/navbar') ?>
         <?php $this->load->view('partial/main/sidebar') ?>
+        <?php $this->load->view('content/logistik/modaldetaildriverorder') ?>
 
 
         <!-- Content Wrapper. Contains page content -->
@@ -28,7 +29,9 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <a href="<?= base_url('deliveriorder') ?>"><i class="fas fa-play fa-flip-horizontal mr-2"></i></a>
+                                <?php foreach ($kd as $k) : ?>
+                                    <a href="<?= base_url('detail_deliveri/') . $k->kd_deliveri ?>"><i class="fas fa-play fa-flip-horizontal mr-2"></i></a>
+                                <?php endforeach; ?>
                                 <h3 class="card-title">Driver Listing Order</h3>
                             </div>
                         </div>
@@ -83,8 +86,7 @@
                                         <th>Nama Driver</th>
                                         <th>Nama Truk</th>
                                         <th>Nomor Plat</th>
-                                        <th>Destinasi</th>
-                                        <th>Jumlah Toko</th>
+                                        <th>Nama Toko</th>
                                         <th style="text-align: center;">#</th>
                                     </tr>
                                 </thead>
@@ -94,11 +96,10 @@
                                             <th><?= $d->nama_driver ?></th>
                                             <th><?= $d->kd_truk ?></th>
                                             <th><?= $d->noplat ?></th>
-                                            <th><?= $d->destinasi ?></th>
-                                            <th><?= $d->jml_toko ?></th>
+                                            <th><?= $d->nm_toko ?></th>
                                             <th style="text-align: center;">
-                                                <a href="<?= base_url('detail_deliveri/') . $d->kd_deliveri . '/' . $d->kd_driver ?>" class=" btn btn-primary btn-sm ">
-                                                    <i class=" fa fa-solid fa-search"></i> Detail Perjalanan
+                                                <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#maddnotepending<?= $d->id ?>">
+                                                    <i class="fa fa-solid fa-ban"></i> PENDING <i class="fa fa-solid fa-ban"></i>
                                                 </a>
                                             </th>
                                         </tr>

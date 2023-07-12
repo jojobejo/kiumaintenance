@@ -69,7 +69,7 @@ class M_Logistik extends CI_Model
         $this->db->select('COUNT(b.kd_driver) as jml_driver');
         $this->db->select('COUNT(b.nm_toko) as jml_toko');
         $this->db->from('tb_order_tracking_driver a');
-        $this->db->join('tb_det_tracking_driver b','b.kd_deliveri = a.kd_order');
+        $this->db->join('tb_det_tracking_driver b', 'b.kd_deliveri = a.kd_order');
         return $this->db->get()->result();
     }
     public function get_driver($kduser)
@@ -89,13 +89,19 @@ class M_Logistik extends CI_Model
     }
     function get_det_deliv($kd)
     {
-        $this->db->select('*');
-        $this->db->select('a.id as idorder');
-        $this->db->from('tb_det_tracking_driver a');
-        $this->db->join('tb_op_driver b', 'b.kd_driver = a.kd_driver');
-        $this->db->join('tb_op_plat c', 'c.nm_truk = a.kd_truk');
-        $this->db->where('kd_deliveri', $kd);
-        return $this->db->get()->result();
+        return $this->db->query("SELECT 
+        a.id, a.kd_deliveri , a.kd_driver ,b.nama_driver, a.kd_truk , c.noplat , a.destinasi ,COUNT(a.nm_toko) AS jml_toko 
+        FROM tb_det_tracking_driver a JOIN tb_op_driver b ON b.kd_driver = a.kd_driver JOIN tb_op_plat c ON c.nm_truk = a.kd_truk 
+        WHERE a.kd_deliveri = '$kd' 
+        GROUP BY a.kd_driver");
+    }
+    function get_det_jalan_driver($kdorder, $driver)
+    {
+        return $this->db->query("SELECT a.id, a.kd_deliveri , a.destinasi,a.tgl_jalan ,a.kd_driver ,b.nama_driver, a.kd_truk , c.noplat , a.nm_toko FROM tb_det_tracking_driver a JOIN tb_op_driver b ON b.kd_driver = a.kd_driver JOIN tb_op_plat c ON c.nm_truk = a.kd_truk WHERE a.kd_deliveri = '$kdorder' AND a.kd_driver = '$driver';");
+    }
+    public function get_kd($kd)
+    {
+        return $this->db->query("SELECT a.id, a.kd_deliveri , a.destinasi,a.tgl_jalan ,a.kd_driver ,b.nama_driver, a.kd_truk , c.noplat , a.nm_toko FROM tb_det_tracking_driver a JOIN tb_op_driver b ON b.kd_driver = a.kd_driver JOIN tb_op_plat c ON c.nm_truk = a.kd_truk WHERE a.kd_deliveri = '$kd' LIMIT 1");
     }
     function insert_pnd_driver($data)
     {
