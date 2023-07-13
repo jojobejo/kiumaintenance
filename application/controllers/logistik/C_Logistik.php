@@ -246,4 +246,10 @@ class C_Logistik extends CI_Controller
         $this->load->view('content/logistik/ajaxlogistik.php');
         $this->load->view('content/logistik/modaldetaildriverorder.php');
     }
+    public function driver_pending()
+    {
+        $data['page_title'] = 'KARISMA - LOGISTIK';
+        $data['driver'] = $this->M_Logistik->get_pnd_driver()->result();
+        
+    }
 }

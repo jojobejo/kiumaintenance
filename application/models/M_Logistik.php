@@ -66,10 +66,12 @@ class M_Logistik extends CI_Model
     function get_all_do()
     {
         $this->db->select('*');
-        $this->db->select('COUNT(b.kd_driver) as jml_driver');
-        $this->db->select('COUNT(b.nm_toko) as jml_toko');
+        $this->db->select('COUNT(DISTINCT(b.kd_driver)) as jml_driver');
+        $this->db->select('COUNT(DISTINCT(b.destinasi)) as jml_destinasi');
+        $this->db->select('COUNT(DISTINCT(b.nm_toko)) as jml_toko');
         $this->db->from('tb_order_tracking_driver a');
         $this->db->join('tb_det_tracking_driver b', 'b.kd_deliveri = a.kd_order');
+        $this->db->group_by('a.kd_order');
         return $this->db->get()->result();
     }
     public function get_driver($kduser)

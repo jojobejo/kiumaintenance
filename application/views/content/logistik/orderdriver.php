@@ -31,19 +31,31 @@
                                 <h3 class="card-title">Order Listing</h3>
                             </div>
                         </div>
-                        <div class="ml-2">
-                            <a href="<?= base_url('tambahorderdriver') ?>" class="btn btn-primary m-2 ml-3">
-                                <i class="fas fa-plus"></i>
-                                Add Deliveri Order
-                            </a>
+                        <div class="row">
+                            <div class="ml-2">
+                                <a href="<?= base_url('tambahorderdriver') ?>" class="btn btn-primary m-2 ml-3">
+                                    <i class="fas fa-plus"></i>
+                                    Add Deliveri Order
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="<?= base_url('driver_pending') ?>" class="btn btn-primary m-2 ml-3">
+                                    <i class="fas fa-ban"></i>
+                                    Driver Pending
+                                    <i class="fas fa-ban"></i>
+                                </a>
+                            </div>
                         </div>
                         <div class="card-body">
-                            <table id="tb_list_order" class="table table-bordered table-striped">
+                            <table id="tb_list_order" class="table table-bordered table-striped" style="text-align: center;">
                                 <thead>
                                     <tr>
                                         <th>Kode Order</th>
                                         <th>Tanggal Order</th>
-                                        <th>Jumlah Toko</th>
+                                        <th>Jumlah Driver</th>
+                                        <th>Jumlah Destinasi Kota</th>
+                                        <th>Jumlah Kunjungan Toko</th>
                                         <th>#</th>
                                     </tr>
                                 </thead>
@@ -52,6 +64,8 @@
                                         <tr>
                                             <th><?= $d->kd_order ?></th>
                                             <th><?= $d->tgl_jalan ?></th>
+                                            <th> <?= $d->jml_driver ?></th>
+                                            <th> <?= $d->jml_destinasi ?></th>
                                             <th> <?= $d->jml_toko ?></th>
                                             <th>
                                                 <a href="<?= base_url('detail_deliveri/') . $d->kd_order ?>" class="btn btn-primary btn-block btn-sm">
