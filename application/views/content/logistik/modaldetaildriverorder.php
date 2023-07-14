@@ -1,5 +1,5 @@
 <?php foreach ($detail as $d) : ?>
-    <div class="modal fade" id="maddnotepending<?= $d->id ?>">
+    <div class="modal fade" id="maddnotepending<?= $d->kd_deliveri ?><?= $d->kd_driver ?>">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -14,13 +14,13 @@
                         <div class="row">
                             <label class="col-sm-3 control-label text-right" for="id_bar">Note Pending<span class="required">*</span></label>
                             <div class="col-sm-8"><input class="form-control" type="text" id="pnd_isi" name="pnd_isi" value="" /></div>
-                            <input class="form-control" type="text" id="id_isi" name="id_isi" value="<?= $d->id ?>" readonly hidden/>
+                            <input class="form-control" type="text" id="id_isi" name="id_isi" value="<?= $d->id ?>" readonly />
                             <input class="form-control" type="text" id="kd_deliv_isi" name="kd_deliv_isi" value="<?= $d->kd_deliveri ?>" hidden readonly />
-                            <input class="form-control" type="text" id="tgl_isi" name="tgl_isi" value="<?= $d->tgl_jalan ?>" hidden readonly />
+                            <input class="form-control" type="text" id="tgl_isi" name="tgl_isi" value="<?= $d->tgl_jalan ?>" readonly />
                             <input class="form-control" type="text" id="driver_isi" name="driver_isi" value="<?= $d->kd_driver ?>" hidden readonly />
-                            <input class="form-control" type="text" id="truk_isi" name="truk_isi" value="<?= $d->kd_truk ?>" hidden readonly />
+                            <input class="form-control" type="text" id="truk_isi" name="truk_isi" value="<?= $d->kd_truk ?>" readonly />
                             <input class="form-control" type="text" id="destinasi_isi" name="destinasi_isi" value="<?= $d->destinasi ?>" hidden readonly />
-                            <input class="form-control" type="text" id="tko_isi" name="tko_isi" value="<?= $d->nm_toko ?>" hidden readonly />
+                            <input class="form-control" type="text" id="tko_isi" name="tko_isi" value="<?= $d->nm_toko ?>" readonly />
                         </div>
                     </div>
                 </div>

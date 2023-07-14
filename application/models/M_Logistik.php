@@ -87,12 +87,13 @@ class M_Logistik extends CI_Model
         $this->db->select('*');
         $this->db->from('tb_order_tracking_driver');
         $this->db->where('kd_order', $kd);
+        $this->db->limit(1);
         return $this->db->get()->result();
     }
     function get_det_deliv($kd)
     {
         return $this->db->query("SELECT 
-        a.id, a.kd_deliveri , a.kd_driver ,b.nama_driver, a.kd_truk , c.noplat , a.destinasi ,COUNT(a.nm_toko) AS jml_toko 
+        a.id,a.tgl_jalan, a.nm_toko, a.kd_deliveri , a.kd_driver ,b.nama_driver, a.kd_truk , c.noplat , a.destinasi ,COUNT(a.nm_toko) AS jml_toko 
         FROM tb_det_tracking_driver a JOIN tb_op_driver b ON b.kd_driver = a.kd_driver JOIN tb_op_plat c ON c.nm_truk = a.kd_truk 
         WHERE a.kd_deliveri = '$kd' 
         GROUP BY a.kd_driver");
@@ -107,10 +108,31 @@ class M_Logistik extends CI_Model
     }
     function insert_pnd_driver($data)
     {
-        return $this->db->insert('tb_driver_pending', $data);
+        return $this->db->insert_batch('tb_driver_pending', $data);
     }
     function delete_tr_detail_driver($id)
     {
         return $this->db->delete('tb_det_tracking_driver', array("id" => $id));
+    }
+    function get_pnd_driver ()
+    {
+        return $this->db->query("SELECT a.kd_deliveri , a.tgl_jalan , c.nama_driver , b.noplat , a.kd_truk , a.destinasi , COUNT(a.nm_toko) AS jml_toko ,a.note_pending, a.kd_driver
+        FROM tb_driver_pending a
+        join tb_op_plat b ON b.nm_truk = a.kd_truk
+        JOIN tb_op_driver c ON c.kd_driver = a.kd_driver
+        GROUP BY a.kd_deliveri , a.kd_driver
+        ");
+    }
+    function get_det_driver_pnd($kd1,$kd2)
+    {
+        return $this->db->query("SELECT a.id,a.kd_deliveri , a.tgl_jalan , c.nama_driver , b.noplat , a.kd_truk , a.destinasi ,a.nm_toko ,a.note_pending, a.kd_driver
+        FROM tb_driver_pending a
+        join tb_op_plat b ON b.nm_truk = a.kd_truk
+        JOIN tb_op_driver c ON c.kd_driver = a.kd_driver
+        WHERE a.kd_deliveri = '$kd1' AND a.kd_driver = '$kd2'");
+    }
+    public function get_kd_det_pnd($kd)
+    {
+        return $this->db->query("SELECT a.id, a.kd_deliveri , a.destinasi,a.tgl_jalan ,a.kd_driver ,b.nama_driver, a.kd_truk , c.noplat , a.nm_toko FROM tb_det_tracking_driver a JOIN tb_op_driver b ON b.kd_driver = a.kd_driver JOIN tb_op_plat c ON c.nm_truk = a.kd_truk WHERE a.kd_deliveri = '$kd' LIMIT 1");
     }
 }

@@ -29,9 +29,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <?php foreach ($kd as $k) : ?>
-                                    <a href="<?= base_url('detail_deliveri/') . $k->kd_deliveri ?>"><i class="fas fa-play fa-flip-horizontal mr-2"></i></a>
-                                <?php endforeach; ?>
+                                    <a href="<?= base_url('deliveriorder') ?>"><i class="fas fa-play fa-flip-horizontal mr-2"></i></a>
                                 <h3 class="card-title">Driver Listing Order</h3>
                             </div>
                         </div>
@@ -41,13 +39,13 @@
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Note Pending Driver</h4>
+                                                <h4 class="modal-title">Reschedule Driver</h4>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <?php echo form_open_multipart('add_pending_driver'); ?>
+                                                <?php echo form_open_multipart('#'); ?>
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label class="col-sm-3 control-label text-right" for="id_bar">Note Pending<span class="required">*</span></label>
@@ -76,7 +74,7 @@
                                 </div>
                                 <a href="#" class="btn btn-danger mb-2 btn-lg" data-toggle="modal" data-target="#maddnotepending">
                                     <i class="fa fa-solid fa-ban"></i>
-                                    PENDING DELIVERY
+                                    Reschedule Driver
                                 </a>
                             </div>
                             </form>

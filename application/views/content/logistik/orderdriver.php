@@ -63,7 +63,7 @@
                                     <?php foreach ($deliveri as $d) : ?>
                                         <tr>
                                             <th><?= $d->kd_order ?></th>
-                                            <th><?= $d->tgl_jalan ?></th>
+                                            <th><?= format_indo($d->tgl_jalan) ?></th>
                                             <th> <?= $d->jml_driver ?></th>
                                             <th> <?= $d->jml_destinasi ?></th>
                                             <th> <?= $d->jml_toko ?></th>

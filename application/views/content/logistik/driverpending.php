@@ -33,12 +33,6 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <a href="#" class="btn btn-primary mb-2 btn-lg">
-                                <i class="fa fa-solid fa-calendar"></i>
-                                <?php foreach ($order_deliv as $o) : ?>
-                                    Jadwal Deliveri : <?= format_indo($o->tgl_jalan) ?>
-                                <?php endforeach; ?>
-                            </a>
                             <table id="tb_det_list_driver_order" class="table table-bordered table-striped" style="text-align: center;">
                                 <thead>
                                     <tr>
@@ -51,7 +45,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($detail as $d) : ?>
+                                    <?php foreach ($driver as $d) : ?>
                                         <tr>
                                             <th><?= $d->nama_driver ?></th>
                                             <th><?= $d->kd_truk ?></th>
@@ -59,7 +53,7 @@
                                             <th><?= $d->destinasi ?></th>
                                             <th><?= $d->jml_toko ?></th>
                                             <th style="text-align: center;">
-                                                <a href="<?= base_url('detail_deliveri/') . $d->kd_deliveri . '/' . $d->kd_driver ?>" class=" btn btn-primary btn-sm ">
+                                                <a href="<?= base_url('det_pnd_driver/') . $d->kd_deliveri . '/' . $d->kd_driver ?>" class=" btn btn-primary btn-sm ">
                                                     <i class=" fa fa-solid fa-search"></i> Detail Perjalanan
                                                 </a>
                                             </th>

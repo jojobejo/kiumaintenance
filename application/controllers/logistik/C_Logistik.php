@@ -210,35 +210,32 @@ class C_Logistik extends CI_Controller
     }
     public function add_pending_driver()
     {
-        $id         = $this->input->post('id_isi');
-        $kdorder    = $this->input->post('kd_deliv_isi');
-        $tglorder   = $this->input->post('tgl_isi');
-        $kddriver   = $this->input->post('driver_isi');
-        $kdtruk     = $this->input->post('truk_isi');
-        $destinasi  = $this->input->post('destinasi_isi');
-        $nmtko      = $this->input->post('tko_isi');
-        $notepnd    = $this->input->post('pnd_isi');
+        $id    = $this->input->post('id_isi');
+        $pending    = $this->input->post('pnd_isi');
 
-        $datapending = array(
-            'kd_deliveri'   => $kdorder,
-            'tgl_jalan'     => $tglorder,
-            'kd_driver'     => $kddriver,
-            'kd_truk'       => $kdtruk,
-            'destinasi'     => $destinasi,
-            'nm_toko'       => $nmtko,
-            'note_pending'  => $notepnd
-        );
-        $this->M_Logistik->insert_pnd_driver($datapending);
-        $this->M_Logistik->delete_tr_detail_driver($id);
+        $result = array();
+        foreach ($_POST['kd_deliv_isi'] as $i => $val) {
+            $result[] = array(
+                'kd_deliveri' => $this->input->post('kd_deliv_isi')[$i],
+                'tgl_jalan' => $this->input->post('tgl_isi')[$i],
+                'kd_driver' => $this->input->post('driver_isi')[$i],
+                'kd_truk' => $this->input->post('truk_isi')[$i],
+                'destinasi' => $this->input->post('destinasi_isi')[$i],
+                'nm_toko' => $this->input->post('tko_isi')[$i],
+                'note_pending' => $pending
+            );
+        }
+        $this->db->insert_batch('tb_driver_pending', $result);
+        $this->db->where_in('id', $id);
+        $this->db->delete('tb_det_tracking_driver');
 
-        redirect('detail_deliveri/'.$kdorder);
+        redirect('deliveriorder');
     }
-    public function det_driver($kdorder,$kddriver)
+    public function det_driver($kdorder, $kddriver)
     {
         $data['page_title'] = 'KARISMA - LOGISTIK';
-        $data['order_deliv'] = $this->M_Logistik->get_order($kdorder);
         $data['kd'] = $this->M_Logistik->get_kd($kdorder)->result();
-        $data['detail']   = $this->M_Logistik->get_det_jalan_driver($kdorder,$kddriver)->result();
+        $data['detail']   = $this->M_Logistik->get_det_jalan_driver($kdorder, $kddriver)->result();
 
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/logistik/detaildriver.php', $data);
@@ -250,6 +247,21 @@ class C_Logistik extends CI_Controller
     {
         $data['page_title'] = 'KARISMA - LOGISTIK';
         $data['driver'] = $this->M_Logistik->get_pnd_driver()->result();
-        
+
+        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('content/logistik/driverpending.php', $data);
+        $this->load->view('partial/main/footer.php');
+    }
+    public function det_pnd_driver($kdorder, $kddriver)
+    {
+        $data['page_title'] = 'KARISMA - LOGISTIK';
+        $data['kd']         = $this->M_Logistik->get_kd_det_pnd($kdorder)->result();
+        $data['detail']     = $this->M_Logistik->get_det_driver_pnd($kdorder, $kddriver)->result();
+
+        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('content/logistik/det_pnd_driver.php', $data);
+        $this->load->view('partial/main/footer.php');
+        $this->load->view('content/logistik/ajaxlogistik.php');
+        $this->load->view('content/logistik/modaldetaildriverorder.php');
     }
 }
