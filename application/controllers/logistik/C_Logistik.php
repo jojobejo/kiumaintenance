@@ -142,27 +142,30 @@ class C_Logistik extends CI_Controller
     public function tambahorderdriver()
     {
         $data['page_title'] = 'KARISMA - LOGISTIK';
+        $data['driver'] = $this->M_Logistik->get_all_driver();
+        $data['kdorder'] = $this->M_Logistik->get_kd_order();
 
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/logistik/tambahorderdriver.php', $data);
         $this->load->view('partial/main/footer.php');
         $this->load->view('content/logistik/ajaxorderdriver');
     }
-    public function addorderdeliv1()
-    {
-        $kdorder    = $this->input->post('kd_order_i');
-        $tglorder   = $this->input->post('tgl_deliv_i');
-        $nmdriver   = $this->input->post('nm_driver_i');
-        $kdtruk     = $this->input->post('kd_truk_i');
-        $destinasi  = $this->input->post('destinsasi_i');
-        $nmtoko     = $this->input->post('nm_toko_i');
-        if (!empty($kdorder) && !empty($tglorder) && !empty($nmdriver) && !empty($kdtruk) && !empty($destinasi) && !empty($nmtoko)) {
-            foreach ($kdorder as $key => $value) {
-                $this->db->insert('tb_log_tracking', $value);
-            }
-        }
-        redirect('deliveriorder');
-    }
+    // public function addorderdeliv1()
+    // {
+    //     $kdorder    = $this->input->post('kd_order_i');
+    //     $tglorder   = $this->input->post('tgl_deliv_i');
+    //     $nmdriver   = $this->input->post('nm_driver_i');
+    //     $kdtruk     = $this->input->post('kd_truk_i');
+    //     $destinasi  = $this->input->post('destinsasi_i');
+    //     $nmtoko     = $this->input->post('nm_toko_i');
+    //     if (!empty($kdorder) && !empty($tglorder) && !empty($nmdriver) && !empty($kdtruk) && !empty($destinasi) && !empty($nmtoko)) {
+    //         foreach ($kdorder as $key => $value) {
+    //             $this->db->insert('tb_log_tracking', $value);
+    //         }
+    //     }
+    //     redirect('deliveriorder');
+    // }
+
     public function addorderdeliv()
     {
         $kdorder    = $this->input->post('kd_order_i');
@@ -178,16 +181,69 @@ class C_Logistik extends CI_Controller
             $data = array(
                 'kd_deliveri' => $this->input->post('kd_order_i'),
                 'tgl_jalan' => $this->input->post('tgl_deliv_i'),
-                'kd_driver' => $this->input->post('nm_driver_i')[$i],
+                'kd_driver' => $this->input->post('kd_truk_i')[$i],
                 'kd_truk' => $this->input->post('kd_truk_i')[$i],
                 'destinasi' => $this->input->post('destinsasi_i')[$i],
-                'nm_toko' => $this->input->post('nm_toko_i')[$i]
+                'sts_driver' => $this->input->post('sts_driver[]')[$i],
+                'keterangan_i' => $this->input->post('keterangan_i[]')[$i]
             );
             $this->M_Logistik->insert_detail_order_driver($data);
         }
         $this->M_Logistik->insert_deliveri_order($dataOrder);
         redirect('deliveriorder');
+
+        // $datdetail = array(
+        //     'kd_deliveri' => $kode_order,
+        //     'kd_driver' => $kd_driver,
+        //     'tgl_jalan' => $tgl_jalan,
+        //     'kd_truk'   => $kdtruk,
+        //     'destinasi' => $destinasi,
+        //     'sts_driver' => $stsdriver,
+        //     'keterangan' => $ket
+        // );
+        // $datadeliv = array(
+        //     'kd_order'  => $kode_order,
+        //     'tgl_jalan' => $tgl_jalan
+        // );
+
+        // $this->M_Logistik->add_detail_deliveri($datdetail);
+        // $this->M_Logistik->add_deliveri($datadeliv);
+        // redirect('deliveriorder');
     }
+
+    function select_kd_truk()
+    {
+        $nm_truk = $this->input->post('nm_truk[]');
+        $data = $this->M_Logistik->select_kd_truk($nm_truk);
+
+        echo json_encode($data);
+    }
+
+    // public function addorderdeliv()
+    // {
+    //     $kdorder    = $this->input->post('kd_order_i');
+    //     $tglorder   = $this->input->post('tgl_deliv_i');
+
+    //     $dataOrder  = array(
+    //         'kd_order'  => $kdorder,
+    //         'tgl_jalan' => $tglorder,
+    //     );
+
+    //     $jumlah = count($this->input->post('nm_driver_i'));
+    //     for ($i = 0; $i < $jumlah; $i++) {
+    //         $data = array(
+    //             'kd_deliveri' => $this->input->post('kd_order_i'),
+    //             'tgl_jalan' => $this->input->post('tgl_deliv_i'),
+    //             'kd_driver' => $this->input->post('nm_driver_i')[$i],
+    //             'kd_truk' => $this->input->post('kd_truk_i')[$i],
+    //             'destinasi' => $this->input->post('destinsasi_i')[$i],
+    //             'nm_toko' => $this->input->post('nm_toko_i')[$i]
+    //         );
+    //         $this->M_Logistik->insert_detail_order_driver($data);
+    //     }
+    //     $this->M_Logistik->insert_deliveri_order($dataOrder);
+    //     redirect('deliveriorder');
+    // }
 
     function select2driver()
     {

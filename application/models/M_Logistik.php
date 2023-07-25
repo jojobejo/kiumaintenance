@@ -55,6 +55,21 @@ class M_Logistik extends CI_Model
         date_default_timezone_set('Asia/Jakarta');
         return 'KIU' . date('dmy') . $kd;
     }
+    function get_kd_order()
+    {
+        $cd = $this->db->query("SELECT MAX(RIGHT(kd_order,4)) as kd_max FROM tb_order_tracking_driver WHERE DATE(create_at)=CURDATE()");
+        $kd = "";
+        if ($cd->num_rows() > 0) {
+            foreach ($cd->result() as $k) {
+                $tmp = ((int)$k->kd_max) + 1;
+                $kd = sprintf("%04s", $tmp);
+            }
+        } else {
+            $kd = "0001";
+        }
+        date_default_timezone_set('Asia/Jakarta');
+        return 'KIUD' . date('dmy') . $kd;
+    }
     function insert_detail_order_driver($data)
     {
         return $this->db->insert('tb_det_tracking_driver', $data);
@@ -114,7 +129,7 @@ class M_Logistik extends CI_Model
     {
         return $this->db->delete('tb_det_tracking_driver', array("id" => $id));
     }
-    function get_pnd_driver ()
+    function get_pnd_driver()
     {
         return $this->db->query("SELECT a.kd_deliveri , a.tgl_jalan , c.nama_driver , b.noplat , a.kd_truk , a.destinasi , COUNT(a.nm_toko) AS jml_toko ,a.note_pending, a.kd_driver
         FROM tb_driver_pending a
@@ -123,7 +138,7 @@ class M_Logistik extends CI_Model
         GROUP BY a.kd_deliveri , a.kd_driver
         ");
     }
-    function get_det_driver_pnd($kd1,$kd2)
+    function get_det_driver_pnd($kd1, $kd2)
     {
         return $this->db->query("SELECT a.id,a.kd_deliveri , a.tgl_jalan , c.nama_driver , b.noplat , a.kd_truk , a.destinasi ,a.nm_toko ,a.note_pending, a.kd_driver
         FROM tb_driver_pending a
@@ -134,5 +149,17 @@ class M_Logistik extends CI_Model
     public function get_kd_det_pnd($kd)
     {
         return $this->db->query("SELECT a.id, a.kd_deliveri , a.destinasi,a.tgl_jalan ,a.kd_driver ,b.nama_driver, a.kd_truk , c.noplat , a.nm_toko FROM tb_det_tracking_driver a JOIN tb_op_driver b ON b.kd_driver = a.kd_driver JOIN tb_op_plat c ON c.nm_truk = a.kd_truk WHERE a.kd_deliveri = '$kd' LIMIT 1");
+    }
+    public function get_all_driver()
+    {
+        return $this->db->get('tb_op_driver')->result();
+    }
+    public function select_kd_truk($search)
+    {
+        $this->db->select('*');
+        $this->db->limit('6');
+        $this->db->from('tb_op_plat');
+        $this->db->like('nm_truk', $search);
+        return $this->db->get()->result_array();
     }
 }

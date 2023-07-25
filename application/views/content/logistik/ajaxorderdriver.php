@@ -19,6 +19,49 @@
             $('#' + button_id + '').remove();
         }
     });
+    
+    $("#kd_truk_i").select2({
+            placeholder: "Kode Truk",
+            theme: "bootstrap",
+            allowClear: true,
+            minimumInputLenght: 1,
+            language: {
+                inputTooShort: function(args) {
+
+                    return "2 or more symbol.";
+                },
+                noResults: function() {
+                    return "Not Found.";
+                },
+                searching: function() {
+                    return "Searching...";
+                }
+            },
+            minimumInputLenght: 1,
+            ajax: {
+                url: '<?= base_url('get_kd_truk_order') ?>',
+                type: "post",
+                dataType: 'json',
+                delay: 200,
+
+                data: function(params) {
+                    return {
+                        nm_truk: params.term
+
+                    };
+                },
+                processResults: function(data) {
+                    return {
+                        results: $.map(data, function(item) {
+                            return {
+                                text: item.nm_truk,
+                                id: item.nm_truk
+                            }
+                        })
+                    };
+                }
+            }
+        });
 
     let initializeSelect2 = function() {
         $(".select2Driver").select2({

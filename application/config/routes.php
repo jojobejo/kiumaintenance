@@ -93,6 +93,7 @@ $route['detail_deliveri/(:any)/(:any)'] = 'logistik/C_Logistik/det_driver/$1/$2'
 $route['add_pending_driver']     = 'logistik/C_Logistik/add_pending_driver';
 $route['driver_pending']    = 'logistik/C_Logistik/driver_pending';
 $route['det_pnd_driver/(:any)/(:any)'] = 'logistik/C_Logistik/det_pnd_driver/$1/$2';
+$route['get_kd_truk_order'] = 'logistik/C_Logistik/select_kd_truk';
 
 //UserAccount
 $route['userAdmin'] = 'User/Admin';

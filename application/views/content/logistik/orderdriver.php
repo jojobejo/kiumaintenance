@@ -53,9 +53,6 @@
                                     <tr>
                                         <th>Kode Order</th>
                                         <th>Tanggal Order</th>
-                                        <th>Jumlah Driver</th>
-                                        <th>Jumlah Destinasi Kota</th>
-                                        <th>Jumlah Kunjungan Toko</th>
                                         <th>#</th>
                                     </tr>
                                 </thead>
@@ -64,9 +61,6 @@
                                         <tr>
                                             <th><?= $d->kd_order ?></th>
                                             <th><?= format_indo($d->tgl_jalan) ?></th>
-                                            <th> <?= $d->jml_driver ?></th>
-                                            <th> <?= $d->jml_destinasi ?></th>
-                                            <th> <?= $d->jml_toko ?></th>
                                             <th>
                                                 <a href="<?= base_url('detail_deliveri/') . $d->kd_order ?>" class="btn btn-primary btn-block btn-sm">
                                                     <i class="fa fa-solid fa-search"></i>

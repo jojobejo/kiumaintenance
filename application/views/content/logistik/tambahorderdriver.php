@@ -39,7 +39,7 @@
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <label for="noInv" class="">Kode Order</label>
-                                        <input type="text" id="kd_order_i" name="kd_order_i" value="" class="form-control">
+                                        <input type="text" id="kd_order_i" name="kd_order_i" value="<?= $kdorder ?>" class="form-control" readonly>
                                     </div>
                                     <div class="col-sm-3">
                                         <label for="noInv" class="">Tanggal Order</label>
@@ -47,32 +47,41 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div id="driveroption">
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <label for="noInv" class="">Nama Driver</label>
-                                        <select class="form-control select2bs4 select2Driver" name="nm_driver_i[]" id="nm_driver_i">
-                                            <option value="&nbsp" selected></option>
-                                        </select>
+                                <?php foreach ($driver as $d) : ?>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label for="noInv" class="">Nama Driver</label>
+                                            <input type="text" id="nm_driver_i" name="nm_driver_i" value="<?= $d->nama_driver ?>" class="form-control" readonly>
+                                            <input type="text" id="kd_driver_i[]" name="kd_driver_i[]" value="<?= $d->kd_driver ?>" class="form-control" readonly hidden>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <label for="noInv" class="">Kode Truk</label>
+                                            <select type="text" id="kd_truk_i" name="kd_truk_i[]" value="" class="form-control select2-allow-clear">
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label for="noInv" class="">Destinasi Kota</label>
+                                            <input type="text" id="destinsasi_i[]" name="destinsasi_i[]" value="" class="form-control">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label for="noInv" class="">Status Driver</label>
+                                            <select name="sts_driver[]" id="sts_driver[]" class="form-control">
+                                                <option value="READY">READY</option>
+                                                <option value="PENDING">PENDING</option>
+                                                <option value="ON THE ROAD">ON THE ROAD</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="noInv" class="">Keterangan</label>
+                                            <input type="text" id="keterangan_i[]" name="keterangan_i[]" value="" class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <label for="noInv" class="">Kode Truk</label>
-                                        <input type="text" id="kd_truk_i[]" name="kd_truk_i[]" value="" class="form-control">
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <label for="noInv" class="">Destinasi Kota</label>
-                                        <input type="text" id="destinsasi_i[]" name="destinsasi_i[]" value="" class="form-control">
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <label for="noInv" class="">Nama Toko</label>
-                                        <input type="text" id="nm_toko_i[]" name="nm_toko_i[]" value="" class="form-control">
-                                    </div>
-                                </div>
+                                <?php endforeach; ?>
                             </div>
 
                             <label for="noInv" class=""></label><br>
-                            <button type="button" name="add" id="add" class="btn btn-success btn-block"> <i class="fas fa-plus"></i></button>
                             <button type="submit" class="btn btn-primary btn-block">Simpan Data </button>
                             </form>
                         </div>
