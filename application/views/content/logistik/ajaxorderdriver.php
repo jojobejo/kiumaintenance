@@ -20,7 +20,7 @@
         }
     });
     
-    $("#kd_truk_i").select2({
+    $(".kd_truk_i").select2({
             placeholder: "Kode Truk",
             theme: "bootstrap",
             allowClear: true,

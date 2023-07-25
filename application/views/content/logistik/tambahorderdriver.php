@@ -57,8 +57,8 @@
                                         </div>
                                         <div class="col-sm-1">
                                             <label for="noInv" class="">Kode Truk</label>
-                                            <select type="text" id="kd_truk_i" name="kd_truk_i[]" value="" class="form-control select2-allow-clear">
-                                                <option value=""></option>
+                                            <select type="text" id="kd_truk_i" name="kd_truk_i[]" value="" class="form-control select2-allow-clear kd_truk_i">
+                                                <option value="&nbsp" selected></option>
                                             </select>
                                         </div>
                                         <div class="col-sm-3">
