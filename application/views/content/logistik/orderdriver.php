@@ -39,13 +39,13 @@
                                     <i class="fas fa-plus"></i>
                                 </a>
                             </div>
-                            <div>
+                            <!-- <div>
                                 <a href="<?= base_url('driver_pending') ?>" class="btn btn-primary m-2 ml-3">
                                     <i class="fas fa-ban"></i>
                                     Driver Pending
                                     <i class="fas fa-ban"></i>
                                 </a>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="card-body">
                             <table id="tb_list_order" class="table table-bordered table-striped" style="text-align: center;">
@@ -53,6 +53,9 @@
                                     <tr>
                                         <th>Kode Order</th>
                                         <th>Tanggal Order</th>
+                                        <th>Ready</th>
+                                        <th>Pending</th>
+                                        <th>On The Road</th>
                                         <th>#</th>
                                     </tr>
                                 </thead>
@@ -61,6 +64,21 @@
                                         <tr>
                                             <th><?= $d->kd_order ?></th>
                                             <th><?= format_indo($d->tgl_jalan) ?></th>
+                                            <th>
+                                                <a href="#" class="btn btn-success btn-block btn-sm">
+                                                    <?= $d->d_ready ?>
+                                                </a>
+                                            </th>
+                                            <th>
+                                                <a href="#" class="btn btn-danger btn-block btn-sm">
+                                                    <?= $d->d_pending ?>
+                                                </a>
+                                            </th>
+                                            <th>
+                                                <a href="#" class="btn btn-secondary btn-block btn-sm">
+                                                    <?= $d->d_otr ?>
+                                                </a>
+                                            </th>
                                             <th>
                                                 <a href="<?= base_url('detail_deliveri/') . $d->kd_order ?>" class="btn btn-primary btn-block btn-sm">
                                                     <i class="fa fa-solid fa-search"></i>

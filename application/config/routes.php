@@ -94,6 +94,15 @@ $route['add_pending_driver']     = 'logistik/C_Logistik/add_pending_driver';
 $route['driver_pending']    = 'logistik/C_Logistik/driver_pending';
 $route['det_pnd_driver/(:any)/(:any)'] = 'logistik/C_Logistik/det_pnd_driver/$1/$2';
 $route['get_kd_truk_order'] = 'logistik/C_Logistik/select_kd_truk';
+$route['tracking_driver'] = 'logistik/C_Logistik/tracking_driver';
+$route['det_driver_tracking/(:any)'] = 'logistik/C_Logistik/detail_tracking_driver/$1';
+// HRD 
+$route['hrd_lap_distribusi'] = 'hrd/C_Hrd/lap_distribusi';
+$route['add_lap_distribusi_hrd'] = 'hrd/C_Hrd/input_lap_distribusi';
+$route['edit_lap_distribusi_hrd'] = 'hrd/C_Hrd/edit_lap_distribusi';
+$route['hapus_lap_distribusi_hrd'] = 'hrd/C_Hrd/hapus_lap_distribusi_hrd';
+
+
 
 //UserAccount
 $route['userAdmin'] = 'User/Admin';

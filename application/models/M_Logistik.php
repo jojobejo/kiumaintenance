@@ -78,16 +78,31 @@ class M_Logistik extends CI_Model
     {
         return $this->db->insert('tb_order_tracking_driver', $data);
     }
+
+    function get_deliv_logistik()
+    {
+        return $this->db->query("SELECT 
+        *, 
+        COUNT(CASE WHEN  b.sts_driver = 'READY' then 1 ELSE NULL END) as 'd_ready' ,
+        COUNT(CASE WHEN  b.sts_driver = 'PENDING' then 1 ELSE NULL END) as 'd_pending',
+        COUNT(CASE WHEN b.sts_driver = 'ON THE ROAD' THEN 1 ELSE NULL END) as 'd_otr'
+        FROM tb_order_tracking_driver a
+        JOIN tb_det_tracking_driver b ON b.kd_deliveri = a.kd_order
+        GROUP BY a.kd_order
+        ");
+    }
     function get_all_do()
     {
-        $this->db->select('*');
-        $this->db->select('COUNT(DISTINCT(b.kd_driver)) as jml_driver');
-        $this->db->select('COUNT(DISTINCT(b.destinasi)) as jml_destinasi');
-        $this->db->select('COUNT(DISTINCT(b.nm_toko)) as jml_toko');
-        $this->db->from('tb_order_tracking_driver a');
-        $this->db->join('tb_det_tracking_driver b', 'b.kd_deliveri = a.kd_order');
-        $this->db->group_by('a.kd_order');
-        return $this->db->get()->result();
+        return $this->db->query("SELECT 
+       *, 
+       COUNT(CASE WHEN  b.sts_driver = 'READY' then 1 ELSE NULL END) as 'd_ready' ,
+       COUNT(CASE WHEN  b.sts_driver = 'PENDING' then 1 ELSE NULL END) as 'd_pending',
+       COUNT(CASE WHEN b.sts_driver = 'ON THE ROAD' THEN 1 ELSE NULL END) as 'd_otr'
+       FROM tb_order_tracking_driver a
+       JOIN tb_det_tracking_driver b ON b.kd_deliveri = a.kd_order
+       WHERE  YEARWEEK(a.create_at, 1) = YEARWEEK(CURDATE(), 1)
+       GROUP BY a.kd_order
+       ");
     }
     public function get_driver($kduser)
     {
@@ -108,8 +123,8 @@ class M_Logistik extends CI_Model
     function get_det_deliv($kd)
     {
         return $this->db->query("SELECT 
-        a.id,a.tgl_jalan, a.nm_toko, a.kd_deliveri , a.kd_driver ,b.nama_driver, a.kd_truk , c.noplat , a.destinasi ,COUNT(a.nm_toko) AS jml_toko 
-        FROM tb_det_tracking_driver a JOIN tb_op_driver b ON b.kd_driver = a.kd_driver JOIN tb_op_plat c ON c.nm_truk = a.kd_truk 
+        a.id,a.norut,a.tgl_jalan, a.nm_toko, a.kd_deliveri , a.kd_driver ,b.nama_driver, a.kd_truk , COALESCE(c.noplat,'-') as noplat , a.destinasi , a.sts_driver , COALESCE(NULLIF(a.keterangan,''),'-') as keterangan 
+        FROM tb_det_tracking_driver a JOIN tb_op_driver b ON b.kd_driver = a.kd_driver LEFT JOIN tb_op_plat c ON c.nm_truk = a.kd_truk 
         WHERE a.kd_deliveri = '$kd' 
         GROUP BY a.kd_driver");
     }
@@ -154,12 +169,38 @@ class M_Logistik extends CI_Model
     {
         return $this->db->get('tb_op_driver')->result();
     }
-    public function select_kd_truk($search)
+    public function select_kd_truk()
     {
         $this->db->select('*');
-        $this->db->limit('6');
         $this->db->from('tb_op_plat');
-        $this->db->like('nm_truk', $search);
-        return $this->db->get()->result_array();
+        return $this->db->get()->result();
+    }
+    public function get_data_driver()
+    {
+        return $this->db->query("SELECT b.nama_driver , b.kd_driver, 
+        COUNT(CASE WHEN  a.sts_driver = 'READY' then 1 ELSE NULL END) as 'd_ready',
+        COUNT(CASE WHEN  a.sts_driver = 'PENDING' then 1 ELSE NULL END) as 'd_pending'
+        FROM tb_det_tracking_driver a
+        JOIN tb_op_driver b ON b.kd_driver = a.kd_driver
+        GROUP BY a.kd_driver        
+        ");
+    }
+    public function get_det_tracking($kd)
+    {
+        return $this->db->query("SELECT a.kd_deliveri , a.tgl_jalan ,a.kd_truk , COALESCE(c.noplat,'-') AS noplat , a.destinasi,COALESCE(NULLIF(a.keterangan,''),'-') AS keterangan
+        FROM tb_det_tracking_driver a
+        LEFT JOIN tb_op_driver b ON b.kd_driver = a.kd_driver
+        LEFT JOIN tb_op_plat c on c.nm_truk = a.kd_truk
+        WHERE b.kd_driver = '$kd'
+        ");
+    }
+    public function get_det_data_driver($kd)
+    {
+        return $this->db->query("SELECT b.nama_driver , b.kd_driver
+        FROM tb_det_tracking_driver a
+        JOIN tb_op_driver b ON b.kd_driver = a.kd_driver
+        WHERE b.kd_driver = '$kd' 
+        GROUP BY a.kd_driver 
+        ");
     }
 }

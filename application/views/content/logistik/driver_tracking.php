@@ -28,57 +28,39 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <a href="<?= base_url('deliveriorder') ?>"><i class="fas fa-play fa-flip-horizontal mr-2"></i></a>
-                                <h3 class="card-title">Driver Listing Order</h3>
+                                <a href="<?= base_url('dashboard') ?>"><i class="fas fa-play fa-flip-horizontal mr-2"></i></a>
+                                <h3 class="card-title">Driver List</h3>
+                            </div>
+                        </div>
+                        <div class="ml-3">
+                            <div class="row">
+                                <button type="button" class="btn btn-success m-2 ml-3" data-toggle="modal" data-target="#maddplat">
+                                    <i class="fas fa-file-excel"></i>
+                                    Export Data Excel
+                                </button>
                             </div>
                         </div>
                         <div class="card-body">
-                            <a href="#" class="btn btn-primary mb-2 btn-lg">
-                                <i class="fa fa-solid fa-calendar"></i>
-                                <?php foreach ($order_deliv as $o) : ?>
-                                    Jadwal Deliveri : <?= format_indo($o->tgl_jalan) ?>
-                                <?php endforeach; ?>
-                            </a>
                             <table id="tb_det_list_driver_order" class="table table-bordered table-striped" style="text-align: center;">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
                                         <th>Nama Driver</th>
-                                        <th>Nama Truk</th>
-                                        <th>Nomor Plat</th>
-                                        <th>Destinasi</th>
-                                        <th>Status Driver</th>
-                                        <th>Keterangan</th>
+                                        <th>Total Keberangkatan Driver </th>
+                                        <th>Total Driver Pending</th>
+                                        <th style="text-align: center;">#</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($detail as $d) : ?>
+                                    <?php foreach ($driver as $d) : ?>
                                         <tr>
-                                            <th><?= $d->norut ?></th>
                                             <th><?= $d->nama_driver ?></th>
-                                            <th><?= $d->kd_truk ?></th>
-                                            <th><?= $d->noplat ?></th>
-                                            <th><?= $d->destinasi ?></th>
-                                            <th><?= $d->sts_driver ?></th>
-                                            <?php if ($d->sts_driver == 'READY') : ?>
-                                                <th>
-                                                    <a href="#" class=" btn btn-success btn-sm btn-block ">
-                                                        READY
-                                                    </a>
-                                                </th>
-                                            <?php elseif ($d->sts_driver == 'PENDING') : ?>
-                                                <th>
-                                                    <a href="#" class=" btn btn-danger btn-sm btn-block ">
-                                                        PENDING
-                                                    </a>
-                                                </th>
-                                            <?php elseif ($d->sts_driver == 'ON THE ROAD') : ?>
-                                                <th>
-                                                    <a href="#" class=" btn btn-secondary btn-sm btn-block ">
-                                                        ON THE ROAD
-                                                    </a>
-                                                </th>
-                                            <?php endif; ?>
+                                            <th><?= $d->d_ready ?></th>
+                                            <th><?= $d->d_pending ?></th>
+                                            <th style="text-align: center;">
+                                                <a href="<?= base_url('det_driver_tracking/') . $d->kd_driver ?>" class=" btn btn-primary btn-sm ">
+                                                    <i class=" fa fa-solid fa-search"></i> Detail Perjalanan
+                                                </a>
+                                            </th>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>

@@ -132,7 +132,7 @@ class C_Logistik extends CI_Controller
     public function deleveriorder()
     {
         $data['page_title'] = 'KARISMA - LOGISTIK';
-        $data['deliveri']   = $this->M_Logistik->get_all_do();
+        $data['deliveri']   = $this->M_Logistik->get_deliv_logistik()->result();
 
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/logistik/orderdriver.php', $data);
@@ -144,6 +144,7 @@ class C_Logistik extends CI_Controller
         $data['page_title'] = 'KARISMA - LOGISTIK';
         $data['driver'] = $this->M_Logistik->get_all_driver();
         $data['kdorder'] = $this->M_Logistik->get_kd_order();
+        $data['kdtruk'] = $this->M_Logistik->select_kd_truk();
 
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/logistik/tambahorderdriver.php', $data);
@@ -176,39 +177,22 @@ class C_Logistik extends CI_Controller
             'tgl_jalan' => $tglorder,
         );
 
-        $jumlah = count($this->input->post('nm_driver_i'));
+        $jumlah = count($this->input->post('nm_driver_i[]'));
         for ($i = 0; $i < $jumlah; $i++) {
             $data = array(
+                'norut' => $this->input->post('urut_i')[$i],
                 'kd_deliveri' => $this->input->post('kd_order_i'),
                 'tgl_jalan' => $this->input->post('tgl_deliv_i'),
-                'kd_driver' => $this->input->post('kd_truk_i')[$i],
+                'kd_driver' => $this->input->post('kd_driver_i')[$i],
                 'kd_truk' => $this->input->post('kd_truk_i')[$i],
                 'destinasi' => $this->input->post('destinsasi_i')[$i],
                 'sts_driver' => $this->input->post('sts_driver[]')[$i],
-                'keterangan_i' => $this->input->post('keterangan_i[]')[$i]
+                'keterangan' => $this->input->post('keterangan_i[]')[$i]
             );
             $this->M_Logistik->insert_detail_order_driver($data);
         }
         $this->M_Logistik->insert_deliveri_order($dataOrder);
         redirect('deliveriorder');
-
-        // $datdetail = array(
-        //     'kd_deliveri' => $kode_order,
-        //     'kd_driver' => $kd_driver,
-        //     'tgl_jalan' => $tgl_jalan,
-        //     'kd_truk'   => $kdtruk,
-        //     'destinasi' => $destinasi,
-        //     'sts_driver' => $stsdriver,
-        //     'keterangan' => $ket
-        // );
-        // $datadeliv = array(
-        //     'kd_order'  => $kode_order,
-        //     'tgl_jalan' => $tgl_jalan
-        // );
-
-        // $this->M_Logistik->add_detail_deliveri($datdetail);
-        // $this->M_Logistik->add_deliveri($datadeliv);
-        // redirect('deliveriorder');
     }
 
     function select_kd_truk()
@@ -319,5 +303,24 @@ class C_Logistik extends CI_Controller
         $this->load->view('partial/main/footer.php');
         $this->load->view('content/logistik/ajaxlogistik.php');
         $this->load->view('content/logistik/modaldetaildriverorder.php');
+    }
+    public function tracking_driver()
+    {
+        $data['page_title'] = 'KARISMA - LOGISTIK';
+        $data['driver'] = $this->M_Logistik->get_data_driver()->result();
+
+        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('content/logistik/driver_tracking.php', $data);
+        $this->load->view('partial/main/footer.php');
+    }
+    public function detail_tracking_driver($kd)
+    {
+        $data['page_title'] = 'KARISMA - LOGISTIK';
+        $data['driver'] = $this->M_Logistik->get_det_data_driver($kd)->result();
+        $data['detail'] = $this->M_Logistik->get_det_tracking($kd)->result();
+
+        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('content/logistik/det_tracking_driver.php', $data);
+        $this->load->view('partial/main/footer.php');
     }
 }

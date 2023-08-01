@@ -43,22 +43,30 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <label for="noInv" class="">Tanggal Order</label>
-                                        <input type="date" id="tgl_deliv_i" name="tgl_deliv_i" value="" class="form-control">
+                                        <?php $startDate = time(); ?>
+                                        <input type="date" id="tgl_deliv_i" name="tgl_deliv_i" value="<?= date("Y-m-d", strtotime('+1 day', $startDate)) ?>" class="form-control" readonly>
                                     </div>
                                 </div>
                             </div>
                             <div id="driveroption">
                                 <?php foreach ($driver as $d) : ?>
                                     <div class="row">
+                                        <div class="col-sm-1">
+                                            <label for="noInv" class="">No</label>
+                                            <input type="text" id="urut_i[]" name="urut_i[]" value="" class="form-control">
+                                        </div>
                                         <div class="col-sm-2">
                                             <label for="noInv" class="">Nama Driver</label>
-                                            <input type="text" id="nm_driver_i" name="nm_driver_i" value="<?= $d->nama_driver ?>" class="form-control" readonly>
+                                            <input type="text" id="nm_driver_i[]" name="nm_driver_i[]" value="<?= $d->nama_driver ?>" class="form-control" readonly>
                                             <input type="text" id="kd_driver_i[]" name="kd_driver_i[]" value="<?= $d->kd_driver ?>" class="form-control" readonly hidden>
                                         </div>
                                         <div class="col-sm-1">
                                             <label for="noInv" class="">Kode Truk</label>
-                                            <select type="text" id="kd_truk_i" name="kd_truk_i[]" value="" class="form-control select2-allow-clear kd_truk_i">
-                                                <option value="&nbsp" selected></option>
+                                            <select type="text" id="kd_truk_i[]" name="kd_truk_i[]" value="" class="form-control select2-allow-clear">
+                                                <option value="-">-</option>
+                                                <?php foreach ($kdtruk as $k) : ?>
+                                                    <option value="<?= $k->nm_truk ?>"><?= $k->nm_truk ?></option>
+                                                <?php endforeach; ?>
                                             </select>
                                         </div>
                                         <div class="col-sm-3">
@@ -70,10 +78,11 @@
                                             <select name="sts_driver[]" id="sts_driver[]" class="form-control">
                                                 <option value="READY">READY</option>
                                                 <option value="PENDING">PENDING</option>
+                                                <option value="WAITING">WAITING</option>
                                                 <option value="ON THE ROAD">ON THE ROAD</option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <label for="noInv" class="">Keterangan</label>
                                             <input type="text" id="keterangan_i[]" name="keterangan_i[]" value="" class="form-control">
                                         </div>

@@ -17,7 +17,7 @@
           with font-awesome or any other icon font library -->
 
           <!-- START AKSES LV 1 -->
-          <?php if ($this->session->userdata('akses_lv') == '1' && $this->session->userdata('departemen') == 'KEUANGAN') : ?>
+          <?php if ($this->session->userdata('akses_lv') == '1' && $this->session->userdata('departemen') == 'IT') : ?>
             <li class="nav-item">
               <a href="<?php echo base_url('inventaris') ?>" class="nav-link">
                 <i class="nav-icon fas fa-desktop"></i>
@@ -71,7 +71,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url('deleveriorder') ?>" class="nav-link">
+              <a href="<?php echo base_url('tracking_driver') ?>" class="nav-link">
                 <i class="nav-icon fa fa-route"></i>
                 <p>
                   Driver Tracking
@@ -87,6 +87,26 @@
               </a>
             </li>
             <!-- END AKSES LV 1 USER LOGISTIK -->
+
+            <!-- START AKSES LV 2 USER HRD -->
+          <?php elseif ($this->session->userdata('akses_lv') == '2' && $this->session->userdata('departemen') == 'HRD') : ?>
+            <li class="nav-item">
+              <a href="<?php echo base_url('hrd_lap_distribusi') ?>" class="nav-link">
+                <i class="nav-icon fa fa-car-side"></i>
+                <p>
+                  Laporan Distribusi
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('logout') ?>" class="nav-link">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p>
+                  Log Out
+                </p>
+              </a>
+            </li>
+            <!-- END AKSES LV 2 USER HRD -->
 
             <!-- START AKSES LV 2 USER LOGISTIK -->
           <?php elseif ($this->session->userdata('akses_lv') == '2' && $this->session->userdata('departemen') == 'KEUANGAN') : ?>
