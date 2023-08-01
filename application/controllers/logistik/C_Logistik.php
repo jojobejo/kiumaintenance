@@ -15,24 +15,18 @@ class C_Logistik extends CI_Controller
     {
 
         $data['page_title'] = 'KARISMA - LOGISTIK';
+        $data['dataplat']   = $this->M_Logistik->getallplat();
+        $data['driver']    = $this->M_Logistik->getAllDriver();
+        $data['kd_driver']  = $this->M_Logistik->kd_driver();
+        
 
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/logistik/bodylogistik.php', $data);
         $this->load->view('partial/main/footer.php');
-    }
-
-    public function op_plat()
-    {
-        $data['page_title'] = 'KARISMA - LOGISTIK';
-        $data['dataplat']   = $this->M_Logistik->getallplat();
-        $data['driver']    = $this->M_Logistik->getAllDriver();
-        $data['kd_driver']  = $this->M_Logistik->kd_driver();
-
-        $this->load->view('partial/main/header.php', $data);
-        $this->load->view('content/logistik/bodyopplat.php', $data);
-        $this->load->view('partial/main/footer.php');
         $this->load->view('content/logistik/ajaxlogistik');
     }
+
+  
     public function addplat()
     {
         $kdplat = $this->input->post('kd_plat_isi');
@@ -43,7 +37,7 @@ class C_Logistik extends CI_Controller
             'nm_truk'   => $kdplat
         );
         $this->M_Logistik->addnoplatbaru($dataplat);
-        redirect('opplat');
+        redirect('truckoprational');
     }
     public function editplat()
     {
@@ -56,26 +50,14 @@ class C_Logistik extends CI_Controller
             'nm_truk'   => $kdplat
         );
         $this->M_Logistik->editnoplat($id, $dataplat);
-        redirect('opplat');
+        redirect('truckoprational');
     }
     public function hapusplat()
     {
         $id     = $this->input->post('id_isi');
 
         $this->M_Logistik->deletenoplat($id);
-        redirect('opplat');
-    }
-    public function driverop()
-    {
-        $data['page_title'] = 'KARISMA - LOGISTIK';
-        $data['dataplat']   = $this->M_Logistik->getallplat();
-        $data['driver']     = $this->M_Logistik->getAllDriver();
-        $data['kd_driver']  = $this->M_Logistik->kd_driver();
-
-        $this->load->view('partial/main/header.php', $data);
-        $this->load->view('content/logistik/bodydriver.php', $data);
-        $this->load->view('partial/main/footer.php');
-        $this->load->view('content/logistik/ajaxlogistik');
+        redirect('truckoprational');
     }
     public function addriver()
     {
@@ -89,7 +71,7 @@ class C_Logistik extends CI_Controller
             'status'   => $stsisi
         );
         $this->M_Logistik->adddriverbaru($dataplat);
-        redirect('driverop');
+        redirect('truckoprational');
     }
     public function editdriver()
     {
@@ -101,7 +83,7 @@ class C_Logistik extends CI_Controller
             'nama_driver'   => $nmdriver,
         );
         $this->M_Logistik->editdriver($kd_driver, $dataplat);
-        redirect('driverop');
+        redirect('truckoprational');
     }
     public function activedrver($kd_driver)
     {
@@ -109,7 +91,7 @@ class C_Logistik extends CI_Controller
             'status' => 'ACTIVE'
         );
         $this->M_Logistik->editdriver($kd_driver, $dataupdate);
-        redirect('driverop');
+        redirect('truckoprational');
     }
     public function nonactivedriver($kd_driver)
     {
@@ -117,14 +99,14 @@ class C_Logistik extends CI_Controller
             'status' => 'NON-ACTIVE'
         );
         $this->M_Logistik->editdriver($kd_driver, $dataupdate);
-        redirect('driverop');
+        redirect('truckoprational');
     }
     public function hapusdriver()
     {
         $id     = $this->input->post('id_isi');
 
         $this->M_Logistik->hapusdriver($id);
-        redirect('driverop');
+        redirect('truckoprational');
     }
     public function tambahpenggunadriver()
     {
@@ -322,5 +304,121 @@ class C_Logistik extends CI_Controller
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/logistik/det_tracking_driver.php', $data);
         $this->load->view('partial/main/footer.php');
+    }
+
+    public function export_tracking_driver()
+    {
+        include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
+        $excel = new PHPExcel();
+        $excel->getProperties()->setCreator('it_karisma')
+            ->setLastModifiedBy('tracking_driver_')
+            ->setTitle("Tracking All Driver")
+            ->setSubject("Tracking All Driver")
+            ->setDescription("Tracking All Driver")
+            ->setKeywords("Tracking Driver");
+
+        $style_col = array(
+            'font' => array('bold' => true), 
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER 
+            ),
+            'borders' => array(
+                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), 
+                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) 
+            )
+        );
+
+        $style_row = array(
+            'alignment' => array(
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER 
+            ),
+            'borders' => array(
+                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), 
+                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), 
+                'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) 
+            )
+        );
+
+        $excel->setActiveSheetIndex(0)->setCellValue('A1', "Tracking Driver"); 
+        $excel->getActiveSheet()->mergeCells('A1:J1'); 
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); 
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); 
+        $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+        $excel->setActiveSheetIndex(0)->setCellValue('A3', "NO"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('B3', "KODE DELIVERI"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('C3', "TANGGAL JALAN"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('D3', "NO JALAN"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('E3', "NAMA DRIVER"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('F3', "KODE TRUK"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('G3', "NOMOR PLAT");
+        $excel->setActiveSheetIndex(0)->setCellValue('H3', "STATUS DRIVER");
+        $excel->setActiveSheetIndex(0)->setCellValue('I3', "DESTINASI"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('J3', "KETERANGAN");
+
+        $excel->getActiveSheet()->getStyle('A3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('B3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('C3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('D3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('E3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('F3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('G3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('H3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('I3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('J3')->applyFromArray($style_col);
+        
+        $tracking = $this->M_Logistik->export_tracking()->result();
+
+        $no = 1;
+        $numrow = 4; 
+        foreach ($tracking as $data) { 
+            $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $no);
+            $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, $data->kd_deliveri);
+            $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, format_indo($data->tgl_jalan));
+            $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->norut);
+            $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data->nama_driver);
+            $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data->kd_truk);
+            $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data->noplat);
+            $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data->sts_driver);
+            $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data->destinasi);
+            $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data->keterangan);
+            $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('C' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('D' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('E' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('F' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('G' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('H' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('I' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('J' . $numrow)->applyFromArray($style_row);
+            $no++; 
+            $numrow++; 
+        }
+
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(5); 
+        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(15); 
+        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(20); 
+        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(10); 
+        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(20); 
+        $excel->getActiveSheet()->getColumnDimension('F')->setWidth(11); 
+        $excel->getActiveSheet()->getColumnDimension('G')->setWidth(13); 
+        $excel->getActiveSheet()->getColumnDimension('H')->setWidth(15); 
+        $excel->getActiveSheet()->getColumnDimension('I')->setWidth(20); 
+        $excel->getActiveSheet()->getColumnDimension('J')->setWidth(20); 
+        $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
+        $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+        $excel->getActiveSheet(0)->setTitle("Rekap Tracking Driver ");
+        $excel->setActiveSheetIndex(0);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="rekap_tracking_driver.xlsx"');
+        header('Cache-Control: max-age=0');
+
+        $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+        $write->save('php://output');
     }
 }

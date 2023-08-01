@@ -128,6 +128,13 @@ class M_Logistik extends CI_Model
         WHERE a.kd_deliveri = '$kd' 
         GROUP BY a.kd_driver");
     }
+    function export_tracking()
+    {
+        return $this->db->query("SELECT a.id,a.norut,a.tgl_jalan, a.nm_toko, a.kd_deliveri , a.kd_driver ,b.nama_driver, a.kd_truk , COALESCE(c.noplat,'-') as noplat , a.destinasi , a.sts_driver , COALESCE(NULLIF(a.keterangan,''),'-') as keterangan 
+        FROM tb_det_tracking_driver a 
+        JOIN tb_op_driver b ON b.kd_driver = a.kd_driver 
+        LEFT JOIN tb_op_plat c ON c.nm_truk = a.kd_truk");
+    }
     function get_det_jalan_driver($kdorder, $driver)
     {
         return $this->db->query("SELECT a.id, a.kd_deliveri , a.destinasi,a.tgl_jalan ,a.kd_driver ,b.nama_driver, a.kd_truk , c.noplat , a.nm_toko FROM tb_det_tracking_driver a JOIN tb_op_driver b ON b.kd_driver = a.kd_driver JOIN tb_op_plat c ON c.nm_truk = a.kd_truk WHERE a.kd_deliveri = '$kdorder' AND a.kd_driver = '$driver';");
@@ -178,7 +185,7 @@ class M_Logistik extends CI_Model
     public function get_data_driver()
     {
         return $this->db->query("SELECT b.nama_driver , b.kd_driver, 
-        COUNT(CASE WHEN  a.sts_driver = 'READY' then 1 ELSE NULL END) as 'd_ready',
+        COUNT(CASE WHEN  a.sts_driver = 'READY' then 1 ELSE NULL END) + COUNT(CASE WHEN  a.sts_driver = 'ON THE ROAD' then 1 ELSE NULL END)  as 'd_ready',
         COUNT(CASE WHEN  a.sts_driver = 'PENDING' then 1 ELSE NULL END) as 'd_pending'
         FROM tb_det_tracking_driver a
         JOIN tb_op_driver b ON b.kd_driver = a.kd_driver

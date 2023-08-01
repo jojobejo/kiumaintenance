@@ -34,10 +34,10 @@
                         </div>
                         <div class="ml-3">
                             <div class="row">
-                                <button type="button" class="btn btn-success m-2 ml-3" data-toggle="modal" data-target="#maddplat">
+                                <a href="<?= base_url('export_excel')?>" class="btn btn-success m-2 ml-3">
                                     <i class="fas fa-file-excel"></i>
                                     Export Data Excel
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div class="card-body">

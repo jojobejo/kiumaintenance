@@ -8,6 +8,7 @@
 
         <?php $this->load->view('partial/main/navbar') ?>
         <?php $this->load->view('partial/main/sidebar') ?>
+        <?php $this->load->view('content/logistik/modallogistik') ?>
 
 
         <!-- Content Wrapper. Contains page content -->
@@ -30,39 +31,85 @@
                         </div>
                         <div class="ml-2">
                             <div class="row">
-                                <a href="<?= base_url('tambahpenggunadriver') ?>" class="btn btn-primary m-2 ml-3">
-                                    <i class="fas fa-plus"></i>
-                                    Tambah Pengguna Driver
-                                </a>
-                                <a href="<?= base_url('opplat') ?>" class="btn btn-primary m-2 ml-3">
+                                <a href="<?= base_url('opplat') ?>" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#maddplat">
                                     <i class="fas fa-truck"></i>
-                                    Truk - Option
-                                </a>
-                                <a href="<?= base_url('driverop') ?>" class="btn btn-primary m-2 ml-3">
-                                    <i class="fas fa-user-cog"></i>
-                                    Driver - Option
+                                    Tambah Truk Baru
                                 </a>
                             </div>
                         </div>
                         <div class="card-body">
-                            <table id="tb_inventaris" class="table table-bordered table-striped">
+                            <table id="tb_plat" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>No Plat</th>
-                                        <th>Kode Truk</th>
-                                        <th>Driver</th>
+                                        <th style="text-align: center;">No Plat</th>
+                                        <th style="text-align: center;">Kode Truk</th>
+                                        <th style="width: 15%; text-align: center;">#</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($dataplat as $d) : ?>
+                                        <tr>
+                                            <th style="text-align: center;"><?= $d->noplat ?></th>
+                                            <th style="text-align: center;"><?= $d->nm_truk ?></th>
+                                            <th style="text-align: center;">
+                                                <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#meditplat<?= $d->id ?>">
+                                                    <i class="fa fa-solid fa-pencil-alt"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-danger btn-sm ml-2 " data-toggle="modal" data-target="#hapusnoplat<?= $d->id ?>">
+                                                    <i class="fa fa-solid fa-trash-alt"></i>
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card mt-2">
+                        <div class="card-header">
+                            <h3 class="card-title">Driver Listing</h3>
+                        </div>
+                        <div class="ml-2">
+                            <div class="row">
+                                <a href="<?= base_url('driverop') ?>" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#adddriver">
+                                    <i class="fas fa-user-cog"></i>
+                                    Tambah Driver Baru
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="tb_driver" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Driver</th>
                                         <th>Status</th>
                                         <th>#</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
+                                    <?php foreach ($driver as $d) : ?>
+                                        <tr>
+                                            <th><?= $d->nama_driver ?></th>
+                                            <th><?= $d->status ?></th>
+                                            <th>
+                                                <a href="#" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#editdriver<?= $d->id ?>">
+                                                    <i class="fa fa-solid fa-pencil-alt"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-danger btn-sm ml-2 " data-toggle="modal" data-target="#hapusdriver<?= $d->id ?>">
+                                                    <i class="fa fa-solid fa-trash-alt"></i>
+                                                </a>
+                                                <?php if ($d->status == 'ACTIVE') : ?>
+                                                    <a href="<?= base_url('nonactivedriver/') . $d->kd_driver  ?>" class="btn btn-warning btn-sm ml-2 ">
+                                                        <i class="fa fa-solid fa-ban"></i>
+                                                    </a>
+                                                <?php elseif ($d->status == 'NON-ACTIVE') : ?>
+                                                    <a href="<?= base_url('activedrver/') . $d->kd_driver ?>" class="btn btn-success btn-sm ml-2">
+                                                        <i class="fa fa-solid fa-user-check"></i>
+                                                    </a>
+                                                <?php endif; ?>
+                                            </th>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
