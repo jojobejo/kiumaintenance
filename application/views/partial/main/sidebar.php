@@ -99,6 +99,38 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="<?php echo base_url('hrd_lap_tamu') ?>" class="nav-link">
+                <i class="nav-icon fa fa-car-side"></i>
+                <p>
+                  Laporan Tamu
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('hrd_lap_Karyawan_KM') ?>" class="nav-link">
+                <i class="nav-icon fa fa-car-side"></i>
+                <p>
+                  Laporan Karyawan K-M
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('hrd_lap_expedisi') ?>" class="nav-link">
+                <i class="nav-icon fa fa-car-side"></i>
+                <p>
+                  Laporan Expedisi
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('hrd_lap_issue') ?>" class="nav-link">
+                <i class="nav-icon fa fa-car-side"></i>
+                <p>
+                  Laporan Issue
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="<?php echo base_url('logout') ?>" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
                 <p>
