@@ -56,7 +56,7 @@
                   <?php foreach ($laporan as $l) : ?>
 
                     <tr>
-                      <th><?= $l->id ?></th>
+                      <th hidden><?= $l->id ?></th>
                       <th><?= $l->tanggal ?></th>
                       <th><?= $l->nama ?></th>
                       <th><?= $l->perusahaan ?></th>
