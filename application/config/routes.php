@@ -102,6 +102,22 @@ $route['hrd_lap_distribusi'] = 'hrd/C_Hrd/lap_distribusi';
 $route['add_lap_distribusi_hrd'] = 'hrd/C_Hrd/input_lap_distribusi';
 $route['edit_lap_distribusi_hrd'] = 'hrd/C_Hrd/edit_lap_distribusi';
 $route['hapus_lap_distribusi_hrd'] = 'hrd/C_Hrd/hapus_lap_distribusi_hrd';
+$route['hrd_lap_tamu'] = 'hrd/C_Hrd/lap_tamu';
+$route['tambah_lap_tamu'] = 'hrd/C_Hrd/tambah_lap_tamu';
+$route['hapus_lap_tamu_hrd'] = 'hrd/C_Hrd/hapus_lap_tamu_hrd';
+$route['edit_lap_tamu_hrd'] = 'hrd/C_Hrd/edit_lap_tamu';
+$route['hrd_lap_Karyawan_KM'] = 'hrd/C_Hrd/lap_karykm';
+$route['edit_lap_Karyawan_KM'] = 'hrd/C_Hrd/edit_lap_karykm';
+$route['tambah_lap_karykm'] = 'hrd/C_Hrd/tambah_lap_karykm';
+$route['hapus_lap_karykm'] = 'hrd/C_Hrd/hapus_lap_karykm';
+$route['hrd_lap_expedisi'] = 'hrd/C_Hrd/lap_expedisi';
+$route['edit_lap_expedisi'] = 'hrd/C_Hrd/edit_lap_expedisi';
+$route['tambah_lap_expedisi'] = 'hrd/C_Hrd/tambah_lap_expedisi';
+$route['hapus_lap_expedisi'] = 'hrd/C_Hrd/hapus_lap_expedisi';
+$route['hrd_lap_issue'] = 'hrd/C_Hrd/lap_issue';
+$route['edit_lap_issue'] = 'hrd/C_Hrd/edit_lap_issue';
+$route['tambah_lap_issue'] = 'hrd/C_Hrd/tambah_lap_issue';
+$route['hapus_lap_issue'] = 'hrd/C_Hrd/hapus_lap_issue';
 
 
 
