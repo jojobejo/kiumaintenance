@@ -39,7 +39,7 @@
               <table id="tb_lap_distribusi" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>id</th>
+                    <th hidden>id</th>
                     <th>Tanggal</th>
                     <th>Des Issue</th>
                     <th>Lokasi</th>
