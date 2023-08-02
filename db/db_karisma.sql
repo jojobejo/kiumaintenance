@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2023 at 10:15 AM
+-- Generation Time: Aug 02, 2023 at 10:03 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.3.24
 
@@ -56,7 +56,11 @@ INSERT INTO `tb_det_tracking_driver` (`id`, `norut`, `kd_deliveri`, `tgl_jalan`,
 (13, 1, 'KIUD2907230001', '2023-07-30', 'KIU1107230001', 'K1', 'Jember', 'READY', '', ''),
 (14, 3, 'KIUD2907230001', '2023-07-30', 'KIU1107230002', 'K2', 'Surabaya', 'READY', '', ''),
 (15, 2, 'KIUD2907230001', '2023-07-30', 'KIU1107230003', 'K3', 'Malang', 'READY', '', ''),
-(16, 4, 'KIUD2907230001', '2023-07-30', 'KIU1107230004', 'K4', 'Probolinggo', 'READY', '', '');
+(16, 4, 'KIUD2907230001', '2023-07-30', 'KIU1107230004', 'K4', 'Probolinggo', 'READY', '', ''),
+(17, 3, 'KIUD0108230001', '2023-08-02', 'KIU1107230001', 'K1', 'Jember', 'READY', '', ''),
+(18, 2, 'KIUD0108230001', '2023-08-02', 'KIU1107230002', 'K2', 'Jember', 'READY', '', ''),
+(19, 1, 'KIUD0108230001', '2023-08-02', 'KIU1107230003', 'K3', 'Jember', 'READY', '', ''),
+(20, 4, 'KIUD0108230001', '2023-08-02', 'KIU1107230004', 'K4', 'Jember', 'READY', '', '');
 
 -- --------------------------------------------------------
 
@@ -78,6 +82,26 @@ CREATE TABLE `tb_driver_pending` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_expedisi`
+--
+
+CREATE TABLE `tb_expedisi` (
+  `id` int(11) NOT NULL,
+  `tanggal` text NOT NULL,
+  `jammasuk` varchar(255) NOT NULL,
+  `jamkeluar` varchar(255) NOT NULL,
+  `nopol` varchar(255) NOT NULL,
+  `namadriver` varchar(255) NOT NULL,
+  `notlpndriver` varchar(255) NOT NULL,
+  `perusahaanpengirim` varchar(255) NOT NULL,
+  `namabarang` varchar(255) NOT NULL,
+  `jumlahbarang` varchar(255) NOT NULL,
+  `keterangan` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_inventaris`
 --
 
@@ -90,6 +114,37 @@ CREATE TABLE `tb_inventaris` (
   `deskripsi` text NOT NULL,
   `tgl_pembelian` text NOT NULL,
   `status` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_issue`
+--
+
+CREATE TABLE `tb_issue` (
+  `id` int(11) NOT NULL,
+  `tanggal` text NOT NULL,
+  `issue` varchar(255) NOT NULL,
+  `lokasi` varchar(255) NOT NULL,
+  `nama` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_karyawan_keluarmasuk`
+--
+
+CREATE TABLE `tb_karyawan_keluarmasuk` (
+  `id` int(11) NOT NULL,
+  `tanggal` text NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `departemen` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `jamkeluar` varchar(255) NOT NULL,
+  `jammasuk` varchar(255) NOT NULL,
+  `keterangan` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -183,7 +238,27 @@ CREATE TABLE `tb_order_tracking_driver` (
 INSERT INTO `tb_order_tracking_driver` (`id`, `kd_order`, `tgl_jalan`, `create_at`) VALUES
 (1, 'KIUD2507230001', '2023-07-25', '2023-07-25 03:43:21'),
 (3, 'KIUD2607230001', '2023-07-26', '2023-07-26 01:33:44'),
-(4, 'KIUD2907230001', '2023-07-30', '2023-07-29 02:17:00');
+(4, 'KIUD2907230001', '2023-07-30', '2023-07-29 02:17:00'),
+(5, 'KIUD0108230001', '2023-08-02', '2023-08-01 07:52:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_tamu`
+--
+
+CREATE TABLE `tb_tamu` (
+  `id` int(11) NOT NULL,
+  `tanggal` text NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `perusahaan` varchar(255) NOT NULL,
+  `alamat` varchar(255) NOT NULL,
+  `jumlahpersonil` varchar(255) NOT NULL,
+  `tujuan` varchar(255) NOT NULL,
+  `jammasuk` text NOT NULL,
+  `jamkeluar` varchar(255) NOT NULL,
+  `keterangan` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -247,9 +322,27 @@ ALTER TABLE `tb_driver_pending`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tb_expedisi`
+--
+ALTER TABLE `tb_expedisi`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tb_inventaris`
 --
 ALTER TABLE `tb_inventaris`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_issue`
+--
+ALTER TABLE `tb_issue`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_karyawan_keluarmasuk`
+--
+ALTER TABLE `tb_karyawan_keluarmasuk`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -277,6 +370,12 @@ ALTER TABLE `tb_order_tracking_driver`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tb_tamu`
+--
+ALTER TABLE `tb_tamu`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tb_truck`
 --
 ALTER TABLE `tb_truck`
@@ -296,7 +395,7 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_det_tracking_driver`
 --
 ALTER TABLE `tb_det_tracking_driver`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tb_driver_pending`
@@ -305,34 +404,58 @@ ALTER TABLE `tb_driver_pending`
   MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `tb_expedisi`
+--
+ALTER TABLE `tb_expedisi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `tb_inventaris`
 --
 ALTER TABLE `tb_inventaris`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `tb_issue`
+--
+ALTER TABLE `tb_issue`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tb_karyawan_keluarmasuk`
+--
+ALTER TABLE `tb_karyawan_keluarmasuk`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `tb_lap_distribusi`
 --
 ALTER TABLE `tb_lap_distribusi`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tb_op_driver`
 --
 ALTER TABLE `tb_op_driver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tb_op_plat`
 --
 ALTER TABLE `tb_op_plat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tb_order_tracking_driver`
 --
 ALTER TABLE `tb_order_tracking_driver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tb_tamu`
+--
+ALTER TABLE `tb_tamu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tb_truck`
