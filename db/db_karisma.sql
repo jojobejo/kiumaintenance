@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2023 at 10:03 AM
+-- Generation Time: Aug 05, 2023 at 09:49 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.3.24
 
@@ -33,8 +33,12 @@ CREATE TABLE `tb_det_tracking_driver` (
   `kd_deliveri` varchar(25) NOT NULL,
   `tgl_jalan` text NOT NULL,
   `kd_driver` varchar(25) NOT NULL,
+  `kd_helper` varchar(25) NOT NULL,
   `kd_truk` varchar(25) NOT NULL,
   `destinasi` text NOT NULL,
+  `jml_kios` int(25) NOT NULL,
+  `tonase` int(25) NOT NULL,
+  `kubikasi` int(25) NOT NULL,
   `sts_driver` varchar(25) NOT NULL,
   `keterangan` text NOT NULL,
   `nm_toko` text NOT NULL
@@ -44,23 +48,25 @@ CREATE TABLE `tb_det_tracking_driver` (
 -- Dumping data for table `tb_det_tracking_driver`
 --
 
-INSERT INTO `tb_det_tracking_driver` (`id`, `norut`, `kd_deliveri`, `tgl_jalan`, `kd_driver`, `kd_truk`, `destinasi`, `sts_driver`, `keterangan`, `nm_toko`) VALUES
-(1, 0, 'KIUD2507230001', '2023-07-25', 'KIU1107230001', 'K1', 'Jember', 'READY', '', ''),
-(2, 0, 'KIUD2507230001', '2023-07-25', 'KIU1107230002', 'K2', 'Lumajang', 'READY', '', ''),
-(3, 0, 'KIUD2507230001', '2023-07-25', 'KIU1107230003', 'K3', 'Surabaya', 'READY', '', ''),
-(4, 0, 'KIUD2507230001', '2023-07-25', 'KIU1107230004', '-', '-', 'PENDING', '-', ''),
-(9, 0, 'KIUD2607230001', '2023-07-26', 'KIU1107230001', 'K1', 'Jember', 'READY', '', ''),
-(10, 0, 'KIUD2607230001', '2023-07-26', 'KIU1107230002', 'K2', 'Malang', 'READY', '', ''),
-(11, 0, 'KIUD2607230001', '2023-07-26', 'KIU1107230003', 'K3', 'Surabaya', 'ON THE ROAD', 'Dalam perjalanan', ''),
-(12, 0, 'KIUD2607230001', '2023-07-26', 'KIU1107230004', '-', '-', 'PENDING', 'Sakit', ''),
-(13, 1, 'KIUD2907230001', '2023-07-30', 'KIU1107230001', 'K1', 'Jember', 'READY', '', ''),
-(14, 3, 'KIUD2907230001', '2023-07-30', 'KIU1107230002', 'K2', 'Surabaya', 'READY', '', ''),
-(15, 2, 'KIUD2907230001', '2023-07-30', 'KIU1107230003', 'K3', 'Malang', 'READY', '', ''),
-(16, 4, 'KIUD2907230001', '2023-07-30', 'KIU1107230004', 'K4', 'Probolinggo', 'READY', '', ''),
-(17, 3, 'KIUD0108230001', '2023-08-02', 'KIU1107230001', 'K1', 'Jember', 'READY', '', ''),
-(18, 2, 'KIUD0108230001', '2023-08-02', 'KIU1107230002', 'K2', 'Jember', 'READY', '', ''),
-(19, 1, 'KIUD0108230001', '2023-08-02', 'KIU1107230003', 'K3', 'Jember', 'READY', '', ''),
-(20, 4, 'KIUD0108230001', '2023-08-02', 'KIU1107230004', 'K4', 'Jember', 'READY', '', '');
+INSERT INTO `tb_det_tracking_driver` (`id`, `norut`, `kd_deliveri`, `tgl_jalan`, `kd_driver`, `kd_helper`, `kd_truk`, `destinasi`, `jml_kios`, `tonase`, `kubikasi`, `sts_driver`, `keterangan`, `nm_toko`) VALUES
+(1, 1, 'KIUD0508230001', '2023-08-06', 'KIU0508230003', 'KIU0508230020', 'K 21', 'Lumajang', 20, 10, 20, 'READY', '', ''),
+(2, 2, 'KIUD0508230001', '2023-08-06', 'KIU0508230004', 'KIU0508230019', 'K 88', 'Malang', 10, 10, 30, 'READY', '', ''),
+(3, 3, 'KIUD0508230001', '2023-08-06', 'KIU0508230005', '-', '-', '', 0, 0, 0, 'READY', '', ''),
+(4, 4, 'KIUD0508230001', '2023-08-06', 'KIU0508230006', '-', '-', '', 0, 0, 0, 'READY', '', ''),
+(5, 5, 'KIUD0508230001', '2023-08-06', 'KIU0508230007', '-', '-', '', 0, 0, 0, 'READY', '', ''),
+(6, 6, 'KIUD0508230001', '2023-08-06', 'KIU0508230008', '-', '-', '', 0, 0, 0, 'READY', '', ''),
+(7, 7, 'KIUD0508230001', '2023-08-06', 'KIU0508230009', '-', '-', '', 0, 0, 0, 'READY', '', ''),
+(8, 8, 'KIUD0508230001', '2023-08-06', 'KIU0508230010', '-', '-', '', 0, 0, 0, 'READY', '', ''),
+(9, 9, 'KIUD0508230001', '2023-08-06', 'KIU0508230011', '-', '-', '', 0, 0, 0, 'READY', '', ''),
+(10, 10, 'KIUD0508230001', '2023-08-06', 'KIU0508230012', '-', '-', '', 0, 0, 0, 'READY', '', ''),
+(11, 11, 'KIUD0508230001', '2023-08-06', 'KIU0508230013', '-', '-', '', 0, 0, 0, 'READY', '', ''),
+(12, 12, 'KIUD0508230001', '2023-08-06', 'KIU0508230014', '-', '-', '', 0, 0, 0, 'READY', '', ''),
+(13, 13, 'KIUD0508230001', '2023-08-06', 'KIU0508230015', '-', '-', '', 0, 0, 0, 'READY', '', ''),
+(14, 14, 'KIUD0508230001', '2023-08-06', 'KIU0508230016', '-', '-', '', 0, 0, 0, 'READY', '', ''),
+(15, 15, 'KIUD0508230001', '2023-08-06', 'KIU0508230017', '-', '-', '', 0, 0, 0, 'READY', '', ''),
+(16, 16, 'KIUD0508230001', '2023-08-06', 'KIU0508230018', '-', '-', '', 0, 0, 0, 'READY', '', ''),
+(17, 17, 'KIUD0508230001', '2023-08-06', 'KIU0508230001', '-', '-', '', 0, 0, 0, 'READY', '', ''),
+(18, 18, 'KIUD0508230001', '2023-08-06', 'KIU0508230002', '-', '-', '', 0, 0, 0, 'READY', '', '');
 
 -- --------------------------------------------------------
 
@@ -179,6 +185,7 @@ CREATE TABLE `tb_lap_distribusi` (
 
 CREATE TABLE `tb_op_driver` (
   `id` int(11) NOT NULL,
+  `no_urut_hr_i` int(12) NOT NULL,
   `kd_driver` varchar(25) NOT NULL,
   `nama_driver` text NOT NULL,
   `status` varchar(25) NOT NULL,
@@ -189,11 +196,48 @@ CREATE TABLE `tb_op_driver` (
 -- Dumping data for table `tb_op_driver`
 --
 
-INSERT INTO `tb_op_driver` (`id`, `kd_driver`, `nama_driver`, `status`, `create_at`) VALUES
-(2, 'KIU1107230001', 'Ribut S', 'ACTIVE', '2023-07-11 06:45:49'),
-(3, 'KIU1107230002', 'Sugianto', 'ACTIVE', '2023-07-11 06:45:49'),
-(4, 'KIU1107230003', 'Timan', 'ACTIVE', '2023-07-11 06:45:49'),
-(5, 'KIU1107230004', 'Joni', 'ACTIVE', '2023-07-11 06:45:49');
+INSERT INTO `tb_op_driver` (`id`, `no_urut_hr_i`, `kd_driver`, `nama_driver`, `status`, `create_at`) VALUES
+(7, 17, 'KIU0508230001', 'TIMAN', 'ACTIVE', '2023-08-05 04:51:45'),
+(8, 18, 'KIU0508230002', 'SAMHADI', 'ACTIVE', '2023-08-05 04:51:45'),
+(9, 1, 'KIU0508230003', 'JONI', 'ACTIVE', '2023-08-05 04:51:45'),
+(10, 2, 'KIU0508230004', 'GOVIL', 'ACTIVE', '2023-08-05 04:51:45'),
+(11, 3, 'KIU0508230005', 'ALI WAFA', 'ACTIVE', '2023-08-05 04:51:45'),
+(12, 4, 'KIU0508230006', 'FANDI', 'ACTIVE', '2023-08-05 04:51:45'),
+(13, 5, 'KIU0508230007', 'ROHMAN', 'ACTIVE', '2023-08-05 04:51:45'),
+(14, 6, 'KIU0508230008', 'ANANG', 'ACTIVE', '2023-08-05 04:51:45'),
+(15, 7, 'KIU0508230009', 'SUGIHARTONO', 'ACTIVE', '2023-08-05 04:51:45'),
+(16, 8, 'KIU0508230010', 'MAKRUF', 'ACTIVE', '2023-08-05 04:51:45'),
+(17, 9, 'KIU0508230011', 'ADE', 'ACTIVE', '2023-08-05 04:51:45'),
+(18, 10, 'KIU0508230012', 'RIBUT', 'ACTIVE', '2023-08-05 04:51:45'),
+(19, 11, 'KIU0508230013', 'MUSTAJAB', 'ACTIVE', '2023-08-05 04:51:45'),
+(20, 12, 'KIU0508230014', 'IMAM T', 'ACTIVE', '2023-08-05 04:51:45'),
+(21, 13, 'KIU0508230015', 'KRISTIAN', 'ACTIVE', '2023-08-05 04:51:45'),
+(22, 14, 'KIU0508230016', 'SUYONO', 'ACTIVE', '2023-08-05 04:51:45'),
+(23, 15, 'KIU0508230017', 'HERI H', 'ACTIVE', '2023-08-05 04:51:45'),
+(24, 16, 'KIU0508230018', 'RAHMAT', 'ACTIVE', '2023-08-05 04:51:45');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_op_helper`
+--
+
+CREATE TABLE `tb_op_helper` (
+  `id` int(12) NOT NULL,
+  `kd_helper` varchar(25) NOT NULL,
+  `nama_helper` text NOT NULL,
+  `status` varchar(25) NOT NULL,
+  `create_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_op_helper`
+--
+
+INSERT INTO `tb_op_helper` (`id`, `kd_helper`, `nama_helper`, `status`, `create_at`) VALUES
+(2, 'KIU0508230020', 'Billy', 'ACTIVE', '2023-08-05 04:44:54'),
+(5, 'KIU0508230019', 'Yoga', 'ACTIVE', '2023-08-05 05:11:35'),
+(6, 'KIU0508230019', 'Yono', 'ACTIVE', '2023-08-05 05:20:19');
 
 -- --------------------------------------------------------
 
@@ -212,11 +256,30 @@ CREATE TABLE `tb_op_plat` (
 --
 
 INSERT INTO `tb_op_plat` (`id`, `noplat`, `nm_truk`) VALUES
-(2, 'P8808UG', 'K1'),
-(3, 'P8034UQ', 'K2'),
-(4, 'P8035UQ', 'K3'),
-(5, 'P8035UQ', 'K4'),
-(6, 'P8305UK', 'K5');
+(2, 'P 8925 GC', 'K 22'),
+(3, 'P 9962 UG', 'K 15'),
+(4, 'P 9805 UG', 'K 25'),
+(5, 'P 8808 G', 'K 21'),
+(6, 'P 8305 UK', 'K 16'),
+(8, 'P 8241 UG', 'K 89'),
+(9, 'P 9695 UG', 'K 57'),
+(10, 'P 9068 UG', 'K 11'),
+(11, 'P 8306 UK', 'K 17'),
+(12, 'P 8060 UG', 'K 59'),
+(13, 'P 9276 UG', 'K 12'),
+(14, 'P 9880 UG', 'K 58'),
+(15, 'P 8058 UQ', 'K 45'),
+(16, 'P 9905 UG', 'K 36'),
+(17, 'P 8290 UG', 'K 28'),
+(18, 'P 8092 UG', 'K 78'),
+(19, 'P 9904 UG', 'K 27'),
+(20, 'P 9629 UG', 'K 23'),
+(21, 'P 8242 UG', 'K 88'),
+(22, 'P 9161 UG', 'K 77'),
+(23, 'P 9475 UG', 'K 18'),
+(24, 'P 8297 UQ', 'K 99'),
+(25, 'P 8252 GE', 'GRANDMAX'),
+(26, 'P 9611 GE', 'FUTURA');
 
 -- --------------------------------------------------------
 
@@ -236,10 +299,7 @@ CREATE TABLE `tb_order_tracking_driver` (
 --
 
 INSERT INTO `tb_order_tracking_driver` (`id`, `kd_order`, `tgl_jalan`, `create_at`) VALUES
-(1, 'KIUD2507230001', '2023-07-25', '2023-07-25 03:43:21'),
-(3, 'KIUD2607230001', '2023-07-26', '2023-07-26 01:33:44'),
-(4, 'KIUD2907230001', '2023-07-30', '2023-07-29 02:17:00'),
-(5, 'KIUD0108230001', '2023-08-02', '2023-08-01 07:52:10');
+(1, 'KIUD0508230001', '2023-08-06', '2023-08-05 05:31:07');
 
 -- --------------------------------------------------------
 
@@ -358,6 +418,12 @@ ALTER TABLE `tb_op_driver`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tb_op_helper`
+--
+ALTER TABLE `tb_op_helper`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tb_op_plat`
 --
 ALTER TABLE `tb_op_plat`
@@ -395,7 +461,7 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_det_tracking_driver`
 --
 ALTER TABLE `tb_det_tracking_driver`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tb_driver_pending`
@@ -437,19 +503,25 @@ ALTER TABLE `tb_lap_distribusi`
 -- AUTO_INCREMENT for table `tb_op_driver`
 --
 ALTER TABLE `tb_op_driver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `tb_op_helper`
+--
+ALTER TABLE `tb_op_helper`
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tb_op_plat`
 --
 ALTER TABLE `tb_op_plat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `tb_order_tracking_driver`
 --
 ALTER TABLE `tb_order_tracking_driver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_tamu`

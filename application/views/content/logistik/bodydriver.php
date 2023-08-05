@@ -46,6 +46,7 @@
                                     <tr>
                                         <th>Nama Driver</th>
                                         <th>Status</th>
+                                        <th style="width: 10px;">No.Urut Hari Ini</th>
                                         <th>#</th>
                                     </tr>
                                 </thead>
@@ -54,6 +55,7 @@
                                         <tr>
                                             <th><?= $d->nama_driver ?></th>
                                             <th><?= $d->status ?></th>
+                                            <th style="width: 5px;"><?= $d->no_urut_hr_i ?></th>
                                             <th>
                                                 <a href="#" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#editdriver<?= $d->id ?>">
                                                     <i class="fa fa-solid fa-pencil-alt"></i>

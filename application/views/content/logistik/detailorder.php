@@ -8,7 +8,7 @@
 
         <?php $this->load->view('partial/main/navbar') ?>
         <?php $this->load->view('partial/main/sidebar') ?>
-
+        <?php $this->load->view('content/logistik/modaleditdetail') ?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -33,22 +33,33 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <a href="#" class="btn btn-primary mb-2 btn-lg">
-                                <i class="fa fa-solid fa-calendar"></i>
-                                <?php foreach ($order_deliv as $o) : ?>
-                                    Jadwal Deliveri : <?= format_indo($o->tgl_jalan) ?>
-                                <?php endforeach; ?>
-                            </a>
+                            <div class="row">
+                                <a href="#" class="btn btn-primary mb-2 btn-lg">
+                                    <i class="fa fa-solid fa-calendar"></i>
+                                    <?php foreach ($order_deliv as $o) : ?>
+                                        Jadwal Deliveri : <?= format_indo($o->tgl_jalan) ?>
+                                    <?php endforeach; ?>
+                                </a>
+                                <a class="btn btn-primary mb-2 ml-3 btn-lg" href="<?= base_url('editorderdeliver/') . $kd ?>">
+                                    <i class="fas fa-user-cog"></i>
+                                    Edit Data Detail
+                                </a>
+                            </div>
                             <table id="tb_det_list_driver_order" class="table table-bordered table-striped" style="text-align: center;">
                                 <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Driver</th>
+                                        <th>Nama Helper</th>
                                         <th>Nama Truk</th>
                                         <th>Nomor Plat</th>
                                         <th>Destinasi</th>
+                                        <th>Jumlah Kios</th>
+                                        <th>Tonase(TON)</th>
+                                        <th>Kubikasi(M2)</th>
                                         <th>Status Driver</th>
                                         <th>Keterangan</th>
+                                        <!-- <th>#</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -56,10 +67,13 @@
                                         <tr>
                                             <th><?= $d->norut ?></th>
                                             <th><?= $d->nama_driver ?></th>
+                                            <th><?= $d->nama_helper ?></th>
                                             <th><?= $d->kd_truk ?></th>
                                             <th><?= $d->noplat ?></th>
                                             <th><?= $d->destinasi ?></th>
-                                            <th><?= $d->sts_driver ?></th>
+                                            <th><?= $d->jml_kios ?></th>
+                                            <th><?= $d->tonase ?></th>
+                                            <th><?= $d->kubikasi ?></th>
                                             <?php if ($d->sts_driver == 'READY') : ?>
                                                 <th>
                                                     <a href="#" class=" btn btn-success btn-sm btn-block ">
@@ -79,6 +93,23 @@
                                                     </a>
                                                 </th>
                                             <?php endif; ?>
+                                            <th><?= $d->keterangan ?></th>
+                                            <!-- <th>
+                                                <div class="row">
+                                                    <a href="#" class="btn btn-success btn-sm " data-toggle="modal" data-target="#editdetail<?= $d->id ?>">
+                                                        <i class="fa fa-solid fa-pencil-alt"></i>
+                                                    </a>
+                                                    <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editdetail<?= $d->id ?>">
+                                                        <i class="fa fa-solid fa-ban"></i>
+                                                    </a>
+                                                    <a href="#" class="btn btn-default btn-sm " data-toggle="modal" data-target="#editdetail<?= $d->id ?>">
+                                                        <i class="fa fa-solid fa-truck"></i>
+                                                    </a>
+                                                    <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#editdetail<?= $d->id ?>">
+                                                        <i class="fa fa-solid fa-trash-alt"></i>
+                                                    </a>
+                                                </div>
+                                            </th> -->
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>

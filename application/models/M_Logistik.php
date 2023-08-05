@@ -22,6 +22,39 @@ class M_Logistik extends CI_Model
     {
         return $this->db->delete('tb_op_plat', array("id" => $id));
     }
+    //Helper Config
+    public function getallhelper()
+    {
+        return $this->db->get('tb_op_helper')->result();
+    }
+    public function addhelperbaru($data)
+    {
+        return $this->db->insert('tb_op_helper', $data);
+    }
+    public function edithelper($id, $data)
+    {
+        $this->db->where('kd_helper', $id);
+        return $this->db->update('tb_op_helper', $data);
+    }
+    public function hapushelper($id)
+    {
+        return $this->db->delete('tb_op_helper', array("id" => $id));
+    }
+    function kd_helper()
+    {
+        $cd = $this->db->query("SELECT MAX(RIGHT(kd_helper,4)) AS kd_max FROM tb_op_helper WHERE DATE(create_at)=CURDATE()");
+        $kd = "";
+        if ($cd->num_rows() > 0) {
+            foreach ($cd->result() as $k) {
+                $tmp = ((int)$k->kd_max) + 1;
+                $kd = sprintf("%04s", $tmp);
+            }
+        } else {
+            $kd = "0001";
+        }
+        date_default_timezone_set('Asia/Jakarta');
+        return 'KIUH' . date('dmy') . $kd;
+    }
     //Driver Config
     public function getalldriver()
     {
@@ -123,8 +156,8 @@ class M_Logistik extends CI_Model
     function get_det_deliv($kd)
     {
         return $this->db->query("SELECT 
-        a.id,a.norut,a.tgl_jalan, a.nm_toko, a.kd_deliveri , a.kd_driver ,b.nama_driver, a.kd_truk , COALESCE(c.noplat,'-') as noplat , a.destinasi , a.sts_driver , COALESCE(NULLIF(a.keterangan,''),'-') as keterangan 
-        FROM tb_det_tracking_driver a JOIN tb_op_driver b ON b.kd_driver = a.kd_driver LEFT JOIN tb_op_plat c ON c.nm_truk = a.kd_truk 
+        a.jml_kios,a.tonase,a.kubikasi,d.nama_helper,a.id,a.norut,a.tgl_jalan, a.nm_toko, a.kd_deliveri , a.kd_driver ,b.nama_driver, a.kd_truk , COALESCE(c.noplat,'-') as noplat , a.destinasi , a.sts_driver , COALESCE(NULLIF(a.keterangan,''),'-') as keterangan 
+        FROM tb_det_tracking_driver a JOIN tb_op_driver b ON b.kd_driver = a.kd_driver LEFT JOIN tb_op_plat c ON c.nm_truk = a.kd_truk LEFT JOIN tb_op_helper d ON d.kd_helper = a.kd_helper 
         WHERE a.kd_deliveri = '$kd' 
         GROUP BY a.kd_driver");
     }
@@ -174,12 +207,22 @@ class M_Logistik extends CI_Model
     }
     public function get_all_driver()
     {
-        return $this->db->get('tb_op_driver')->result();
+        $this->db->select('*');
+        $this->db->from('tb_op_driver');
+        $this->db->order_by("no_urut_hr_i", "asc");
+        return $this->db->get()->result();
     }
     public function select_kd_truk()
     {
         $this->db->select('*');
         $this->db->from('tb_op_plat');
+        return $this->db->get()->result();
+    }
+    public function select_kd_helper()
+    {
+        $this->db->select('*');
+        $this->db->from('tb_op_helper');
+        $this->db->where('status', 'ACTIVE');
         return $this->db->get()->result();
     }
     public function get_data_driver()
@@ -209,5 +252,22 @@ class M_Logistik extends CI_Model
         WHERE b.kd_driver = '$kd' 
         GROUP BY a.kd_driver 
         ");
+    }
+    public function get_deliv($kd)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_det_tracking_driver a');
+        $this->db->join('tb_op_driver b', 'b.kd_driver = a.kd_driver','left');
+        $this->db->join('tb_op_plat c', 'c.nm_truk = a.kd_truk','left');
+        $this->db->join('tb_op_helper d', 'd.kd_helper = a.kd_helper','left');
+        $this->db->where('kd_deliveri', $kd);
+        return $this->db->get()->result();
+    }
+    public function detail_deliv($kd)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_order_tracking_driver');
+        $this->db->where('kd_order', $kd);
+        return $this->db->get()->result();
     }
 }

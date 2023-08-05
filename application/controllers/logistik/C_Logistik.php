@@ -13,12 +13,13 @@ class C_Logistik extends CI_Controller
 
     public function index()
     {
-
         $data['page_title'] = 'KARISMA - LOGISTIK';
         $data['dataplat']   = $this->M_Logistik->getallplat();
         $data['driver']    = $this->M_Logistik->getAllDriver();
+        $data['helper']    = $this->M_Logistik->getAllHelper();
         $data['kd_driver']  = $this->M_Logistik->kd_driver();
-        
+        $data['kd_helper']  = $this->M_Logistik->kd_helper();
+
 
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/logistik/bodylogistik.php', $data);
@@ -26,7 +27,7 @@ class C_Logistik extends CI_Controller
         $this->load->view('content/logistik/ajaxlogistik');
     }
 
-  
+
     public function addplat()
     {
         $kdplat = $this->input->post('kd_plat_isi');
@@ -125,11 +126,26 @@ class C_Logistik extends CI_Controller
     {
         $data['page_title'] = 'KARISMA - LOGISTIK';
         $data['driver'] = $this->M_Logistik->get_all_driver();
+        $data['helper'] = $this->M_Logistik->select_kd_helper();
         $data['kdorder'] = $this->M_Logistik->get_kd_order();
         $data['kdtruk'] = $this->M_Logistik->select_kd_truk();
 
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/logistik/tambahorderdriver.php', $data);
+        $this->load->view('partial/main/footer.php');
+        $this->load->view('content/logistik/ajaxorderdriver');
+    }
+    public function editdeliv($kd)
+    {
+        $data['page_title'] = 'KARISMA - LOGISTIK';
+        $data['deliv'] = $this->M_Logistik->get_deliv($kd);
+        $data['kdtruk'] = $this->M_Logistik->select_kd_truk();
+        $data['driver'] = $this->M_Logistik->get_all_driver();
+        $data['helper'] = $this->M_Logistik->select_kd_helper();
+        $data['status'] = $this->M_Logistik->detail_deliv($kd);
+
+        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('content/logistik/editorderdriver.php', $data);
         $this->load->view('partial/main/footer.php');
         $this->load->view('content/logistik/ajaxorderdriver');
     }
@@ -162,12 +178,47 @@ class C_Logistik extends CI_Controller
         $jumlah = count($this->input->post('nm_driver_i[]'));
         for ($i = 0; $i < $jumlah; $i++) {
             $data = array(
-                'norut' => $this->input->post('urut_i')[$i],
+                'norut' => $this->input->post('no_urut_i')[$i],
                 'kd_deliveri' => $this->input->post('kd_order_i'),
                 'tgl_jalan' => $this->input->post('tgl_deliv_i'),
                 'kd_driver' => $this->input->post('kd_driver_i')[$i],
+                'kd_helper' => $this->input->post('helper_i')[$i],
                 'kd_truk' => $this->input->post('kd_truk_i')[$i],
                 'destinasi' => $this->input->post('destinsasi_i')[$i],
+                'jml_kios' => $this->input->post('jml_kios')[$i],
+                'tonase' => $this->input->post('tonase_i')[$i],
+                'kubikasi' => $this->input->post('kubikasi_i')[$i],
+                'sts_driver' => $this->input->post('sts_driver[]')[$i],
+                'keterangan' => $this->input->post('keterangan_i[]')[$i]
+            );
+            $this->M_Logistik->insert_detail_order_driver($data);
+        }
+        $this->M_Logistik->insert_deliveri_order($dataOrder);
+        redirect('deliveriorder');
+    }
+    public function editorderdeliver()
+    {
+        $kdorder    = $this->input->post('kd_order_i');
+        $tglorder   = $this->input->post('tgl_deliv_i');
+
+        $dataOrder  = array(
+            'kd_order'  => $kdorder,
+            'tgl_jalan' => $tglorder,
+        );
+
+        $jumlah = count($this->input->post('nm_driver_i[]'));
+        for ($i = 0; $i < $jumlah; $i++) {
+            $data = array(
+                'norut' => $this->input->post('no_urut_i')[$i],
+                'kd_deliveri' => $this->input->post('kd_order_i'),
+                'tgl_jalan' => $this->input->post('tgl_deliv_i'),
+                'kd_driver' => $this->input->post('kd_driver_i')[$i],
+                'kd_helper' => $this->input->post('helper_i')[$i],
+                'kd_truk' => $this->input->post('kd_truk_i')[$i],
+                'destinasi' => $this->input->post('destinsasi_i')[$i],
+                'jml_kios' => $this->input->post('jml_kios')[$i],
+                'tonase' => $this->input->post('tonase_i')[$i],
+                'kubikasi' => $this->input->post('kubikasi_i')[$i],
                 'sts_driver' => $this->input->post('sts_driver[]')[$i],
                 'keterangan' => $this->input->post('keterangan_i[]')[$i]
             );
@@ -221,8 +272,10 @@ class C_Logistik extends CI_Controller
     public function det_deliveri($kd_deliveri)
     {
         $data['page_title'] = 'KARISMA - LOGISTIK';
+        $data['kd'] = $kd_deliveri;
         $data['order_deliv'] = $this->M_Logistik->get_order($kd_deliveri);
         $data['detail']   = $this->M_Logistik->get_det_deliv($kd_deliveri)->result();
+
 
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/logistik/detailorder.php', $data);
@@ -318,46 +371,46 @@ class C_Logistik extends CI_Controller
             ->setKeywords("Tracking Driver");
 
         $style_col = array(
-            'font' => array('bold' => true), 
+            'font' => array('bold' => true),
             'alignment' => array(
-                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 
-                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER 
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
             ),
             'borders' => array(
-                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), 
+                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
                 'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
                 'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
-                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) 
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN)
             )
         );
 
         $style_row = array(
             'alignment' => array(
-                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER 
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
             ),
             'borders' => array(
-                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), 
-                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), 
+                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
                 'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
-                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) 
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN)
             )
         );
 
-        $excel->setActiveSheetIndex(0)->setCellValue('A1', "Tracking Driver"); 
-        $excel->getActiveSheet()->mergeCells('A1:J1'); 
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); 
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); 
+        $excel->setActiveSheetIndex(0)->setCellValue('A1', "Tracking Driver");
+        $excel->getActiveSheet()->mergeCells('A1:J1');
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15);
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        
-        $excel->setActiveSheetIndex(0)->setCellValue('A3', "NO"); 
-        $excel->setActiveSheetIndex(0)->setCellValue('B3', "KODE DELIVERI"); 
-        $excel->setActiveSheetIndex(0)->setCellValue('C3', "TANGGAL JALAN"); 
-        $excel->setActiveSheetIndex(0)->setCellValue('D3', "NO JALAN"); 
-        $excel->setActiveSheetIndex(0)->setCellValue('E3', "NAMA DRIVER"); 
-        $excel->setActiveSheetIndex(0)->setCellValue('F3', "KODE TRUK"); 
+
+        $excel->setActiveSheetIndex(0)->setCellValue('A3', "NO");
+        $excel->setActiveSheetIndex(0)->setCellValue('B3', "KODE DELIVERI");
+        $excel->setActiveSheetIndex(0)->setCellValue('C3', "TANGGAL JALAN");
+        $excel->setActiveSheetIndex(0)->setCellValue('D3', "NO JALAN");
+        $excel->setActiveSheetIndex(0)->setCellValue('E3', "NAMA DRIVER");
+        $excel->setActiveSheetIndex(0)->setCellValue('F3', "KODE TRUK");
         $excel->setActiveSheetIndex(0)->setCellValue('G3', "NOMOR PLAT");
         $excel->setActiveSheetIndex(0)->setCellValue('H3', "STATUS DRIVER");
-        $excel->setActiveSheetIndex(0)->setCellValue('I3', "DESTINASI"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('I3', "DESTINASI");
         $excel->setActiveSheetIndex(0)->setCellValue('J3', "KETERANGAN");
 
         $excel->getActiveSheet()->getStyle('A3')->applyFromArray($style_col);
@@ -370,12 +423,12 @@ class C_Logistik extends CI_Controller
         $excel->getActiveSheet()->getStyle('H3')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('I3')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('J3')->applyFromArray($style_col);
-        
+
         $tracking = $this->M_Logistik->export_tracking()->result();
 
         $no = 1;
-        $numrow = 4; 
-        foreach ($tracking as $data) { 
+        $numrow = 4;
+        foreach ($tracking as $data) {
             $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $no);
             $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, $data->kd_deliveri);
             $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, format_indo($data->tgl_jalan));
@@ -396,20 +449,20 @@ class C_Logistik extends CI_Controller
             $excel->getActiveSheet()->getStyle('H' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('I' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('J' . $numrow)->applyFromArray($style_row);
-            $no++; 
-            $numrow++; 
+            $no++;
+            $numrow++;
         }
 
-        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(5); 
-        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(15); 
-        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(20); 
-        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(10); 
-        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(20); 
-        $excel->getActiveSheet()->getColumnDimension('F')->setWidth(11); 
-        $excel->getActiveSheet()->getColumnDimension('G')->setWidth(13); 
-        $excel->getActiveSheet()->getColumnDimension('H')->setWidth(15); 
-        $excel->getActiveSheet()->getColumnDimension('I')->setWidth(20); 
-        $excel->getActiveSheet()->getColumnDimension('J')->setWidth(20); 
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(5);
+        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(15);
+        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(20);
+        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(10);
+        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
+        $excel->getActiveSheet()->getColumnDimension('F')->setWidth(11);
+        $excel->getActiveSheet()->getColumnDimension('G')->setWidth(13);
+        $excel->getActiveSheet()->getColumnDimension('H')->setWidth(15);
+        $excel->getActiveSheet()->getColumnDimension('I')->setWidth(20);
+        $excel->getActiveSheet()->getColumnDimension('J')->setWidth(20);
         $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
         $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
         $excel->getActiveSheet(0)->setTitle("Rekap Tracking Driver ");
@@ -420,5 +473,70 @@ class C_Logistik extends CI_Controller
 
         $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
         $write->save('php://output');
+    }
+    public function editnorut()
+    {
+        $id    = $this->input->post('id_isi');
+        $no    = $this->input->post('norut');
+
+        $result = array();
+        foreach ($_POST['id_isi'] as $i => $val) {
+            $result[] = array(
+                'id' => $this->input->post('id_isi')[$i],
+                'no_urut_hr_i' => $this->input->post('norut')[$i],
+            );
+        }
+        $this->db->update_batch('tb_op_driver', $result, 'id');
+
+        redirect('truckoprational');
+    }
+    public function tambahhelper()
+    {
+        $kd_driver  = $this->input->post('kd_driver');
+        $nmdriver   = $this->input->post('driver_isi');
+        $stsisi     = $this->input->post('sts_select');
+
+        $dataplat = array(
+            'kd_helper' => $kd_driver,
+            'nama_helper'   => $nmdriver,
+            'status'   => $stsisi
+        );
+        $this->M_Logistik->addhelperbaru($dataplat);
+        redirect('truckoprational');
+    }
+    public function edithelper()
+    {
+        $kd_driver  = $this->input->post('kd_driver');
+        $nmdriver   = $this->input->post('driver_isi');
+
+        $dataplat = array(
+            'kd_helper' => $kd_driver,
+            'nama_helper'   => $nmdriver,
+        );
+        $this->M_Logistik->edithelper($kd_driver, $dataplat);
+        redirect('truckoprational');
+    }
+    public function activehelper($kd_driver)
+    {
+        $dataupdate = array(
+            'status' => 'ACTIVE'
+        );
+        $this->M_Logistik->edithelper($kd_driver, $dataupdate);
+        redirect('truckoprational');
+    }
+    public function nonactivehelper($kd_driver)
+    {
+        $dataupdate = array(
+            'status' => 'NON-ACTIVE'
+        );
+        $this->M_Logistik->edithelper($kd_driver, $dataupdate);
+        redirect('truckoprational');
+    }
+    public function hapushelper()
+    {
+        $id     = $this->input->post('id_isi');
+
+        $this->M_Logistik->hapushelper($id);
+        redirect('truckoprational');
     }
 }

@@ -37,21 +37,23 @@
                             <?php echo form_open_multipart('addorderdeliv'); ?>
                             <div id="kodeawal">
                                 <div class="row">
-                                    <div class="col-sm-3">
-                                        <label for="noInv" class="">Kode Order</label>
-                                        <input type="text" id="kd_order_i" name="kd_order_i" value="<?= $kdorder ?>" class="form-control" readonly>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label for="noInv" class="">Tanggal Order</label>
-                                        <?php $startDate = time(); ?>
-                                        <input type="date" id="tgl_deliv_i" name="tgl_deliv_i" value="<?= date("Y-m-d", strtotime('+1 day', $startDate)) ?>" class="form-control">
-                                    </div>
+                                    <?php foreach ($status as $s) : ?>
+                                        <div class="col-sm-3">
+                                            <label for="noInv" class="">Kode Order</label>
+                                            <input type="text" id="kd_order_i" name="kd_order_i" value="<?= $s->kd_order ?>" class="form-control" readonly>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label for="noInv" class="">Tanggal Order</label>
+                                            <?php $startDate = $s->tgl_jalan; ?>
+                                            <input type="date" id="tgl_deliv_i" name="tgl_deliv_i" value="<?= date("Y-m-d", strtotime($startDate)) ?>" class="form-control">
+                                        </div>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                             <div id="driveroption">
                                 <?php foreach ($driver as $d) : ?>
                                     <div class="row">
-                                    <div class="col" hidden>
+                                        <div class="col" hidden>
                                             <label for="noInv" class="">No Urut</label>
                                             <input type="number" id="no_urut_i[]" name="no_urut_i[]" value="<?= $d->no_urut_hr_i ?>" class="form-control" readonly>
                                         </div>

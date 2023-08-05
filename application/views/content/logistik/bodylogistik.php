@@ -71,9 +71,13 @@
                         </div>
                         <div class="ml-2">
                             <div class="row">
-                                <a href="<?= base_url('driverop') ?>" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#adddriver">
+                                <a class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#adddriver">
                                     <i class="fas fa-user-cog"></i>
                                     Tambah Driver Baru
+                                </a>
+                                <a class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#editnourut">
+                                    <i class="fas fa-user-cog"></i>
+                                    Setting Nomor Urut
                                 </a>
                             </div>
                         </div>
@@ -81,6 +85,7 @@
                             <table id="tb_driver" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th style="width: 5px;">No.Urut Hari Ini</th>
                                         <th>Nama Driver</th>
                                         <th>Status</th>
                                         <th>#</th>
@@ -89,6 +94,7 @@
                                 <tbody>
                                     <?php foreach ($driver as $d) : ?>
                                         <tr>
+                                            <th style="width: 5px;"><?= $d->no_urut_hr_i ?></th>
                                             <th><?= $d->nama_driver ?></th>
                                             <th><?= $d->status ?></th>
                                             <th>
@@ -114,6 +120,56 @@
                             </table>
                         </div>
                     </div>
+                    <div class="card mt-2">
+                        <div class="card-header">
+                            <h3 class="card-title">Helper Listing</h3>
+                        </div>
+                        <div class="ml-2">
+                            <div class="row">
+                                <a class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#addhelper">
+                                    <i class="fas fa-user-cog"></i>
+                                    Tambah Helper Baru
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="tb_driver" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Driver</th>
+                                        <th>Status</th>
+                                        <th>#</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($helper as $h) : ?>
+                                        <tr>
+                                            <th><?= $h->nama_helper ?></th>
+                                            <th><?= $h->status ?></th>
+                                            <th>
+                                                <a href="#" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#edithelper<?= $h->id ?>">
+                                                    <i class="fa fa-solid fa-pencil-alt"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-danger btn-sm ml-2 " data-toggle="modal" data-target="#hapushelper<?= $h->id ?>">
+                                                    <i class="fa fa-solid fa-trash-alt"></i>
+                                                </a>
+                                                <?php if ($h->status == 'ACTIVE') : ?>
+                                                    <a href="<?= base_url('nonactivehelper/') . $h->kd_helper  ?>" class="btn btn-warning btn-sm ml-2 ">
+                                                        <i class="fa fa-solid fa-ban"></i>
+                                                    </a>
+                                                <?php elseif ($h->status == 'NON-ACTIVE') : ?>
+                                                    <a href="<?= base_url('activehelper/') . $h->kd_helper ?>" class="btn btn-success btn-sm ml-2">
+                                                        <i class="fa fa-solid fa-user-check"></i>
+                                                    </a>
+                                                <?php endif; ?>
+                                            </th>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
             </section>
 
