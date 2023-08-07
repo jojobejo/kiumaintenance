@@ -50,13 +50,13 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Driver</th>
-                                        <th>Nama Helper</th>
                                         <th>Nama Truk</th>
                                         <th>Nomor Plat</th>
+                                        <th>Nama Helper</th>
                                         <th>Destinasi</th>
-                                        <th>Jumlah Kios</th>
                                         <th>Tonase(TON)</th>
                                         <th>Kubikasi(M2)</th>
+                                        <th>Jumlah Kios</th>
                                         <th>Status Driver</th>
                                         <th>Keterangan</th>
                                         <th>#</th>
@@ -67,11 +67,11 @@
                                         <tr>
                                             <th><?= $d->norut ?></th>
                                             <th><?= $d->nama_driver ?></th>
-                                            <th><?= $d->nama_helper ?></th>
                                             <th><?= $d->kd_truk ?></th>
                                             <th><?= $d->noplat ?></th>
-                                            <th><?= $d->destinasi ?></th>
+                                            <th><?= $d->nama_helper ?></th>
                                             <th><?= $d->jml_kios ?></th>
+                                            <th><?= $d->destinasi ?></th>
                                             <th><?= $d->tonase ?></th>
                                             <th><?= $d->kubikasi ?></th>
                                             <?php if ($d->sts_driver == 'READY') : ?>

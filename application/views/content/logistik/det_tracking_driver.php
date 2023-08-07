@@ -43,6 +43,7 @@
                                         <th>Tanggal Jalan</th>
                                         <th>Kode Truk</th>
                                         <th>Nomor Plat</th>
+                                        <th>Helper</th>
                                         <th>Destinasi </th>
                                         <th>Keterangan </th>
                                     </tr>
@@ -54,6 +55,7 @@
                                             <th><?= format_indo($det->tgl_jalan) ?></th>
                                             <th><?= $det->kd_truk ?></th>
                                             <th><?= $det->noplat ?></th>
+                                            <th><?= $det->nama_helper ?></th>
                                             <th><?= $det->destinasi ?></th>
                                             <th><?= $det->keterangan ?></th>
                                         </tr>

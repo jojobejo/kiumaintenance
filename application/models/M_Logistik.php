@@ -237,11 +237,13 @@ class M_Logistik extends CI_Model
     }
     public function get_det_tracking($kd)
     {
-        return $this->db->query("SELECT a.kd_deliveri , a.tgl_jalan ,a.kd_truk , COALESCE(c.noplat,'-') AS noplat , a.destinasi,COALESCE(NULLIF(a.keterangan,''),'-') AS keterangan
+        return $this->db->query("SELECT d.nama_helper,a.kd_deliveri , a.tgl_jalan ,a.kd_truk , COALESCE(c.noplat,'-') AS noplat , a.destinasi,COALESCE(NULLIF(a.keterangan,''),'-') AS keterangan
         FROM tb_det_tracking_driver a
         LEFT JOIN tb_op_driver b ON b.kd_driver = a.kd_driver
         LEFT JOIN tb_op_plat c on c.nm_truk = a.kd_truk
+        LEFT JOIN tb_op_helper d on d.kd_helper = a.kd_helper
         WHERE b.kd_driver = '$kd'
+        GROUP BY a.kd_deliveri
         ");
     }
     public function get_det_data_driver($kd)

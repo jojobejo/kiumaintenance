@@ -79,20 +79,20 @@
                                             </select>
                                         </div>
                                         <div class="col">
-                                            <label for="noInv" class="">Jumlah Kios</label>
-                                            <input type="number" id="jml_kios[]" name="jml_kios[]" value="" class="form-control">
-                                        </div>
-                                        <div class="col">
                                             <label for="noInv" class="">Destinasi Kota</label>
                                             <input type="text" id="destinsasi_i[]" name="destinsasi_i[]" value="" class="form-control">
                                         </div>
                                         <div class="col">
                                             <label for="noInv" class="">Tonase</label>
-                                            <input type="number" id="tonase_i[]" name="tonase_i[]" value="" class="form-control">
+                                            <input type="number" id="tonase_i[]" name="tonase_i[]" value="" class="form-control" step=".01">
                                         </div>
                                         <div class="col">
                                             <label for="noInv" class="">Kubikasi</label>
-                                            <input type="number" id="kubikasi_i[]" name="kubikasi_i[]" value="" class="form-control">
+                                            <input type="number" id="kubikasi_i[]" name="kubikasi_i[]" value="" step=".01" class="form-control">
+                                        </div>
+                                        <div class="col">
+                                            <label for="noInv" class="">Jumlah Kios</label>
+                                            <input type="number" id="jml_kios[]" name="jml_kios[]" value="" class="form-control">
                                         </div>
                                         <div class="col">
                                             <label for="noInv" class="">Status Driver</label>
