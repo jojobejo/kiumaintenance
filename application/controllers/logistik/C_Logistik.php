@@ -275,6 +275,8 @@ class C_Logistik extends CI_Controller
         $data['kd'] = $kd_deliveri;
         $data['order_deliv'] = $this->M_Logistik->get_order($kd_deliveri);
         $data['detail']   = $this->M_Logistik->get_det_deliv($kd_deliveri)->result();
+        $data['helper'] = $this->M_Logistik->select_kd_helper();
+        $data['kdtruk'] = $this->M_Logistik->select_kd_truk();
 
 
         $this->load->view('partial/main/header.php', $data);
@@ -538,5 +540,41 @@ class C_Logistik extends CI_Controller
 
         $this->M_Logistik->hapushelper($id);
         redirect('truckoprational');
+    }
+    public function editdetaildriver()
+    {
+        $kd         = $this->input->post('kdorder');
+        $id         = $this->input->post('id_i');
+        $norut      = $this->input->post('no_jalan_i');
+        $kdriver    = $this->input->post('kddriver');
+        $kdhelper   = $this->input->post('helper_i');
+        $kdtruk     = $this->input->post('kd_truk_i');
+        $destinasi  = $this->input->post('destinasi_i');
+        $jmlkios    = $this->input->post('jml_kios_i');
+        $tonase     = $this->input->post('tonase_i');
+        $kubikasi   = $this->input->post('kubikasi_i');
+        $stsdriver  = $this->input->post('sts_isi');
+        $keterangan = $this->input->post('keterangan_i');
+
+        $data = array(
+            'norut'     => $norut,
+            'kd_driver' => $kdriver,
+            'kd_helper' => $kdhelper,
+            'kd_truk'   => $kdtruk,
+            'destinasi' => $destinasi,
+            'jml_kios'  => $jmlkios,
+            'tonase'    => $tonase,
+            'kubikasi'  => $kubikasi,
+            'sts_driver' => $stsdriver,
+            'keterangan' => $keterangan
+        );
+        $this->M_Logistik->edit_detail_order_driver($id, $data);
+        redirect('detail_deliveri/' . $kd);
+    }
+    public function hapus_detail_order($kd)
+    {
+        $this->M_Logistik->deletedetailorder($kd);
+        $this->M_Logistik->deleteorder($kd);
+        redirect('deliveriorder');
     }
 }

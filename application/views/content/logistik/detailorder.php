@@ -40,10 +40,10 @@
                                         Jadwal Deliveri : <?= format_indo($o->tgl_jalan) ?>
                                     <?php endforeach; ?>
                                 </a>
-                                <a class="btn btn-primary mb-2 ml-3 btn-lg" href="<?= base_url('editorderdeliver/') . $kd ?>">
+                                <!-- <a class="btn btn-primary mb-2 ml-3 btn-lg" href="<?= base_url('editorderdeliver/') . $kd ?>">
                                     <i class="fas fa-user-cog"></i>
                                     Edit Data Detail
-                                </a>
+                                </a> -->
                             </div>
                             <table id="tb_det_list_driver_order" class="table table-bordered table-striped" style="text-align: center;">
                                 <thead>
@@ -59,7 +59,7 @@
                                         <th>Kubikasi(M2)</th>
                                         <th>Status Driver</th>
                                         <th>Keterangan</th>
-                                        <!-- <th>#</th> -->
+                                        <th>#</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -94,22 +94,13 @@
                                                 </th>
                                             <?php endif; ?>
                                             <th><?= $d->keterangan ?></th>
-                                            <!-- <th>
+                                            <th>
                                                 <div class="row">
-                                                    <a href="#" class="btn btn-success btn-sm " data-toggle="modal" data-target="#editdetail<?= $d->id ?>">
+                                                    <a href="#" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#editdetail<?= $d->id ?>">
                                                         <i class="fa fa-solid fa-pencil-alt"></i>
                                                     </a>
-                                                    <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editdetail<?= $d->id ?>">
-                                                        <i class="fa fa-solid fa-ban"></i>
-                                                    </a>
-                                                    <a href="#" class="btn btn-default btn-sm " data-toggle="modal" data-target="#editdetail<?= $d->id ?>">
-                                                        <i class="fa fa-solid fa-truck"></i>
-                                                    </a>
-                                                    <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#editdetail<?= $d->id ?>">
-                                                        <i class="fa fa-solid fa-trash-alt"></i>
-                                                    </a>
                                                 </div>
-                                            </th> -->
+                                            </th>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>

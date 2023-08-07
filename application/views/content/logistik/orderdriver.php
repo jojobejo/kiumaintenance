@@ -65,24 +65,33 @@
                                             <th><?= $d->kd_order ?></th>
                                             <th><?= format_indo($d->tgl_jalan) ?></th>
                                             <th>
-                                                <a href="#" class="btn btn-success btn-block btn-sm">
+                                                <a href="#" class=" btn-success btn-block btn-sm">
                                                     <?= $d->d_ready ?>
                                                 </a>
                                             </th>
                                             <th>
-                                                <a href="#" class="btn btn-danger btn-block btn-sm">
+                                                <a href="#" class=" btn-danger btn-block btn-sm">
                                                     <?= $d->d_pending ?>
                                                 </a>
                                             </th>
                                             <th>
-                                                <a href="#" class="btn btn-secondary btn-block btn-sm">
+                                                <a href="#" class=" btn-secondary btn-block btn-sm">
                                                     <?= $d->d_otr ?>
                                                 </a>
                                             </th>
                                             <th>
-                                                <a href="<?= base_url('detail_deliveri/') . $d->kd_order ?>" class="btn btn-primary btn-block btn-sm">
-                                                    <i class="fa fa-solid fa-search"></i>
-                                                </a>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <a href="<?= base_url('detail_deliveri/') . $d->kd_order ?>" class="btn btn-primary btn-block">
+                                                            <i class="fa fa-solid fa-search"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <a href="<?= base_url('hapus_detail_order/') . $d->kd_order ?>" class="btn btn-danger btn-block">
+                                                            <i class="fa fa-solid fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
                                             </th>
                                         </tr>
                                     <?php endforeach; ?>
