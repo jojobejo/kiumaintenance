@@ -70,14 +70,20 @@
                                             <th><?= $d->kd_truk ?></th>
                                             <th><?= $d->noplat ?></th>
                                             <th><?= $d->nama_helper ?></th>
-                                            <th><?= $d->jml_kios ?></th>
                                             <th><?= $d->destinasi ?></th>
                                             <th><?= $d->tonase ?></th>
                                             <th><?= $d->kubikasi ?></th>
+                                            <th><?= $d->jml_kios ?></th>
                                             <?php if ($d->sts_driver == 'READY') : ?>
                                                 <th>
                                                     <a href="#" class=" btn btn-success btn-sm btn-block ">
                                                         READY
+                                                    </a>
+                                                </th>
+                                            <?php elseif ($d->sts_driver == 'WAITING') : ?>
+                                                <th>
+                                                    <a href="#" class=" btn btn-warning btn-sm btn-block ">
+                                                        PENDING
                                                     </a>
                                                 </th>
                                             <?php elseif ($d->sts_driver == 'PENDING') : ?>

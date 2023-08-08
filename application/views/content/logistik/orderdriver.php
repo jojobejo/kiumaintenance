@@ -54,6 +54,7 @@
                                         <th>Kode Order</th>
                                         <th>Tanggal Order</th>
                                         <th>Ready</th>
+                                        <th>Waiting</th>
                                         <th>Pending</th>
                                         <th>On The Road</th>
                                         <th>#</th>
@@ -67,6 +68,11 @@
                                             <th>
                                                 <a href="#" class=" btn-success btn-block btn-sm">
                                                     <?= $d->d_ready ?>
+                                                </a>
+                                            </th>
+                                            <th>
+                                                <a href="#" class=" btn-warning btn-block btn-sm">
+                                                    <?= $d->d_wait ?>
                                                 </a>
                                             </th>
                                             <th>
