@@ -32,13 +32,24 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="ml-2">
-                                <a href="<?= base_url('tambahorderdriver') ?>" class="btn btn-primary m-2 ml-3">
-                                    <i class="fas fa-plus"></i>
-                                    Add Deliveri Order
-                                    <i class="fas fa-plus"></i>
-                                </a>
-                            </div>
+                            <?php if ($this->session->userdata('departemen') == 'LOGISTIK' || $this->session->userdata('departemen') == 'IT') : ?>
+                                <div class="ml-2">
+                                    <a href="<?= base_url('tambahorderdriver') ?>" class="btn btn-primary m-2 ml-3">
+                                        <i class="fas fa-plus"></i>
+                                        Add Deliveri Order
+                                        <i class="fas fa-plus"></i>
+                                    </a>
+                                </div>
+                            <?php elseif (
+                                $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC3' ||
+                                $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC2' ||
+                                $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC1' ||
+                                $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC4' ||
+                                $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC5' ||
+                                $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC6' ||
+                                $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC7'
+                            ) : ?>
+                            <?php endif; ?>
                             <!-- <div>
                                 <a href="<?= base_url('driver_pending') ?>" class="btn btn-primary m-2 ml-3">
                                     <i class="fas fa-ban"></i>
@@ -92,11 +103,22 @@
                                                             <i class="fa fa-solid fa-search"></i>
                                                         </a>
                                                     </div>
-                                                    <div class="col">
-                                                        <a href="<?= base_url('hapus_detail_order/') . $d->kd_order ?>" class="btn btn-danger btn-block">
-                                                            <i class="fa fa-solid fa-trash"></i>
-                                                        </a>
-                                                    </div>
+                                                    <?php if ($this->session->userdata('departemen') == 'LOGISTIK' || $this->session->userdata('departemen') == 'IT') : ?>
+                                                        <div class="col">
+                                                            <a href="<?= base_url('hapus_detail_order/') . $d->kd_order ?>" class="btn btn-danger btn-block">
+                                                                <i class="fa fa-solid fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    <?php elseif (
+                                                        $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC3' ||
+                                                        $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC2' ||
+                                                        $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC1' ||
+                                                        $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC4' ||
+                                                        $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC5' ||
+                                                        $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC6' ||
+                                                        $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC7'
+                                                    ) : ?>
+                                                    <?php endif; ?>
                                                 </div>
                                             </th>
                                         </tr>

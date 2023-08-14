@@ -45,72 +45,137 @@
                                     Edit Data Detail
                                 </a> -->
                             </div>
-                            <table id="tb_det_list_driver_order" class="table table-bordered table-striped" style="text-align: center;">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Driver</th>
-                                        <th>Nama Truk</th>
-                                        <th>Nomor Plat</th>
-                                        <th>Nama Helper</th>
-                                        <th>Destinasi</th>
-                                        <th>Tonase(TON)</th>
-                                        <th>Kubikasi(M2)</th>
-                                        <th>Jumlah Kios</th>
-                                        <th>Status Driver</th>
-                                        <th>Keterangan</th>
-                                        <th>#</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($detail as $d) : ?>
+                            <?php if ($this->session->userdata('departemen') == 'LOGISTIK' || $this->session->userdata('departemen') == 'IT') : ?>
+                                <table id="tb_det_list_driver_order" class="table table-bordered table-striped" style="text-align: center;">
+                                    <thead>
                                         <tr>
-                                            <th><?= $d->norut ?></th>
-                                            <th><?= $d->nama_driver ?></th>
-                                            <th><?= $d->kd_truk ?></th>
-                                            <th><?= $d->noplat ?></th>
-                                            <th><?= $d->nama_helper ?></th>
-                                            <th><?= $d->destinasi ?></th>
-                                            <th><?= $d->tonase ?></th>
-                                            <th><?= $d->kubikasi ?></th>
-                                            <th><?= $d->jml_kios ?></th>
-                                            <?php if ($d->sts_driver == 'READY') : ?>
-                                                <th>
-                                                    <a href="#" class=" btn btn-success btn-sm btn-block ">
-                                                        READY
-                                                    </a>
-                                                </th>
-                                            <?php elseif ($d->sts_driver == 'WAITING') : ?>
-                                                <th>
-                                                    <a href="#" class=" btn btn-warning btn-sm btn-block ">
-                                                        PENDING
-                                                    </a>
-                                                </th>
-                                            <?php elseif ($d->sts_driver == 'PENDING') : ?>
-                                                <th>
-                                                    <a href="#" class=" btn btn-danger btn-sm btn-block ">
-                                                        PENDING
-                                                    </a>
-                                                </th>
-                                            <?php elseif ($d->sts_driver == 'ON THE ROAD') : ?>
-                                                <th>
-                                                    <a href="#" class=" btn btn-secondary btn-sm btn-block ">
-                                                        ON THE ROAD
-                                                    </a>
-                                                </th>
-                                            <?php endif; ?>
-                                            <th><?= $d->keterangan ?></th>
-                                            <th>
-                                                <div class="row">
-                                                    <a href="#" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#editdetail<?= $d->id ?>">
-                                                        <i class="fa fa-solid fa-pencil-alt"></i>
-                                                    </a>
-                                                </div>
-                                            </th>
+                                            <th>No</th>
+                                            <th>Nama Driver</th>
+                                            <th>Nama Truk</th>
+                                            <th>Nomor Plat</th>
+                                            <th>Nama Helper</th>
+                                            <th>Destinasi</th>
+                                            <th>Tonase(TON)</th>
+                                            <th>Kubikasi(M2)</th>
+                                            <th>Jumlah Kios</th>
+                                            <th>Status Driver</th>
+                                            <th>Keterangan</th>
+                                            <th>#</th>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($detail as $d) : ?>
+                                            <tr>
+                                                <th><?= $d->norut ?></th>
+                                                <th><?= $d->nama_driver ?></th>
+                                                <th><?= $d->kd_truk ?></th>
+                                                <th><?= $d->noplat ?></th>
+                                                <th><?= $d->nama_helper ?></th>
+                                                <th><?= $d->destinasi ?></th>
+                                                <th><?= $d->tonase ?></th>
+                                                <th><?= $d->kubikasi ?></th>
+                                                <th><?= $d->jml_kios ?></th>
+                                                <?php if ($d->sts_driver == 'READY') : ?>
+                                                    <th>
+                                                        <a href="#" class=" btn btn-success btn-sm btn-block ">
+                                                            READY
+                                                        </a>
+                                                    </th>
+                                                <?php elseif ($d->sts_driver == 'WAITING') : ?>
+                                                    <th>
+                                                        <a href="#" class=" btn btn-warning btn-sm btn-block ">
+                                                            PENDING
+                                                        </a>
+                                                    </th>
+                                                <?php elseif ($d->sts_driver == 'PENDING') : ?>
+                                                    <th>
+                                                        <a href="#" class=" btn btn-danger btn-sm btn-block ">
+                                                            PENDING
+                                                        </a>
+                                                    </th>
+                                                <?php elseif ($d->sts_driver == 'ON THE ROAD') : ?>
+                                                    <th>
+                                                        <a href="#" class=" btn btn-secondary btn-sm btn-block ">
+                                                            ON THE ROAD
+                                                        </a>
+                                                    </th>
+                                                <?php endif; ?>
+                                                <th><?= $d->keterangan ?></th>
+                                                <th>
+                                                    <div class="row">
+                                                        <a href="#" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#editdetail<?= $d->id ?>">
+                                                            <i class="fa fa-solid fa-pencil-alt"></i>
+                                                        </a>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            <?php elseif (
+                                $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC3' ||
+                                $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC2' ||
+                                $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC1' ||
+                                $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC4' ||
+                                $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC5' ||
+                                $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC6' ||
+                                $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC7'
+                            ) : ?>
+                                <table id="tb_det_list_driver_order" class="table table-bordered table-striped" style="text-align: center;">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Driver</th>
+                                            <th>Nama Truk</th>
+                                            <th>Nomor Plat</th>
+                                            <th>Nama Helper</th>
+                                            <th>Destinasi</th>
+                                            <th>Jumlah Kios</th>
+                                            <th>Status Driver</th>
+                                            <th>Keterangan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($detail as $d) : ?>
+                                            <tr>
+                                                <th><?= $d->norut ?></th>
+                                                <th><?= $d->nama_driver ?></th>
+                                                <th><?= $d->kd_truk ?></th>
+                                                <th><?= $d->noplat ?></th>
+                                                <th><?= $d->nama_helper ?></th>
+                                                <th><?= $d->destinasi ?></th>
+                                                <th><?= $d->jml_kios ?></th>
+                                                <?php if ($d->sts_driver == 'READY') : ?>
+                                                    <th>
+                                                        <a href="#" class=" btn btn-success btn-sm btn-block ">
+                                                            READY
+                                                        </a>
+                                                    </th>
+                                                <?php elseif ($d->sts_driver == 'WAITING') : ?>
+                                                    <th>
+                                                        <a href="#" class=" btn btn-warning btn-sm btn-block ">
+                                                            PENDING
+                                                        </a>
+                                                    </th>
+                                                <?php elseif ($d->sts_driver == 'PENDING') : ?>
+                                                    <th>
+                                                        <a href="#" class=" btn btn-danger btn-sm btn-block ">
+                                                            PENDING
+                                                        </a>
+                                                    </th>
+                                                <?php elseif ($d->sts_driver == 'ON THE ROAD') : ?>
+                                                    <th>
+                                                        <a href="#" class=" btn btn-secondary btn-sm btn-block ">
+                                                            ON THE ROAD
+                                                        </a>
+                                                    </th>
+                                                <?php endif; ?>
+                                                <th><?= $d->keterangan ?></th>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

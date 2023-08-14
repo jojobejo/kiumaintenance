@@ -142,7 +142,7 @@
 
             <!-- START AKSES LV 2 USER LOGISTIK -->
           <?php elseif ($this->session->userdata('akses_lv') == '2' && $this->session->userdata('departemen') == 'KEUANGAN') : ?>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="<?php echo base_url('#') ?>" class="nav-link">
                 <i class="nav-icon fas fa-desktop"></i>
                 <p>
@@ -163,6 +163,14 @@
                 <i class="nav-icon fa fa-user"></i>
                 <p>
                   User Setting
+                </p>
+              </a>
+            </li> -->
+            <li class="nav-item">
+              <a href="<?php echo base_url('deliveriorder') ?>" class="nav-link">
+                <i class="nav-icon fa fa-shipping-fast"></i>
+                <p>
+                  Deleveri Order
                 </p>
               </a>
             </li>

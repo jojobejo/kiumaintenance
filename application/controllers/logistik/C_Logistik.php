@@ -278,7 +278,6 @@ class C_Logistik extends CI_Controller
         $data['helper'] = $this->M_Logistik->select_kd_helper();
         $data['kdtruk'] = $this->M_Logistik->select_kd_truk();
 
-
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/logistik/detailorder.php', $data);
         $this->load->view('partial/main/footer.php');
