@@ -286,4 +286,8 @@ class M_Logistik extends CI_Model
     {
         return $this->db->delete('tb_det_tracking_driver', array('kd_deliveri' => $id));
     }
+    public function export_lap_distribusi()
+    {
+        return $this->db->get('tb_lap_distribusi')->result();
+    }
 }

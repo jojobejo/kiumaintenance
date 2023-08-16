@@ -108,6 +108,7 @@ $route['export_excel'] = 'logistik/C_Logistik/export_tracking_driver';
 $route['det_driver_tracking/(:any)'] = 'logistik/C_Logistik/detail_tracking_driver/$1';
 $route['editdetaildriver'] = 'logistik/C_Logistik/editdetaildriver';
 $route['hapus_detail_order/(:any)'] = 'logistik/C_Logistik/hapus_detail_order/$1';
+$route['export_excel_lap_distribusi'] = 'logistik/C_Logistik/export_lap_distribusi/';
 
 
 // HRD 

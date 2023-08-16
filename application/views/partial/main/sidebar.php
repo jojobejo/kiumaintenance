@@ -79,6 +79,14 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="<?php echo base_url('hrd_lap_distribusi') ?>" class="nav-link">
+                <i class="nav-icon fa fa-file"></i>
+                <p>
+                  Laporan Distribusi
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="<?php echo base_url('logout') ?>" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
                 <p>
@@ -86,6 +94,7 @@
                 </p>
               </a>
             </li>
+
             <!-- END AKSES LV 1 USER LOGISTIK -->
 
             <!-- START AKSES LV 2 USER HRD -->
