@@ -108,7 +108,7 @@ class C_Hrd extends CI_Controller
         redirect('hrd_lap_distribusi');
     }
 
-   
+
     public function lap_tamu()
     {
         $data['page_title'] = 'KARISMA';
@@ -392,5 +392,27 @@ class C_Hrd extends CI_Controller
 
         $this->M_Hrd->hapuslapissue($id);
         redirect('hrd_lap_issue');
+    }
+    public function search_lap_distribusi()
+    {
+        $vkolom = $this->input->post('sc_bar');
+        $vcari  = $this->input->post('nmsearch');
+        $_SESSION['varkolom'] = $vkolom;
+        $_SESSION['varcari'] = $vcari;
+
+        redirect('v_cari_lap_distribusi');
+    }
+    public function v_cari_lap_distribusi()
+    {
+        $data['page_title'] = 'KARISMA';
+        $valkolom       = $_SESSION['varkolom'];
+        $varcari        = $_SESSION['varcari'];
+        $data['vcari']    = $this->M_Hrd->cari_lap_distribusi($valkolom, $varcari)->result();
+        $data['laporan']    = $this->M_Hrd->get_all_laporan()->result();
+
+        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('content/hrd/v_cari_lap_distribusi.php', $data);
+        $this->load->view('partial/main/footer.php');
+        $this->load->view('content/hrd/ajaxhrd.php');
     }
 }

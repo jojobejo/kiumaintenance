@@ -26,7 +26,12 @@
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Laporan Keluar Masuk Kendaraan</h3>
+                            <div class="row">
+                                <a href="<?= base_url('hrd_lap_distribusi')?>"><i class="fas fa-play fa-flip-horizontal mr-2"></i>
+                                </a>
+                                <h3 class="card-title">Laporan Keluar Masuk Kendaraan</h3>
+                            </div>
+
                         </div>
                         <?php if ($this->session->userdata('departemen') == 'HRD' || $this->session->userdata('departemen') == 'IT') : ?>
                             <div class="row">
@@ -50,7 +55,7 @@
                                     <div class="form-group ml-2">
                                         <input type="text" id="nmsearh" name="nmsearch" class="form-control" placeholder="Input yang akan dicari" value="">
                                     </div>
-                                    <div class="form-group">
+                                    <div>
                                         <button type="submit" class="btn btn-primary ml-2">
                                             <i class="fas fa-search"></i>
                                             Cari Data
@@ -87,7 +92,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($laporan as $l) :
+                                        <?php foreach ($vcari as $l) :
                                             $no = 1; ?>
                                             <tr>
                                                 <th><?= $l->nopol ?></th>
@@ -137,7 +142,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group ml-2">
-                                        <input type="text" id="nmsearch" name="nmsearch" class="form-control" placeholder="Input yang akan dicari" value="">
+                                        <input type="text" id="nmsearh" name="nmsearch" class="form-control" placeholder="Input yang akan dicari" value="">
                                     </div>
                                     <div>
                                         <button type="submit" class="btn btn-primary ml-2">
@@ -145,7 +150,6 @@
                                             Cari Data
                                         </button>
                                     </div>
-
                                     </form>
                                 </div>
                             </div>
@@ -169,7 +173,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($laporan as $l) :
+                                        <?php foreach ($vcari as $l) :
                                             $no = 1; ?>
                                             <tr>
                                                 <th><?= $l->nopol ?></th>

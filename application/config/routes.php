@@ -132,6 +132,8 @@ $route['hrd_lap_issue'] = 'hrd/C_Hrd/lap_issue';
 $route['edit_lap_issue'] = 'hrd/C_Hrd/edit_lap_issue';
 $route['tambah_lap_issue'] = 'hrd/C_Hrd/tambah_lap_issue';
 $route['hapus_lap_issue'] = 'hrd/C_Hrd/hapus_lap_issue';
+$route['search_lap_distribusi'] = 'hrd/C_Hrd/search_lap_distribusi';
+$route['v_cari_lap_distribusi'] = 'hrd/C_Hrd/v_cari_lap_distribusi';
 
 
 

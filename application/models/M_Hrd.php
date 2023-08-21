@@ -24,7 +24,7 @@ class M_Hrd extends CI_Model
     {
         return $this->db->delete('tb_lap_distribusi', array("id" => $id));
     }
-   
+
     public function addlaptamuhrd($data)
     {
         return $this->db->insert('tb_tamu', $data);
@@ -108,5 +108,12 @@ class M_Hrd extends CI_Model
     public function hapuslapissue($id)
     {
         return $this->db->delete('tb_issue', array("id" => $id));
+    }
+    public function cari_lap_distribusi($v1, $v2)
+    {
+        return $this->db->query("SELECT a.*
+        FROM tb_lap_distribusi a
+        WHERE $v1 LIKE '$v2'
+        ");
     }
 }
