@@ -116,4 +116,30 @@ class M_Hrd extends CI_Model
         WHERE $v1 LIKE '$v2'
         ");
     }
+    public function get_all_truk_service_histori()
+    {
+        return $this->db->query("SELECT a.*
+        FROM tb_service_truk a
+        ");
+    }
+    public function update_km_service($id, $data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('tb_service_truk', $data);
+    }
+    public function get_all_karyawan()
+    {
+        return $this->db->query("SELECT a.*
+        FROM tb_user a WHERE id > '4'
+        ");
+    }
+    public function update_karyawan($id, $data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('tb_user', $data);
+    }
+    public function add_karyawan($data)
+    {
+        return $this->db->insert('tb_user', $data);
+    }
 }

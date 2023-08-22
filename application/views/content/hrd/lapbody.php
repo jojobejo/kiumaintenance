@@ -28,7 +28,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Laporan Keluar Masuk Kendaraan</h3>
                         </div>
-                        <?php if ($this->session->userdata('departemen') == 'HRD' || $this->session->userdata('departemen') == 'IT') : ?>
+                        <?php if ($this->session->userdata('departemen') == 'HRD GA' || $this->session->userdata('departemen') == 'IT') : ?>
                             <div class="row">
                                 <div class="ml-2">
                                     <button type="button" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#addInventaris">

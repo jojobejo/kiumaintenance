@@ -134,6 +134,12 @@ $route['tambah_lap_issue'] = 'hrd/C_Hrd/tambah_lap_issue';
 $route['hapus_lap_issue'] = 'hrd/C_Hrd/hapus_lap_issue';
 $route['search_lap_distribusi'] = 'hrd/C_Hrd/search_lap_distribusi';
 $route['v_cari_lap_distribusi'] = 'hrd/C_Hrd/v_cari_lap_distribusi';
+$route['hrd_data_truk'] = 'hrd/C_Hrd/hrd_data_truk';
+$route['hrd_all_karyawan'] = 'hrd/C_Hrd/hrd_all_karyawan';
+$route['updatekmsekarang'] = 'hrd/C_Hrd/update_km_now_service_truk';
+$route['updatekmsebelum'] = 'hrd/C_Hrd/update_km_past_service_truk';
+$route['edit_karyawan'] = 'hrd/C_Hrd/edit_karyawan';
+$route['add_karyawan'] = 'hrd/C_Hrd/add_karyawan';
 
 
 

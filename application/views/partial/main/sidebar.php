@@ -98,7 +98,7 @@
             <!-- END AKSES LV 1 USER LOGISTIK -->
 
             <!-- START AKSES LV 2 USER HRD -->
-          <?php elseif ($this->session->userdata('akses_lv') == '2' && $this->session->userdata('departemen') == 'HRD') : ?>
+          <?php elseif ($this->session->userdata('akses_lv') == '2' && $this->session->userdata('departemen') == 'HRD GA' && $this->session->userdata('username') == 'HRD1' || $this->session->userdata('username') == 'HRD2' || $this->session->userdata('username') == 'HRD3') : ?>
             <li class="nav-item">
               <a href="<?php echo base_url('hrd_lap_distribusi') ?>" class="nav-link">
                 <i class="nav-icon fa fa-car-side"></i>
@@ -109,15 +109,23 @@
             </li>
             <li class="nav-item">
               <a href="<?php echo base_url('hrd_lap_tamu') ?>" class="nav-link">
-                <i class="nav-icon fa fa-car-side"></i>
+                <i class="nav-icon fa fa-id-badge"></i>
                 <p>
                   Laporan Tamu
                 </p>
               </a>
             </li>
             <li class="nav-item">
+              <a href="<?php echo base_url('hrd_data_truk') ?>" class="nav-link">
+                <i class="nav-icon fa fa-tools"></i>
+                <p>
+                  Data Service Truk
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="<?php echo base_url('hrd_lap_Karyawan_KM') ?>" class="nav-link">
-                <i class="nav-icon fa fa-car-side"></i>
+                <i class="nav-icon fa fa-people-arrows"></i>
                 <p>
                   Laporan Karyawan K-M
                 </p>
@@ -125,7 +133,7 @@
             </li>
             <li class="nav-item">
               <a href="<?php echo base_url('hrd_lap_expedisi') ?>" class="nav-link">
-                <i class="nav-icon fa fa-car-side"></i>
+                <i class="nav-icon fa fa-truck-loading"></i>
                 <p>
                   Laporan Expedisi
                 </p>
@@ -133,7 +141,65 @@
             </li>
             <li class="nav-item">
               <a href="<?php echo base_url('hrd_lap_issue') ?>" class="nav-link">
+                <i class="nav-icon fa fa-exclamation-triangle"></i>
+                <p>
+                  Laporan Issue
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('hrd_all_karyawan') ?>" class="nav-link">
+                <i class="nav-icon fa fa-users"></i>
+                <p>
+                  Data Karyawan
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('logout') ?>" class="nav-link">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p>
+                  Log Out
+                </p>
+              </a>
+            </li>
+
+            <?php elseif ($this->session->userdata('akses_lv') == '2' && $this->session->userdata('departemen') == 'HRD GA' && $this->session->userdata('username') == 'HRD4' ) : ?>
+            <li class="nav-item">
+              <a href="<?php echo base_url('hrd_lap_distribusi') ?>" class="nav-link">
                 <i class="nav-icon fa fa-car-side"></i>
+                <p>
+                  Laporan Distribusi
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('hrd_lap_tamu') ?>" class="nav-link">
+                <i class="nav-icon fa fa-id-badge"></i>
+                <p>
+                  Laporan Tamu
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('hrd_lap_Karyawan_KM') ?>" class="nav-link">
+                <i class="nav-icon fa fa-people-arrows"></i>
+                <p>
+                  Laporan Karyawan K-M
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('hrd_lap_expedisi') ?>" class="nav-link">
+                <i class="nav-icon fa fa-truck-loading"></i>
+                <p>
+                  Laporan Expedisi
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('hrd_lap_issue') ?>" class="nav-link">
+                <i class="nav-icon fa fa-exclamation-triangle"></i>
                 <p>
                   Laporan Issue
                 </p>

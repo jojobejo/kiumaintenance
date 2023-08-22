@@ -415,4 +415,85 @@ class C_Hrd extends CI_Controller
         $this->load->view('partial/main/footer.php');
         $this->load->view('content/hrd/ajaxhrd.php');
     }
+    public function hrd_all_karyawan()
+    {
+        $data['page_title'] = 'HISTORI SERVICE TRUK';
+        $data['karyawan']    = $this->M_Hrd->get_all_karyawan()->result();
+
+        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('content/hrd/karyawanall.php', $data);
+        $this->load->view('partial/main/footer.php');
+        $this->load->view('content/hrd/ajaxhrd.php');
+    }
+    public function hrd_data_truk()
+    {
+        $data['page_title'] = 'HISTORI SERVICE TRUK';
+        $data['truk']    = $this->M_Hrd->get_all_truk_service_histori()->result();
+
+        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('content/hrd/trukbodyhrd.php', $data);
+        $this->load->view('partial/main/footer.php');
+        $this->load->view('content/hrd/ajaxhrd.php');
+    }
+    public function update_km_now_service_truk()
+    {
+        $id         = $this->input->post('id');
+        $kmsekarang = $this->input->post('kmnow');
+
+        $dataupdate = array(
+            'km_sekarang' => $kmsekarang
+        );
+        $this->M_Hrd->update_km_service($id, $dataupdate);
+        redirect('hrd_data_truk');
+    }
+    public function update_km_past_service_truk()
+    {
+        $id         = $this->input->post('id');
+        $kmsekarang = $this->input->post('kmnow');
+
+        $dataupdate = array(
+            'km_sebelum' => $kmsekarang
+        );
+        $this->M_Hrd->update_km_service($id, $dataupdate);
+        redirect('hrd_data_truk');
+    }
+
+    public function add_karyawan()
+    {
+        $nik = $this->input->post('nik_isi');
+        $nmkaryawan = $this->input->post('nm_isi');
+        $departemen = $this->input->post('departemen_i');
+        $almt_isi = $this->input->post('alamat_isi');
+        $tgl_lahir = $this->input->post('tgl_isi');
+
+        $dataupdate = array(
+            'nik'       => $nik,
+            'nama_lengkap' => $nmkaryawan,
+            'departemen' => $departemen,
+            'alamat'    => $almt_isi,
+            'tgl_lahir' => $tgl_lahir
+        );
+        $this->M_Hrd->add_karyawan($dataupdate);
+        redirect('hrd_all_karyawan');
+    }
+
+    public function edit_karyawan()
+    {
+        $id         = $this->input->post('id');
+        $nik = $this->input->post('nik_isi');
+        $nmkaryawan = $this->input->post('nm_isi');
+        $departemen = $this->input->post('departemen_i');
+        $almt_isi = $this->input->post('alamat_isi');
+        $tgl_lahir = $this->input->post('tgl_isi');
+
+        $dataupdate = array(
+            'nik'       => $nik,
+            'nama_lengkap' => $nmkaryawan,
+            'departemen' => $departemen,
+            'alamat'    => $almt_isi,
+            'tgl_lahir' => $tgl_lahir
+        );
+        $this->M_Hrd->update_karyawan($id, $dataupdate);
+        redirect('hrd_all_karyawan');
+    }
 }
