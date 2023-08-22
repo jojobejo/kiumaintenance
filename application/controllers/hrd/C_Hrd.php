@@ -9,6 +9,7 @@ class C_Hrd extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_Hrd');
+        $this->load->helper('tanggal_helper');
     }
 
     public function index()
@@ -343,7 +344,7 @@ class C_Hrd extends CI_Controller
     public function lap_issue()
     {
         $data['page_title'] = 'KARISMA';
-        $data['laporan']    = $this->M_Hrd->get_all_laporan_issue()->result();
+        $data['laporan']    = $this->M_Hrd->export_lap_issue();
 
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/hrd/lapissuebody.php', $data);
@@ -495,5 +496,96 @@ class C_Hrd extends CI_Controller
         );
         $this->M_Hrd->update_karyawan($id, $dataupdate);
         redirect('hrd_all_karyawan');
+    }
+    public function export_laporan_issue()
+    {
+        include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
+        $excel = new PHPExcel();
+        $excel->getProperties()->setCreator('it_karisma')
+            ->setLastModifiedBy('lap_issue_hrd_')
+            ->setTitle("Rekap Laporan Issue")
+            ->setSubject("Rekap Laporan Issue")
+            ->setDescription("Rekap Laporan Issue")
+            ->setKeywords("Laporan Issue");
+
+        $style_col = array(
+            'font' => array('bold' => true),
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+            ),
+            'borders' => array(
+                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN)
+            )
+        );
+
+        $style_row = array(
+            'alignment' => array(
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+            ),
+            'borders' => array(
+                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN)
+            )
+        );
+
+        $excel->setActiveSheetIndex(0)->setCellValue('A1', "Rekap Laporan Issue");
+        $excel->getActiveSheet()->mergeCells('A1:E1');
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15);
+        $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $excel->setActiveSheetIndex(0)->setCellValue('A3', "NO");
+        $excel->setActiveSheetIndex(0)->setCellValue('B3', "TANGGAL");
+        $excel->setActiveSheetIndex(0)->setCellValue('C3', "DESKRIPSI ISU");
+        $excel->setActiveSheetIndex(0)->setCellValue('D3', "LOKASI");
+        $excel->setActiveSheetIndex(0)->setCellValue('E3', "NAMA PENEMU");
+
+        $excel->getActiveSheet()->getStyle('A3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('B3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('C3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('D3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('E3')->applyFromArray($style_col);
+
+        $export = $this->M_Hrd->export_lap_issue();
+
+        $no = 1;
+        $numrow = 4;
+        foreach ($export as $data) {
+            $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $no);
+            $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, $data->tanggal);
+            $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->issue);
+            $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->lokasi);
+            $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data->nama);
+            $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('C' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('D' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('E' . $numrow)->applyFromArray($style_row);
+            $no++;
+            $numrow++;
+        }
+
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(5);
+        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(10);
+        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(85);
+        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(35);
+        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(15);
+        $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
+        $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+        $excel->getActiveSheet(0)->setTitle("Rekap Laporan Issue HRD");
+        $excel->setActiveSheetIndex(0);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="laporan_issue_hrd.xlsx"');
+        header('Cache-Control: max-age=0');
+        
+
+        $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+        $write->save('php://output');
     }
 }
