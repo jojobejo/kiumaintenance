@@ -84,7 +84,7 @@
                                                 <?php elseif ($d->sts_driver == 'WAITING') : ?>
                                                     <th>
                                                         <a href="#" class=" btn btn-warning btn-sm btn-block ">
-                                                            PENDING
+                                                            WAITING
                                                         </a>
                                                     </th>
                                                 <?php elseif ($d->sts_driver == 'PENDING') : ?>

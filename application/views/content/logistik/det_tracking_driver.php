@@ -57,8 +57,32 @@
                                             <th><?= $det->kd_truk ?></th>
                                             <th><?= $det->noplat ?></th>
                                             <th><?= $det->nama_helper ?></th>
-                                            <th><?= $det->sts_driver ?></th>
                                             <th><?= $det->destinasi ?></th>
+                                            <?php if ($det->sts_driver == 'READY') : ?>
+                                                <th>
+                                                    <a href="#" class=" btn btn-success btn-sm btn-block ">
+                                                        READY
+                                                    </a>
+                                                </th>
+                                            <?php elseif ($det->sts_driver == 'WAITING') : ?>
+                                                <th>
+                                                    <a href="#" class=" btn btn-warning btn-sm btn-block ">
+                                                        WAITING
+                                                    </a>
+                                                </th>
+                                            <?php elseif ($det->sts_driver == 'PENDING') : ?>
+                                                <th>
+                                                    <a href="#" class=" btn btn-danger btn-sm btn-block ">
+                                                        PENDING
+                                                    </a>
+                                                </th>
+                                            <?php elseif ($det->sts_driver == 'ON THE ROAD') : ?>
+                                                <th>
+                                                    <a href="#" class=" btn btn-secondary btn-sm btn-block ">
+                                                        ON THE ROAD
+                                                    </a>
+                                                </th>
+                                            <?php endif; ?>
                                             <th><?= $det->keterangan ?></th>
                                         </tr>
                                     <?php endforeach; ?>
