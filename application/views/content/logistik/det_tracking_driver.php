@@ -45,6 +45,7 @@
                                         <th>Nomor Plat</th>
                                         <th>Helper</th>
                                         <th>Destinasi </th>
+                                        <th>Status Keberangkatan</th>
                                         <th>Keterangan </th>
                                     </tr>
                                 </thead>
@@ -56,6 +57,7 @@
                                             <th><?= $det->kd_truk ?></th>
                                             <th><?= $det->noplat ?></th>
                                             <th><?= $det->nama_helper ?></th>
+                                            <th><?= $det->sts_driver ?></th>
                                             <th><?= $det->destinasi ?></th>
                                             <th><?= $det->keterangan ?></th>
                                         </tr>

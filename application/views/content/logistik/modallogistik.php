@@ -246,7 +246,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Tambah Driver Baru</h4>
+                <h4 class="modal-title">Tambah Helper Baru</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -258,7 +258,7 @@
                         <label class="col-sm-3 control-label text-right" for="id_bar">Nama Driver<span class="required">*</span></label>
                         <div class="col-sm-8">
                             <input class="form-control" type="text" id="driver_isi" name="driver_isi" value="" />
-                            <input class="form-control" type="text" id="kd_driver" name="kd_driver" value="<?= $kd_driver ?>" readonly hidden />
+                            <input class="form-control" type="text" id="kd_driver" name="kd_driver" value="<?= $kd_helper ?>" readonly hidden />
                         </div>
                     </div>
                 </div>
@@ -289,7 +289,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Driver Baru</h4>
+                    <h4 class="modal-title">Edi Helper </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -298,10 +298,10 @@
                     <?php echo form_open_multipart('edithelper'); ?>
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-sm-3 control-label text-right" for="id_bar">Nama Driver<span class="required">*</span></label>
+                            <label class="col-sm-3 control-label text-right" for="id_bar">Nama Helper<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <input class="form-control" type="text" id="driver_isi" name="driver_isi" value="<?= $h->nama_helper ?>" />
-                                <input class="form-control" type="text" id="kd_driver" name="kd_driver" value="<?= $h->kd_helper ?>" readonly hidden />
+                                <input class="form-control" type="text" id="kd_driver" name="kd_driver" value="<?= $h->kd_helper ?>" readonly hidden/>
                             </div>
                         </div>
                     </div>
