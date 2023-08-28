@@ -700,8 +700,10 @@ class C_Logistik extends CI_Controller
         $this->M_Logistik->edit_detail_order_driver($id, $data);
         redirect('detail_deliveri/' . $kd);
     }
-    public function hapus_detail_order($kd)
+    public function hapus_detail_order()
     {
+        $kd = $this->input->post('id_isi');
+
         $this->M_Logistik->deletedetailorder($kd);
         $this->M_Logistik->deleteorder($kd);
         redirect('deliveriorder');

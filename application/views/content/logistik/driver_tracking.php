@@ -47,6 +47,7 @@
                                         <th>Nama Driver</th>
                                         <th>Total Keberangkatan Driver </th>
                                         <th>Total Driver Pending</th>
+                                        <th>Persentase Keberangkatan Rotasi</th>
                                         <th style="text-align: center;">#</th>
                                     </tr>
                                 </thead>
@@ -56,6 +57,7 @@
                                             <th><?= $d->nama_driver ?></th>
                                             <th><?= $d->d_ready ?></th>
                                             <th><?= $d->d_pending ?></th>
+                                            <th><?= $d->persentase ?>(%)</th>
                                             <th style="text-align: center;">
                                                 <a href="<?= base_url('det_driver_tracking/') . $d->kd_driver ?>" class=" btn btn-primary btn-sm ">
                                                     <i class=" fa fa-solid fa-search"></i> Detail Perjalanan

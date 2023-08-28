@@ -8,6 +8,7 @@
 
         <?php $this->load->view('partial/main/navbar') ?>
         <?php $this->load->view('partial/main/sidebar') ?>
+        <?php $this->load->view('content/logistik/modalhapusdeliveri') ?>
 
 
         <!-- Content Wrapper. Contains page content -->
@@ -105,7 +106,7 @@
                                                     </div>
                                                     <?php if ($this->session->userdata('departemen') == 'LOGISTIK' || $this->session->userdata('departemen') == 'IT') : ?>
                                                         <div class="col">
-                                                            <a href="<?= base_url('hapus_detail_order/') . $d->kd_order ?>" class="btn btn-danger btn-block">
+                                                            <a href="#" class="btn btn-danger btn-block" data-toggle="modal" data-target="#hapusdetail<?= $d->kd_order ?>">
                                                                 <i class="fa fa-solid fa-trash"></i>
                                                             </a>
                                                         </div>
