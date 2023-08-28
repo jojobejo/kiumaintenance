@@ -40,6 +40,11 @@
                                         Add Deliveri Order
                                         <i class="fas fa-plus"></i>
                                     </a>
+                                    <a href="<?= base_url('exportrekaplaporandriver') ?>" class="btn btn-success m-2 ml-3">
+                                        <i class="fas fa-file"></i>
+                                        Export Rekap Laporan Driver
+                                        <i class="fas fa-file"></i>
+                                    </a>
                                 </div>
                             <?php elseif (
                                 $this->session->userdata('departemen') == 'KEUANGAN' && $this->session->userdata('username') == 'KIUTC3' ||

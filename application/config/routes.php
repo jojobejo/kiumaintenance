@@ -91,6 +91,7 @@ $route['nonactivehelper/(:any)'] = 'logistik/C_Logistik/nonactivehelper/$1';
 $route['activehelper/(:any)'] = 'logistik/C_Logistik/activehelper/$1';
 
 $route['tambahhelper'] = 'logistik/C_Logistik/tambahhelper';
+
 //LOGISTIK DELIVERI ORDER
 $route['deliveriorder']     = 'logistik/C_Logistik/deleveriorder';
 $route['tambahorderdriver']     = 'logistik/C_Logistik/tambahorderdriver';
@@ -109,6 +110,7 @@ $route['det_driver_tracking/(:any)'] = 'logistik/C_Logistik/detail_tracking_driv
 $route['editdetaildriver'] = 'logistik/C_Logistik/editdetaildriver';
 $route['hapus_detail_order'] = 'logistik/C_Logistik/hapus_detail_order';
 $route['export_excel_lap_distribusi'] = 'logistik/C_Logistik/export_lap_distribusi/';
+$route['exportrekaplaporandriver'] = 'logistik/C_Logistik/export_rekap_laporan_driver/';
 
 
 // HRD 

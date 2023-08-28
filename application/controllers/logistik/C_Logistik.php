@@ -708,4 +708,139 @@ class C_Logistik extends CI_Controller
         $this->M_Logistik->deleteorder($kd);
         redirect('deliveriorder');
     }
+    public function export_rekap_laporan_driver()
+    {
+        include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
+        $excel = new PHPExcel();
+        $excel->getProperties()->setCreator('it_karisma')
+            ->setLastModifiedBy('rekap_driver_order_')
+            ->setTitle("Rekap Laporan Driver Order")
+            ->setSubject("Rekap Laporan Driver Order")
+            ->setDescription("Rekap Laporan DO")
+            ->setKeywords("Rekap DO");
+
+        $style_col = array(
+            'font' => array('bold' => true),
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+            ),
+            'borders' => array(
+                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN)
+            )
+        );
+
+        $style_row = array(
+            'alignment' => array(
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+            ),
+            'borders' => array(
+                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),
+                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN)
+            )
+        );
+
+        $excel->setActiveSheetIndex(0)->setCellValue('A1', "Rekap Laporan Driver Order");
+        $excel->getActiveSheet()->mergeCells('A1:J1');
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15);
+        $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $excel->setActiveSheetIndex(0)->setCellValue('A3', "NO");
+        $excel->setActiveSheetIndex(0)->setCellValue('B3', "KODE DELIVERI");
+        $excel->setActiveSheetIndex(0)->setCellValue('C3', "TANGGAL JALAN");
+        $excel->setActiveSheetIndex(0)->setCellValue('D3', "NO JALAN");
+        $excel->setActiveSheetIndex(0)->setCellValue('E3', "NAMA DRIVER");
+        $excel->setActiveSheetIndex(0)->setCellValue('F3', "NAMA HELPER");
+        $excel->setActiveSheetIndex(0)->setCellValue('G3', "KODE TRUK");
+        $excel->setActiveSheetIndex(0)->setCellValue('H3', "NOMOR PLAT");
+        $excel->setActiveSheetIndex(0)->setCellValue('I3', "DESTINASI");
+        $excel->setActiveSheetIndex(0)->setCellValue('J3', "JUMLAH KIOS");
+        $excel->setActiveSheetIndex(0)->setCellValue('K3', "TONASE");
+        $excel->setActiveSheetIndex(0)->setCellValue('L3', "KUBIKASI");
+        $excel->setActiveSheetIndex(0)->setCellValue('M3', "STATUS DRIVER");
+        $excel->setActiveSheetIndex(0)->setCellValue('N3', "KETERANGAN");
+
+        $excel->getActiveSheet()->getStyle('A3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('B3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('C3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('D3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('E3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('F3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('G3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('H3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('I3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('J3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('K3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('L3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('M3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('N3')->applyFromArray($style_col);
+
+        $tracking = $this->M_Logistik->export_tracking()->result();
+
+        $no = 1;
+        $numrow = 4;
+        foreach ($tracking as $data) {
+            $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $no);
+            $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, $data->kd_deliveri);
+            $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data->tgl_jalan);
+            $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data->norut);
+            $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data->nama_driver);
+            $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data->nama_helper);
+            $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data->kd_truk);
+            $excel->setActiveSheetIndex(0)->setCellValue('H' . $numrow, $data->noplat);
+            $excel->setActiveSheetIndex(0)->setCellValue('I' . $numrow, $data->destinasi);
+            $excel->setActiveSheetIndex(0)->setCellValue('J' . $numrow, $data->jml_kios);
+            $excel->setActiveSheetIndex(0)->setCellValue('K' . $numrow, $data->tonase);
+            $excel->setActiveSheetIndex(0)->setCellValue('L' . $numrow, $data->kubikasi);
+            $excel->setActiveSheetIndex(0)->setCellValue('M' . $numrow, $data->sts_driver);
+            $excel->setActiveSheetIndex(0)->setCellValue('N' . $numrow, $data->keterangan);
+            $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('C' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('D' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('E' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('F' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('G' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('H' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('I' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('J' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('K' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('L' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('M' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('N' . $numrow)->applyFromArray($style_row);
+            $no++;
+            $numrow++;
+        }
+
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(4);
+        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(16);
+        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(16);
+        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(10);
+        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(14);
+        $excel->getActiveSheet()->getColumnDimension('F')->setWidth(14);
+        $excel->getActiveSheet()->getColumnDimension('G')->setWidth(12);
+        $excel->getActiveSheet()->getColumnDimension('H')->setWidth(13);
+        $excel->getActiveSheet()->getColumnDimension('I')->setWidth(20);
+        $excel->getActiveSheet()->getColumnDimension('J')->setWidth(13);
+        $excel->getActiveSheet()->getColumnDimension('K')->setWidth(8);
+        $excel->getActiveSheet()->getColumnDimension('L')->setWidth(9);
+        $excel->getActiveSheet()->getColumnDimension('M')->setWidth(15);
+        $excel->getActiveSheet()->getColumnDimension('N')->setWidth(55);
+        $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
+        $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+        $excel->getActiveSheet(0)->setTitle("Rekap Driver Order");
+        $excel->setActiveSheetIndex(0);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="rekap_driver_order.xlsx"');
+        header('Cache-Control: max-age=0');
+
+        $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+        $write->save('php://output');
+    }
 }
