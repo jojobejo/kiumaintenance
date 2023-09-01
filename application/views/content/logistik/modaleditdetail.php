@@ -33,6 +33,7 @@
                             <div class="col-sm-8">
                                 <select name="helper_i" id="helper_i" class="form-control">
                                     <option value="<?= $d->kd_helper ?>"><?= $d->nama_helper ?></option>
+                                    <option value="-">-</option>
                                     <?php foreach ($helper as $h) : ?>
                                         <option value="<?= $h->kd_helper ?>"><?= $h->nama_helper ?></option>
                                     <?php endforeach; ?>
@@ -46,6 +47,7 @@
                             <div class="col-sm-8">
                                 <select type="text" id="kd_truk_i" name="kd_truk_i" value="" class="form-control select2-allow-clear">
                                     <option value="<?= $d->kd_truk ?>"><?= $d->kd_truk ?></option>
+                                    <option value="-">-</option>
                                     <?php foreach ($kdtruk as $k) : ?>
                                         <option value="<?= $k->nm_truk ?>"><?= $k->nm_truk ?></option>
                                     <?php endforeach; ?>

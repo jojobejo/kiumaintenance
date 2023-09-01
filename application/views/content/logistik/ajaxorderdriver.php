@@ -3,8 +3,15 @@
         initializeSelect2();
     });
 
+    $(function() {
+        $("#tb_list_order").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "aaSorting": [],
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
-
+    });
     var i = 1;
     $('#add').click(function() {
         i++;

@@ -123,6 +123,7 @@ class M_Logistik extends CI_Model
         FROM tb_order_tracking_driver a
         JOIN tb_det_tracking_driver b ON b.kd_deliveri = a.kd_order
         GROUP BY a.kd_order
+        ORDER BY a.id
         ");
     }
     function get_all_do()
