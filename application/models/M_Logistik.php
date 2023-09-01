@@ -137,6 +137,7 @@ class M_Logistik extends CI_Model
        JOIN tb_det_tracking_driver b ON b.kd_deliveri = a.kd_order
        WHERE  YEARWEEK(a.create_at, 1) = YEARWEEK(CURDATE(), 1)
        GROUP BY a.kd_order
+       ORDER BY a.id
        ");
     }
     public function get_driver($kduser)
