@@ -146,4 +146,14 @@ class M_Hrd extends CI_Model
     {
         return $this->db->insert('tb_user', $data);
     }
+
+    // SERVER - SIDE SYSTEM 
+
+    // AllStok
+    var $table = 'tb_issue';
+    var $column_order = array('tanggal', 'issue', 'lokasi', 'nama', 'id');
+    var $column_search = array('issue', 'lokasi', 'nama');
+    var $order = array('tanggal' => 'ASC');
+
+    
 }

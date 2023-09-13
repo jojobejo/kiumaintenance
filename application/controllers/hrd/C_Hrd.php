@@ -583,9 +583,35 @@ class C_Hrd extends CI_Controller
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment; filename="laporan_issue_hrd.xlsx"');
         header('Cache-Control: max-age=0');
-        
+
 
         $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
         $write->save('php://output');
+    }
+
+    // SERVERSIDE SYSTEM 
+
+    function get_server_issue()
+    {
+
+        $list = $this->M_Hrd->get_datatables();
+        $data = array();
+        foreach ($list as $field) {
+            $row = array();
+            $row[] = $field->kode_barang;
+            $row[] = $field->nama_barang;
+            $row[] = $field->qty_box;
+            $row[] = $field->qty_pcs;
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->M_Inventor->count_all(),
+            "recordsFiltered" => $this->M_Inventor->count_filtered(),
+            "data" => $data,
+        );
+        //output dalam format JSON
+        echo json_encode($output);
     }
 }

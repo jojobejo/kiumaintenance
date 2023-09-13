@@ -144,7 +144,10 @@ $route['edit_karyawan'] = 'hrd/C_Hrd/edit_karyawan';
 $route['add_karyawan'] = 'hrd/C_Hrd/add_karyawan';
 $route['export_laporan_issue'] = 'hrd/C_Hrd/export_laporan_issue';
 
-
+//KPI
+$route['dashboardkpi'] = 'kpi/C_Kpi';
+$route['add_kpi_baru'] = 'kpi/C_Kpi/addkpi';
+$route['detail_kpi/(:any)/(:any)'] = 'kpi/C_Kpi/detail_kpi/$1/$2';
 
 //UserAccount
 $route['userAdmin'] = 'User/Admin';

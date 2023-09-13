@@ -29,6 +29,8 @@ class Auth extends CI_Controller
                     $data_session = array(
                         'id'          => $key->id,
                         'username'    => $key->username,
+                        'kduser'      => $key->kode_user,
+                        'subdepartemen' => $key->sub_departemen,
                         'nama_user'   => $key->nama_user,
                         'akses_lv'    => $key->akses_lv,
                         'departemen'  => $key->departemen,

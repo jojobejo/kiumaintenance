@@ -33,7 +33,7 @@
                             </div>
 
                         </div>
-                        <?php if ($this->session->userdata('departemen') == 'HRD' || $this->session->userdata('departemen') == 'IT') : ?>
+                        <?php if ($this->session->userdata('departemen') == 'HRD GA' || $this->session->userdata('departemen') == 'IT') : ?>
                             <div class="row">
                                 <div class="ml-2">
                                     <button type="button" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#addInventaris">
@@ -76,15 +76,15 @@
                                 <table id="tb_lap_distribusi" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
+                                            <th>Tgl Keluar</th>
+                                            <th>Tgl Masuk</th>
                                             <th>Nopol</th>
                                             <th>Nolambung</th>
                                             <th>Nama Driver</th>
                                             <th>Nama Helper</th>
                                             <th>Tujuan</th>
-                                            <th>Tgl Keluar</th>
                                             <th>Jam Keluar</th>
                                             <th>Km(Keluar)</th>
-                                            <th>Tgl Masuk</th>
                                             <th>Jam Masuk</th>
                                             <th>Km(Masuk)</th>
                                             <th>Keterangan</th>
@@ -95,15 +95,15 @@
                                         <?php foreach ($vcari as $l) :
                                             $no = 1; ?>
                                             <tr>
+                                                <th><?= $l->tglkeluar ?></th>
+                                                <th><?= $l->tglmasuk ?></th>
                                                 <th><?= $l->nopol ?></th>
                                                 <th><?= $l->nolambung ?></th>
                                                 <th><?= $l->namadriver ?></th>
                                                 <th><?= $l->namahelper ?></th>
                                                 <th><?= $l->tujuan ?></th>
-                                                <th><?= $l->tglkeluar ?></th>
                                                 <th><?= $l->jamkeluar ?></th>
                                                 <th><?= $l->kmkeluar ?></th>
-                                                <th><?= $l->tglmasuk ?></th>
                                                 <th><?= $l->jammasuk ?></th>
                                                 <th><?= $l->kmmasuk ?></th>
                                                 <th><?= $l->keterangan ?></th>
