@@ -68,7 +68,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table id="tb_lap_distribusi" class="table table-bordered table-striped">
+                                <table id="tb_lap_distribusia" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>Tgl Keluar</th>
