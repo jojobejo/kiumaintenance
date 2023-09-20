@@ -87,33 +87,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($laporan as $l) :
-                                            $no = 1; ?>
-                                            <tr>
-                                                <th><?= $l->tglkeluar ?></th>
-                                                <th><?= $l->tglmasuk ?></th>
-                                                <th><?= $l->nopol ?></th>
-                                                <th><?= $l->nolambung ?></th>
-                                                <th><?= $l->namadriver ?></th>
-                                                <th><?= $l->namahelper ?></th>
-                                                <th><?= $l->tujuan ?></th>
-                                                <th><?= $l->jamkeluar ?></th>
-                                                <th><?= $l->kmkeluar ?></th>
-                                                <th><?= $l->jammasuk ?></th>
-                                                <th><?= $l->kmmasuk ?></th>
-                                                <th><?= $l->keterangan ?></th>
-                                                <th>
-                                                    <div class="row">
-                                                        <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editlap<?= $l->id ?>">
-                                                            <i class="fa fa-solid fa-pencil-alt"></i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapuslap<?= $l->id ?>">
-                                                            <i class="fa fa-solid fa-trash-alt"></i>
-                                                        </a>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>

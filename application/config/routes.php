@@ -115,6 +115,7 @@ $route['exportrekaplaporandriver'] = 'logistik/C_Logistik/export_rekap_laporan_d
 
 // HRD 
 $route['hrd_lap_distribusi'] = 'hrd/C_Hrd/lap_distribusi';
+$route['get_server_lap_dis'] = 'hrd/C_Hrd/get_lap_distribusi';
 $route['add_lap_distribusi_hrd'] = 'hrd/C_Hrd/input_lap_distribusi';
 $route['edit_lap_distribusi_hrd'] = 'hrd/C_Hrd/edit_lap_distribusi';
 $route['hapus_lap_distribusi_hrd'] = 'hrd/C_Hrd/hapus_lap_distribusi_hrd';

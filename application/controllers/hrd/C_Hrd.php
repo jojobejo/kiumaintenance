@@ -20,17 +20,63 @@ class C_Hrd extends CI_Controller
         $this->load->view('content/body.php', $data);
         $this->load->view('partial/main/footer.php');
     }
-    // TAMPILAN HALAMAN
+    // TAMPILAN HALAMAN LAP DISTRIBUSI
     public function lap_distribusi()
     {
         $data['page_title'] = 'KARISMA';
         $data['laporan']    = $this->M_Hrd->get_all_laporan()->result();
+
 
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/hrd/lapbody.php', $data);
         $this->load->view('partial/main/footer.php');
         $this->load->view('content/hrd/ajaxhrd.php');
     }
+
+    function get_lap_distribusi()
+    {
+        $list = $this->M_Hrd->get_datatables();
+        $data = array();
+        $no = $this->input->post('start');
+        foreach ($list as $field) {
+            $no++;
+            $row = array();
+            $row[] = $field->tglkeluar;
+            $row[] = $field->tglmasuk;
+            $row[] = $field->nopol;
+            $row[] = $field->nolambung;
+            $row[] = $field->namadriver;
+            $row[] = $field->namahelper;
+            $row[] = $field->tujuan;
+            $row[] = $field->jamkeluar;
+            $row[] = $field->kmkeluar;
+            $row[] = $field->jammasuk;
+            $row[] = $field->kmmasuk;
+            $row[] = $field->keterangan;
+            $row[] =  '<td>
+            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editlap' . $field->id . '">
+            <i class="fa fa-solid fa-pencil-alt"></i>
+            </a>
+            </td>
+             <td>
+            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapuslap' . $field->id . '">
+            <i class="fa fa-solid fa-trash-alt"></i>
+            </a>
+            </td>';
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->M_Hrd->count_all(),
+            "recordsFiltered" => $this->M_Hrd->count_filtered(),
+            "data" => $data,
+        );
+        //output dalam format JSON
+        echo json_encode($output);
+    }
+
     // FUNGSI CRUD
     public function input_lap_distribusi()
     {
