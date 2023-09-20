@@ -26,7 +26,7 @@
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Laporan Keluar Masuk Kendaraan</h3>
+                            <h3 class="card-title"><a href="<?= base_url('dashboard') ?>"><i class="fas fa-backward"></i></a> Keluar Masuk Kendaraan</h3>
                         </div>
                         <?php if ($this->session->userdata('departemen') == 'HRD GA' || $this->session->userdata('departemen') == 'IT') : ?>
                             <div class="row">
@@ -139,26 +139,10 @@
                                             <th>Jam Masuk</th>
                                             <th>Km(Masuk)</th>
                                             <th>Keterangan</th>
+                                            <th>#</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($laporan as $l) :
-                                            $no = 1; ?>
-                                            <tr>
-                                                <th><?= $l->tglkeluar ?></th>
-                                                <th><?= $l->tglmasuk ?></th>
-                                                <th><?= $l->nopol ?></th>
-                                                <th><?= $l->nolambung ?></th>
-                                                <th><?= $l->namadriver ?></th>
-                                                <th><?= $l->namahelper ?></th>
-                                                <th><?= $l->tujuan ?></th>
-                                                <th><?= $l->jamkeluar ?></th>
-                                                <th><?= $l->kmkeluar ?></th>
-                                                <th><?= $l->jammasuk ?></th>
-                                                <th><?= $l->kmmasuk ?></th>
-                                                <th><?= $l->keterangan ?></th>
-                                            </tr>
-                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>

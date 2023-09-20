@@ -11,6 +11,13 @@ class M_Hrd extends CI_Model
         FROM tb_lap_distribusi a
         ");
     }
+    public function get_lap_id($id)
+    {
+        return $this->db->query("SELECT a.*
+        FROM tb_lap_distribusi a
+        WHERE id = $id
+        ");
+    }
     public function addlapdistribusihrd($data)
     {
         return $this->db->insert('tb_lap_distribusi', $data);
@@ -147,11 +154,11 @@ class M_Hrd extends CI_Model
         return $this->db->insert('tb_user', $data);
     }
 
-    
+
 
     var $table = 'tb_lap_distribusi'; //nama tabel dari database
-    var $column_order = array('tglkeluar', 'tglmasuk', 'nopol', 'nolambung', 'namadriver', 'namahelper', 'tujuan', 'jamkeluar', 'kmkeluar', 'jammasuk', 'kmmasuk','keterangan','id'); //field yang ada di table user
-    var $column_search = array('nopol', 'namadriver','namahelper','tujuan'); //field yang diizin untuk pencarian 
+    var $column_order = array('tglkeluar', 'tglmasuk', 'nopol', 'nolambung', 'namadriver', 'namahelper', 'tujuan', 'jamkeluar', 'kmkeluar', 'jammasuk', 'kmmasuk', 'keterangan', 'id'); //field yang ada di table user
+    var $column_search = array('nopol', 'namadriver', 'namahelper', 'tujuan'); //field yang diizin untuk pencarian 
     var $order = array('id' => 'asc'); // default order 
 
     private function _get_datatables_query()

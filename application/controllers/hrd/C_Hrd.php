@@ -24,8 +24,6 @@ class C_Hrd extends CI_Controller
     public function lap_distribusi()
     {
         $data['page_title'] = 'KARISMA';
-        $data['laporan']    = $this->M_Hrd->get_all_laporan()->result();
-
 
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/hrd/lapbody.php', $data);
@@ -54,16 +52,14 @@ class C_Hrd extends CI_Controller
             $row[] = $field->kmmasuk;
             $row[] = $field->keterangan;
             $row[] =  '<td>
-            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editlap' . $field->id . '">
+            <a href="' . base_url('edit_lap_distribusi_hrd/' . $field->id . '') . '" class="btn btn-warning btn-sm">
             <i class="fa fa-solid fa-pencil-alt"></i>
             </a>
             </td>
-             <td>
-            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapuslap' . $field->id . '">
+            <a href="' . base_url('hapus_lap_distribusi_hrd/' . $field->id . '') . '" class="btn btn-danger btn-sm">
             <i class="fa fa-solid fa-trash-alt"></i>
             </a>
             </td>';
-
             $data[] = $row;
         }
 
@@ -76,6 +72,7 @@ class C_Hrd extends CI_Controller
         //output dalam format JSON
         echo json_encode($output);
     }
+
 
     // FUNGSI CRUD
     public function input_lap_distribusi()
@@ -112,6 +109,27 @@ class C_Hrd extends CI_Controller
         $this->M_Hrd->addlapdistribusihrd($data);
         redirect('hrd_lap_distribusi');
     }
+
+    public function v_edit_lap_distribusi($id)
+    {
+        $data['page_title'] = 'KARISMA';
+        $data['laporan'] = $this->M_Hrd->get_lap_id($id)->result();
+
+        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('content/hrd/v_lap_dis.php', $data);
+        $this->load->view('partial/main/footer.php');
+    }
+
+    public function v_hapus_lap_distribusi_hrd($id)
+    {
+        $data['page_title'] = 'KARISMA';
+        $data['laporan'] = $this->M_Hrd->get_lap_id($id)->result();
+
+        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('content/hrd/v_lap_dis_hapus.php', $data);
+        $this->load->view('partial/main/footer.php');
+    }
+
     public function edit_lap_distribusi()
     {
         $id = $this->input->post('id_isi');
