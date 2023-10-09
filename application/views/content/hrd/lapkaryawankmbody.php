@@ -46,6 +46,7 @@
                     <th>Status</th>
                     <th>Jam Keluar</th>
                     <th>Jam Masuk</th>
+                    <th>No. Plat</th>
                     <th>Keterangan</th>
                     <th>#</th>
                   </tr>
@@ -61,6 +62,7 @@
                       <th><?= $l->status ?></th>
                       <th><?= $l->jamkeluar ?></th>
                       <th><?= $l->jammasuk ?></th>
+                      <th><?= $l->nopol ?></th>
                       <th><?= $l->keterangan ?></th>
                       <th>
                         <div class="row">

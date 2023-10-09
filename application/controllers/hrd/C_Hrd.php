@@ -273,6 +273,7 @@ class C_Hrd extends CI_Controller
         $status = $this->input->post('status');
         $jammasuk = $this->input->post('jammasuk');
         $jamkeluar = $this->input->post('jamkeluar');
+        $nopol = $this->input->post('nopol');
         $keterangan = $this->input->post('keterangan');
 
 
@@ -283,6 +284,7 @@ class C_Hrd extends CI_Controller
             'status' => $status,
             'jammasuk' => $jammasuk,
             'jamkeluar' => $jamkeluar,
+            'nopol' => $nopol,
             'keterangan' => $keterangan,
 
         );
@@ -298,6 +300,7 @@ class C_Hrd extends CI_Controller
         $status = $this->input->post('status');
         $jammasuk = $this->input->post('jammasuk');
         $jamkeluar = $this->input->post('jamkeluar');
+        $nopol = $this->input->post('nopol');
         $keterangan = $this->input->post('keterangan');
 
         $data = array(
@@ -308,6 +311,7 @@ class C_Hrd extends CI_Controller
             'departemen' => $departemen,
             'jammasuk' => $jammasuk,
             'jamkeluar' => $jamkeluar,
+            'nopol' => $nopol,
             'keterangan' => $keterangan,
         );
         $this->M_Hrd->editlapkarykm($id, $data);

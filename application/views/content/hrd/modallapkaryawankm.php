@@ -47,6 +47,12 @@
                 </div>
                 <div class="form-group">
                     <div class="row">
+                        <label class="col-sm-3 control-label text-right" for="id_bar">No. Plat<span class="required">*</span></label>
+                        <div class="col-sm-8"><input class="form-control" type="text" id="nopol" name="nopol" value="" /></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
                         <label class="col-sm-3 control-label text-right" for="id_bar">Keterangan<span class="required">*</span></label>
                         <div class="col-sm-8"><input class="form-control" type="text" id="keterangan" name="keterangan" value="" /></div>
                     </div>
@@ -112,6 +118,12 @@
                         <div class="row">
                             <label class="col-sm-3 control-label text-right" for="id_bar">Jam Masuk<span class="required">*</span></label>
                             <div class="col-sm-8"><input class="form-control" type="text" id="jammasuk" name="jammasuk" value="<?= $l->jammasuk ?>" /></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-sm-3 control-label text-right" for="id_bar">No.Plat<span class="required">*</span></label>
+                            <div class="col-sm-8"><input class="form-control" type="text" id="nopol" name="nopol" value="<?= $l->nopol ?>" /></div>
                         </div>
                     </div>
                     <div class="form-group">
