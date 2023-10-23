@@ -21,6 +21,16 @@ class C_Kpi extends CI_Controller
         $this->load->view('content/kpi/dashboard_kpi.php', $data);
         $this->load->view('partial/main/footer.php');
     }
+    public function what()
+    {
+        $data['page_title'] = 'KPI DIGITAL';
+        $kd_user = $this->session->userdata('kduser');
+        $data['allkpi'] = $this->M_Kpi->getkpi($kd_user)->result();
+
+        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('content/kpi/dashboard_kpiwhat.php', $data);
+        $this->load->view('partial/main/footer.php');
+    }
     public function addkpi()
     {
         $kduser = $this->input->post('kd_isi');

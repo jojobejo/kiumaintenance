@@ -51,7 +51,7 @@
                                     ?>
                                         <tr>
                                             <td><?= format_bulan($a->tgl_pembuatan) ?></td>
-                                            <td></td>
+                                            <td><?= $d->nama_driver ?></td>
                                             <td></td>
                                             <td><a class="btn btn-primary btn-sm" href="<?= base_url('detail_kpi/') . $a->kd_user . '/' . $a->bln_pembuatan ?>"><i class="fas fa-eye"></i></a></td>
                                         </tr>

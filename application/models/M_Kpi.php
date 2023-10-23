@@ -6,7 +6,7 @@ class M_Kpi extends CI_Model
 {
     public function getkpi($kduser)
     {
-        return $this->db->query("SELECT * FROM tb_kpi WHERE kd_user = '$kduser'
+        return $this->db->query("SELECT * FROM tb_kpiwhat
         ");
     }
     public function addkpi($data)

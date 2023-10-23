@@ -149,6 +149,7 @@ $route['export_laporan_issue'] = 'hrd/C_Hrd/export_laporan_issue';
 
 //KPI
 $route['dashboardkpi'] = 'kpi/C_Kpi';
+$route['dashboardkpiwhat'] = 'kpi/C_Kpi/what';
 $route['add_kpi_baru'] = 'kpi/C_Kpi/addkpi';
 $route['detail_kpi/(:any)/(:any)'] = 'kpi/C_Kpi/detail_kpi/$1/$2';
 

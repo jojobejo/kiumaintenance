@@ -8,7 +8,8 @@
 
         <?php $this->load->view('partial/main/navbar') ?>
         <?php $this->load->view('partial/main/sidebar') ?>
-        <?php $this->load->view('content/inventaris/modalinventaris') ?>
+        <?php $this->load->view('content/kpi/modaldashboardkpi') ?>
+
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -26,49 +27,50 @@
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data Inventaris</h3>
+                            <h3 class="card-title">WHAT KPI</h3>
                         </div>
                         <div class="ml-2">
-                            <button type="button" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#addInventaris">
-                                <i class="fas fa-shopping-cart"></i>
-                                Pembelian Inventaris Baru
+                            <button type="button" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#addkpi">
+                                <i class="fas fa-pen"></i>
+                                ADD WHAT KPI
                             </button>
                         </div>
                         <div class="card-body">
-                            <table id="tb_inventaris" class="table table-bordered table-striped">
+                            <table id="tb_lap_distribusi" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>PIC</th>
-                                        <th>Kode Inventaris</th>
-                                        <th>Departemen</th>
-                                        <th>Komputer</th>
+                                        <th>Bulan KPI</th>
                                         <th>Descripsi</th>
-                                        <th>Tanggal Beli</th>
-                                        <th>Harga Beli</th>
-                                        <th>Status</th>
-                                        <th>History</th>
+                                        <th>Descripsi Indikator</th>
+                                        <th>Nilai Indikator</th>
+                                        <th>Bobot</th>
+                                        <th>Bobot Utama</th>
+                                        <th>Nilai</th>
+                                        <th>Total Nilai</th>
                                         <th>#</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
+                                    <?php foreach ($allkpi as $a) :
+                                    ?>
+                                        <tr>
+                                            <td><?= $a->bulan ?></td>
+                                            <td><?= $a->what ?></td>
+                                            <td><?= $a->indikator ?></td>
+                                            <td><?= $a->nilai_indikator ?></td>
+                                            <td><?= $a->bobot ?></td>
+                                            <td><?= $a->bobotutama ?></td>
+                                            <td><?= $a->nilai ?></td>
+                                            <td>1</td>
+                                            <td><a class="btn btn-primary btn-sm" href="<?= base_url('detail_kpi/') . $a->kd_user . '/' . $a->bln_pembuatan ?>"><i class="fas fa-eye"></i></a></td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </section>
-
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
