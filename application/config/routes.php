@@ -111,6 +111,9 @@ $route['editdetaildriver'] = 'logistik/C_Logistik/editdetaildriver';
 $route['hapus_detail_order'] = 'logistik/C_Logistik/hapus_detail_order';
 $route['export_excel_lap_distribusi'] = 'logistik/C_Logistik/export_lap_distribusi/';
 $route['exportrekaplaporandriver'] = 'logistik/C_Logistik/export_rekap_laporan_driver/';
+$route['tmp_logistik_distribusi'] = 'logistik/C_Logistik/tmp_lap_distribusi/';
+$route['edit_laporan_tmp_dis'] = 'logistik/C_Logistik/edit_laporan_tmp_dis/';
+$route['insert_laporan_tmp_dis'] = 'logistik/C_Logistik/insert_laporan_tmp_dis/';
 
 
 // HRD 

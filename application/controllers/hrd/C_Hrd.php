@@ -338,6 +338,13 @@ class C_Hrd extends CI_Controller
         $this->load->view('content/hrd/ajaxhrd.php');
     }
 
+    public function kpi_digital()
+    {
+        $kduser = $this->session->userdata('kode');
+        $data['kpi']    = $this->M_hrd->getkpi($kduser);
+    }
+
+
     // FUNGSI CRUD
     public function tambah_lap_expedisi()
     {

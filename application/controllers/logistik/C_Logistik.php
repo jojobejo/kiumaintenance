@@ -16,6 +16,7 @@ class C_Logistik extends CI_Controller
         $data['page_title'] = 'KARISMA - LOGISTIK';
         $data['dataplat']   = $this->M_Logistik->getallplat();
         $data['driver']    = $this->M_Logistik->getAllDriver();
+        $data['driverurut']   = $this->M_Logistik->getnorutdriveractive();
         $data['helper']    = $this->M_Logistik->getAllHelper();
         $data['kd_driver']  = $this->M_Logistik->kd_driver();
         $data['kd_helper']  = $this->M_Logistik->kd_helper();
@@ -191,6 +192,17 @@ class C_Logistik extends CI_Controller
                 'sts_driver' => $this->input->post('sts_driver[]')[$i],
                 'keterangan' => $this->input->post('keterangan_i[]')[$i]
             );
+
+            $datatmp = array(
+                'kd_deliveri' => $this->input->post('kd_order_i'),
+                'tgl_jalan' => $this->input->post('tgl_deliv_i'),
+                'kd_driver' => $this->input->post('kd_driver_i')[$i],
+                'kd_helper' => $this->input->post('helper_i')[$i],
+                'kd_truk' => $this->input->post('kd_truk_i')[$i],
+                'destinasi' => $this->input->post('destinsasi_i')[$i],
+                'status' => $this->input->post('sts_driver[]')[$i],
+            );
+            $this->M_Logistik->insert_tmp_lap_distribusi($datatmp);
             $this->M_Logistik->insert_detail_order_driver($data);
         }
         $this->M_Logistik->insert_deliveri_order($dataOrder);
@@ -842,5 +854,73 @@ class C_Logistik extends CI_Controller
 
         $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
         $write->save('php://output');
+    }
+
+    public function tmp_lap_distribusi()
+    {
+        $data['page_title'] = 'KARISMA - LOGISTIK';
+        $data['data'] = $this->M_Logistik->get_tmp_distribusi()->result();
+
+        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('content/logistik/tmp_lap_distribusi', $data);
+        $this->load->view('partial/main/footer.php');
+        $this->load->view('content/logistik/ajaxlogistik');
+    }
+    public function edit_laporan_tmp_dis()
+    {
+        $id         = $this->input->post('id_isi');
+        $tglmasuk   = $this->input->post('tgl_masuk_i');
+        $jmin       = $this->input->post('jm_masuk');
+        $kmin       = $this->input->post('km_masuk');
+        $tglout     = $this->input->post('tgl_keluar');
+        $jmout      = $this->input->post('jm_keluar');
+        $kmout      = $this->input->post('km_keluar');
+
+        $datatmp = array(
+            'tgl_masuk' => $tglmasuk,
+            'jm_masuk'  => $jmin,
+            'km_masuk'  => $kmin,
+            'tgl_keluar' => $tglout,
+            'jm_keluar' => $jmout,
+            'km_keluar' => $kmout
+        );
+        $this->M_Logistik->edited_tmp_lap_dis($id, $datatmp);
+        redirect('tmp_logistik_distribusi');
+    }
+    public function insert_laporan_tmp_dis()
+    {
+        $id         = $this->input->post('id_isi');
+        $nmdriver   = $this->input->post('driver_isi');
+        $nmhelper   = $this->input->post('helper_isi');
+        $nolambung  = $this->input->post('nmlambung');
+        $noplat     = $this->input->post('plat_isi');
+        $destinasi  = $this->input->post('destinasi_i');
+        $tglmasuk   = $this->input->post('tgl_masuk_i');
+        $jmin       = $this->input->post('jm_masuk');
+        $kmin       = $this->input->post('km_masuk');
+        $tglout     = $this->input->post('tgl_keluar');
+        $jmout      = $this->input->post('jm_keluar');
+        $kmout      = $this->input->post('km_keluar');
+        $ket        = $this->input->post('keterangan');
+
+        $datatmp = array(
+            'nopol'      => $noplat,
+            'nolambung'  => $nolambung,
+            'namadriver' => $nmdriver,
+            'namahelper' => $nmhelper,
+            'tujuan'     => $destinasi,
+            'tglkeluar' => $tglout,
+            'jamkeluar'  => $jmout,
+            'kmkeluar' => $kmout,
+            'tglmasuk' => $tglmasuk,
+            'jammasuk'  => $jmin,
+            'kmmasuk'  => $kmin,
+            'keterangan' => $ket,
+            'inputer'   => 'Security'
+
+        );
+        $this->M_Logistik->insert_lap_distribusi($datatmp);
+        $this->M_Logistik->delete_tmp_lap_dis($id);
+        redirect('tmp_logistik_distribusi');
     }
 }

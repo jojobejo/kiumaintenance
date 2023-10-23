@@ -60,6 +60,14 @@ class M_Logistik extends CI_Model
     {
         return $this->db->get('tb_op_driver')->result();
     }
+    public function getnorutdriveractive()
+    {
+        $this->db->select('*');
+        $this->db->from('tb_op_driver');
+        $this->db->where('status', 'ACTIVE');
+        $this->db->order_by('no_urut_hr_i', 'ASC');
+        return $this->db->get()->result();
+    }
     public function adddriverbaru($data)
     {
         return $this->db->insert('tb_op_driver', $data);
@@ -213,6 +221,7 @@ class M_Logistik extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tb_op_driver');
+        $this->db->where('status', 'ACTIVE');
         $this->db->order_by("no_urut_hr_i", "asc");
         return $this->db->get()->result();
     }
@@ -293,5 +302,29 @@ class M_Logistik extends CI_Model
     public function export_lap_distribusi()
     {
         return $this->db->get('tb_lap_distribusi')->result();
+    }
+
+    function get_tmp_distribusi()
+    {
+        return $this->db->query("SELECT a.*,b.noplat,b.nm_truk,c.nama_driver,d.nama_helper
+        FROM tb_tmp_lap_distribusi a
+        join tb_op_plat b ON b.nm_truk = a.kd_truk
+        JOIN tb_op_driver c ON c.kd_driver = a.kd_driver
+        JOIN tb_op_helper d ON d.kd_helper = a.kd_helper
+        WHERE a.status ='ready'
+        ");
+    }
+    public function insert_lap_distribusi($data)
+    {
+        return $this->db->insert('tb_lap_distribusi', $data);
+    }
+    public function edited_tmp_lap_dis($id, $data)
+    {
+        $this->db->where('id_lap_dis', $id);
+        return $this->db->update('tb_tmp_lap_distribusi', $data);
+    }
+    public function delete_tmp_lap_dis($id)
+    {
+        return $this->db->delete('tb_tmp_lap_distribusi', array('id_lap_dis' => $id));
     }
 }

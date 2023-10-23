@@ -71,6 +71,14 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="<?php echo base_url('tmp_logistik_distribusi') ?>" class="nav-link">
+                <i class="nav-icon fa fa-truck"></i>
+                <p>
+                  Data Logistik Distribusi
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="<?php echo base_url('tracking_driver') ?>" class="nav-link">
                 <i class="nav-icon fa fa-route"></i>
                 <p>
@@ -164,12 +172,20 @@
               </a>
             </li>
 
-            <?php elseif ($this->session->userdata('akses_lv') == '2' && $this->session->userdata('departemen') == 'HRD GA' && $this->session->userdata('username') == 'HRD4' ) : ?>
+          <?php elseif ($this->session->userdata('akses_lv') == '2' && $this->session->userdata('departemen') == 'HRD GA' && $this->session->userdata('username') == 'HRD4') : ?>
             <li class="nav-item">
               <a href="<?php echo base_url('hrd_lap_distribusi') ?>" class="nav-link">
                 <i class="nav-icon fa fa-car-side"></i>
                 <p>
                   Laporan Distribusi
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('tmp_logistik_distribusi') ?>" class="nav-link">
+                <i class="nav-icon fa fa-truck"></i>
+                <p>
+                  Data Logistik Distribusi
                 </p>
               </a>
             </li>
