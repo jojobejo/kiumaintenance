@@ -1,0 +1,21 @@
+.judul {
+    position: relative;
+    top: 100px;
+}
+
+.divgbrindek {
+    position: relative;
+    top: 120px;
+}
+
+.tmbl1 {
+    background-color: #04AA6D;
+    border: 1px solid black;
+    color: white;
+    padding: 50px 80px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+}
