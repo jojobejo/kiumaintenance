@@ -15,7 +15,7 @@ class C_Pelanggan extends CI_Controller
     {
         $data['page_title'] = 'KARISMA';
 
-        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('partial/main/headeripkp.php', $data);
         $this->load->view('content/pelanggan/body.php', $data);
         $this->load->view('partial/main/footer.php');
     }
@@ -35,5 +35,19 @@ class C_Pelanggan extends CI_Controller
         );
 
         $this->M_Pelanggan->addnilai($ainput);
+        redirect('kepuasan_pelanggan');
+    }
+
+    public function rating_review()
+    {
+        $data['page_title'] = 'KARISMA';
+
+
+        $data['dataplanggan'] = $this->M_Pelanggan->getdatapelanggan();
+        $data['nilai'] = $this->M_Pelanggan->nilaiall()->result();
+
+        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('content/pelanggan/bodyreview.php', $data);
+        $this->load->view('partial/main/footer.php');
     }
 }

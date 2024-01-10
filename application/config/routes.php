@@ -163,3 +163,4 @@ $route['addUser']   = 'User/Admin/addUser';
 //IndeksNilaiKepuasanPelanggan
 $route['kepuasan_pelanggan'] = 'Pelanggan/C_Pelanggan';
 $route['nilai_ipkp/(:any)'] = 'Pelanggan/C_Pelanggan/input_nilai/$1';
+$route['ratingreview'] = 'Pelanggan/C_Pelanggan/rating_review';
