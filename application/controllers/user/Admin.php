@@ -16,7 +16,8 @@ class Admin extends CI_Controller
         $data['page_title'] = 'User Account';
         $data['alluser']    = $this->M_User->getAll();
         $data['kduser']     = $this->M_User->kduser();
-
+        $data['kdusers']    = $this->M_User->kduser();
+        
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/user/admin.php', $data);
         $this->load->view('partial/main/footer.php');
