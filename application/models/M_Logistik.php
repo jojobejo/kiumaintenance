@@ -133,7 +133,7 @@ class M_Logistik extends CI_Model
         GROUP BY a.kd_order
         ORDER BY a.id
         ");
-    }
+    } 
     function get_all_do()
     {
         return $this->db->query("SELECT 

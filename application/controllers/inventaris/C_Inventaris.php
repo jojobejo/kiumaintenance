@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+
 class C_Inventaris extends CI_Controller
 {
 
@@ -12,9 +13,10 @@ class C_Inventaris extends CI_Controller
 
     public function index()
     {
-        $data['page_title'] = 'KIU MAINTENANCE';
+        $data['page_title'] = 'KIU MAINTENANCE'; 
+        $data['datainventaris']   = $this->M_Inventaris->getAllinventaris();
 
-        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('partial/main/header.php', $data); 
         $this->load->view('content/inventaris/bodyadmin.php', $data);
         $this->load->view('partial/main/footer.php');
         $this->load->view('content/inventaris/ajaxinventaris.php');
@@ -29,7 +31,33 @@ class C_Inventaris extends CI_Controller
 
     public function addInventaris()
     {
+        $kdinventaris  = $this->input->post('kdinventaris');
+        $kdpic   = $this->input->post('kdpic');
+        $stsisi     = $this->input->post('sts_select');
+
+        $dataplat = array(
+            'kd_driver' => $kd_driver,
+            'kdpic'   => $kdpice,
+            'status'   => $stsisi
+        );
+        $this->M_Logistik->adddriverbaru($dataplat);
+        redirect('truckoprational');
     }
+    public function addriver1()
+    {
+        $kd_driver  = $this->input->post('kd_driver');
+        $nmdriver   = $this->input->post('driver_isi');
+        $stsisi     = $this->input->post('sts_select');
+
+        $dataplat = array(
+            'kd_driver' => $kd_driver,
+            'nama_driver'   => $nmdriver,
+            'status'   => $stsisi
+        );
+        $this->M_Logistik->adddriverbaru($dataplat);
+        redirect('truckoprational');
+    }
+    
     public function editInventaris()
     {
     }

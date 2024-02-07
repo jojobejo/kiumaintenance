@@ -9,7 +9,7 @@
     <?php $this->load->view('partial/main/navbar') ?>
     <?php $this->load->view('partial/main/sidebar') ?>
     <?php $this->load->view('content/hrd/modallapkaryawankm') ?>
-
+ 
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

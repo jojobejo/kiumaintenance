@@ -63,7 +63,7 @@ $route['logout']    = 'Auth/logout';
 $route['dashboard'] = 'Dashboard';
 
 //inventaris
-$route['inventaris']        = 'inventaris/C_Inventaris';
+$route['inventaris']        = 'inventaris/C_Inventaris'; 
 $route['addinventaris']     = 'inventaris/C_Inventaris/addinventaris';
 $route['editinventaris']    = 'inventaris/C_Inventaris/editinventaris';
 $route['hapusinventaris']   = 'inventaris/C_Inventaris/hapusinventaris';

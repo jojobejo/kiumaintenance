@@ -557,7 +557,7 @@ class C_Logistik extends CI_Controller
         $excel->getActiveSheet()->getStyle('K3')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('L3')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('M3')->applyFromArray($style_col);
-
+ 
         $export = $this->M_Logistik->export_lap_distribusi();
 
         $no = 1;
