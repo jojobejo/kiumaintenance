@@ -4,9 +4,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class C_Inventaris extends CI_Controller
 {
-
-    function __construct()
-    {
+ 
+    function __construct() 
+    { 
         parent::__construct();
         $this->load->model('M_Inventaris');
     }
@@ -22,47 +22,65 @@ class C_Inventaris extends CI_Controller
         $this->load->view('content/inventaris/ajaxinventaris.php');
     }
 
-    function selectowner()
-    {
-        $kduser = $this->input->post('kd_user');
-        $data = $this->M_Inventaris->getUser($kduser);
-        echo json_encode($data);
-    }
-
     public function addInventaris()
     {
-        $kdinventaris  = $this->input->post('kdinventaris');
-        $kdpic   = $this->input->post('kdpic');
-        $stsisi     = $this->input->post('sts_select');
-
-        $dataplat = array(
-            'kd_driver' => $kd_driver,
-            'kdpic'   => $kdpice,
-            'status'   => $stsisi
+        $kd_invetaris  = $this->input->post('kd_invetaris');
+        $kd_pic   = $this->input->post('kd_pic');
+        $dept     = $this->input->post('dept');
+        $type_brg = $this->input->post('type_brg');
+        $Desc     = $this->input->post('Desc');
+        $tgl_beli = $this->input->post('tgl_beli');
+        $stat     = $this->input->post('stat');
+        $hist     = $this->input->post('hist');
+        
+        $data = array(
+            // <kiri buat database > kanan nama di modalnya
+            'kdinventaris' => $kd_invetaris,
+            'kdpic'=>$kd_pic,
+            'departement'=>$dept,
+            'typebarang'=>$type_brg,
+            'deskripsi'=>$Desc,
+            'tglbeli'=>$tgl_beli,
+            'status'=>$stat,
+            'history'=>$hist,
         );
-        $this->M_Logistik->adddriverbaru($dataplat);
-        redirect('truckoprational');
-    }
-    public function addriver1()
-    {
-        $kd_driver  = $this->input->post('kd_driver');
-        $nmdriver   = $this->input->post('driver_isi');
-        $stsisi     = $this->input->post('sts_select');
-
-        $dataplat = array(
-            'kd_driver' => $kd_driver,
-            'nama_driver'   => $nmdriver,
-            'status'   => $stsisi
-        );
-        $this->M_Logistik->adddriverbaru($dataplat);
-        redirect('truckoprational');
+        $this->M_Inventaris->addInventaris($data);        
+        redirect('inventaris');
     }
     
-    public function editInventaris()
-    {
+    public function editinventaris($data)
+    { 
+        $kd_invetaris  = $this->input->post('kd_invetaris');
+        $id_invetaris  = $this->input->post('id_invetaris');
+        $kd_pic   = $this->input->post('kd_pic');
+        $dept     = $this->input->post('dept');
+        $type_brg = $this->input->post('type_brg');
+        $Desc     = $this->input->post('Desc');
+        $tgl_beli = $this->input->post('tgl_beli');
+        $stat     = $this->input->post('stat');
+        $hist     = $this->input->post('hist');
+        
+        $data = array(
+            // <kiri buat database > kanan nama di modalnya
+            'kdinventaris' => $kd_invetaris,
+            'kdpic'=>$kd_pic,
+            'departement'=>$dept,
+            'typebarang'=>$type_brg,
+            'deskripsi'=>$Desc,
+            'tglbeli'=>$tgl_beli,
+            'status'=>$stat,
+            'history'=>$hist,
+        );
+        $this->M_Inventaris->editinventaris($id_invetaris,$data);
+        redirect('inventaris');
     }
-    public function deleteInventaris()
+    public function hapusinventaris()
     {
+        $id     = $this->input->post('id_invetaris');
+
+        $this->M_Inventaris->hapusinventaris($id);
+        redirect('inventaris');
+    
     }
     public function changeOwner()
     {

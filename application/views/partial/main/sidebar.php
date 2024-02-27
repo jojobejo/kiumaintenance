@@ -239,40 +239,17 @@
             </li>
             <!-- END AKSES LV 2 USER HRD -->
 
-            <!-- START AKSES LV 2 USER LOGISTIK -->
-          <?php elseif ($this->session->userdata('akses_lv') == '2' && $this->session->userdata('departemen') == 'KEUANGAN' || $this->session->userdata('departemen') == 'LOGISTIK' || $this->session->userdata('departemen') == 'HRD GA' || $this->session->userdata('departemen') == 'SALES') : ?>
-            <!-- <li class="nav-item">
-              <a href="<?php echo base_url('#') ?>" class="nav-link">
-                <i class="nav-icon fas fa-desktop"></i>
+            <!-- START AKSES LV2 USER ADMLOBY -->
+          <?php elseif ($this->session->userdata('akses_lv') == '2' && $this->session->userdata('departemen') == 'SALES') : ?>
+
+            <li class="nav-item">
+              <a href="<?php echo base_url('hrd_lap_tamu') ?>" class="nav-link">
+                <i class="nav-icon fa fa-id-badge"></i>
                 <p>
-                  Inventaris Saya
+                  Laporan Tamu
                 </p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="<?php echo base_url('#') ?>" class="nav-link">
-                <i class="nav-icon fa fa-clock"></i>
-                <p>
-                  Maintenance Ticketing
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?php echo base_url('#') ?>" class="nav-link">
-                <i class="nav-icon fa fa-user"></i>
-                <p>
-                  User Setting
-                </p>
-              </a>
-            </li> -->
-            <!-- <li class="nav-item">
-              <a href="<?php echo base_url('dashboardkpi') ?>" class="nav-link">
-                <i class="nav-icon fa fa-paste"></i>
-                <p>
-                  KPI
-                </p>
-              </a>
-            </li> -->
             <li class="nav-item">
               <a href="<?php echo base_url('logout') ?>" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
@@ -281,8 +258,12 @@
                 </p>
               </a>
             </li>
+
+            <!-- END AKSES LV2 USER ADMLOBY -->
           <?php endif; ?>
-          <!-- END AKSES LV 2 USER KEUANGAN -->
+
+
+
       </nav>
       <!-- /.sidebar-menu -->
     </div>

@@ -27,62 +27,104 @@
         <div class="container-fluid">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">LAPORAN HRD TAMU</h3>
+              <?php if ($this->session->userdata('akses_lv') == '2' && $this->session->userdata('departemen') == 'SALES') : ?>
+                <h3 class="card-title">LAPORAN TAMU</h3>
             </div>
             <div class="ml-2">
-              <button type="button" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#addtamu">
-                <i class="fas fa-pen"></i>
-                Input Laporan Baru
-              </button>
-            </div>
-            <div class="card-body">
-              <table id="tb_lap_distribusi" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th hidden>id</th>
-                    <th>Tanggal</th>
-                    <th>Nama</th>
-                    <th>Perusahaan</th>
-                    <th>Alamat</th>
-                    <th>Jumlah Personil</th>
-                    <th>Tujuan</th>
-                    <th>Jam Masuk</th>
-                    <th>Jam Keluar</th>
-                    <th>Keterangan</th>
-                    <th>#</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php foreach ($laporan as $l) : ?>
 
+              <div class="card-body">
+                <table id="tb_lap_distribusi" class="table table-bordered table-striped">
+                  <thead>
                     <tr>
-                      <th hidden><?= $l->id ?></th>
-                      <th><?= $l->tanggal ?></th>
-                      <th><?= $l->nama ?></th>
-                      <th><?= $l->perusahaan ?></th>
-                      <th><?= $l->alamat ?></th>
-                      <th><?= $l->jumlahpersonil ?></th>
-                      <th><?= $l->tujuan ?></th>
-                      <th><?= $l->jammasuk ?></th>
-                      <th><?= $l->jamkeluar ?></th>
-                      <th><?= $l->keterangan ?></th>
-                      <th>
-                        <div class="row">
-                          <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#edittamu<?= $l->id ?>">
-                            <i class="fa fa-solid fa-pencil-alt"></i>
-                          </a>
-                          <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapuslaptamu<?= $l->id ?>">
-                            <i class="fa fa-solid fa-trash-alt"></i>
-                          </a>
-                        </div>
-                      </th>
+                      <th hidden>id</th>
+                      <th>Tanggal</th>
+                      <th>Nama</th>
+                      <th>Perusahaan</th>
+                      <th>Alamat</th>
+                      <th>Jumlah Personil</th>
+                      <th>Tujuan</th>
+                      <th>Jam Masuk</th>
+                      <th>Jam Keluar</th>
+                      <th>Keterangan</th>
                     </tr>
-                  <?php endforeach; ?>
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($laporan as $l) : ?>
+
+                      <tr>
+                        <th hidden><?= $l->id ?></th>
+                        <th><?= $l->tanggal ?></th>
+                        <th><?= $l->nama ?></th>
+                        <th><?= $l->perusahaan ?></th>
+                        <th><?= $l->alamat ?></th>
+                        <th><?= $l->jumlahpersonil ?></th>
+                        <th><?= $l->tujuan ?></th>
+                        <th><?= $l->jammasuk ?></th>
+                        <th><?= $l->jamkeluar ?></th>
+                        <th><?= $l->keterangan ?></th>
+                      </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+                </table>
+
+              <?php elseif ($this->session->userdata('akses_lv') == '2' && $this->session->userdata('departemen') != 'SALES') : ?>
+                <h3 class="card-title">LAPORAN HRD TAMU</h3>
+              </div>
+              <div class="ml-2">
+                <button type="button" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#addtamu">
+                  <i class="fas fa-pen"></i>
+                  Input Laporan Baru
+                </button>
+              </div>
+              <div class="card-body">
+                <table id="tb_lap_distribusi" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th hidden>id</th>
+                      <th>Tanggal</th>
+                      <th>Nama</th>
+                      <th>Perusahaan</th>
+                      <th>Alamat</th>
+                      <th>Jumlah Personil</th>
+                      <th>Tujuan</th>
+                      <th>Jam Masuk</th>
+                      <th>Jam Keluar</th>
+                      <th>Keterangan</th>
+                      <th>#</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($laporan as $l) : ?>
+
+                      <tr>
+                        <th hidden><?= $l->id ?></th>
+                        <th><?= $l->tanggal ?></th>
+                        <th><?= $l->nama ?></th>
+                        <th><?= $l->perusahaan ?></th>
+                        <th><?= $l->alamat ?></th>
+                        <th><?= $l->jumlahpersonil ?></th>
+                        <th><?= $l->tujuan ?></th>
+                        <th><?= $l->jammasuk ?></th>
+                        <th><?= $l->jamkeluar ?></th>
+                        <th><?= $l->keterangan ?></th>
+                        <th>
+                          <div class="row">
+                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#edittamu<?= $l->id ?>">
+                              <i class="fa fa-solid fa-pencil-alt"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapuslaptamu<?= $l->id ?>">
+                              <i class="fa fa-solid fa-trash-alt"></i>
+                            </a>
+                          </div>
+                        </th>
+                      </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+                </table>
+              <?php endif; ?>
+              </div>
             </div>
           </div>
-        </div>
       </section>
     </div>
     <!-- /.content-wrapper -->

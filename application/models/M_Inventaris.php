@@ -14,16 +14,15 @@ class M_Inventaris extends CI_Model
         return $this->db->insert('tb_inventaris', $data);
     }
 
-    public function editInventaris($iduser, $data)
+    public function editinventaris($id, $data)
     {
-        $this->db->where('id_inven', $iduser);
+        $this->db->where('id', $id);
         return $this->db->update('tb_inventaris', $data);
     }
 
-    public function deleteInventaris($iduser)
+    public function hapusinventaris($id)
     {
-        $this->db->where('id_inven', $iduser);
-        return $this->db->delete('tb_inventaris');
+        return $this->db->delete('tb_inventaris', array("id" => $id));
     }
     public function getUser($kduser)
     {

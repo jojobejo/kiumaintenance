@@ -61,12 +61,13 @@ $route['logout']    = 'Auth/logout';
 
 //Dashboard
 $route['dashboard'] = 'Dashboard';
+$route['konfirm_tamu'] = 'Dashboard/konfirm_tamu';
 
 //inventaris
-$route['inventaris']        = 'inventaris/C_Inventaris'; 
+$route['inventaris']        = 'inventaris/C_Inventaris';
 $route['addinventaris']     = 'inventaris/C_Inventaris/addinventaris';
 $route['editinventaris']    = 'inventaris/C_Inventaris/editinventaris';
-$route['hapusinventaris']   = 'inventaris/C_Inventaris/hapusinventaris';
+$route['hapusinventaris1']   = 'inventaris/C_Inventaris/hapusinventaris';
 $route['changeowner']       = 'inventaris/C_Inventaris/changeowner';
 $route['selectowner']       = 'inventaris/C_Inventaris/selectowner';
 

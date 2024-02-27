@@ -11,6 +11,12 @@ class M_Hrd extends CI_Model
         FROM tb_lap_distribusi a
         ");
     }
+    public function getalltamulb()
+    {
+        return $this->db->query("SELECT a.*
+        FROM tb_tamu_lby a
+        ");
+    }
     public function get_lap_id($id)
     {
         return $this->db->query("SELECT a.*
@@ -32,10 +38,20 @@ class M_Hrd extends CI_Model
         return $this->db->delete('tb_lap_distribusi', array("id" => $id));
     }
 
-    public function addlaptamuhrd($data)
+    public function konfirmtamulb($data)
     {
         return $this->db->insert('tb_tamu', $data);
     }
+    
+    public function hapus_lap_tamu_lby($id)
+    {
+        return $this->db->delete('tb_tamu_lby', array("id" => $id));
+    }
+    public function addlaptamuhrd($data)
+    {
+        return $this->db->insert('tb_tamu_lby', $data);
+    }
+
     public function editlaptamu($id, $data)
     {
         $this->db->where('id', $id);

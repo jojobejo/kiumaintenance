@@ -8,6 +8,7 @@
 
         <?php $this->load->view('partial/main/navbar') ?>
         <?php $this->load->view('partial/main/sidebar') ?>
+        <?php $this->load->view('content/modallaptamuhrd') ?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -126,9 +127,63 @@
                         </div>
                     </div>
 
+                <?php elseif ($this->session->userdata('departemen') == 'SALES' || $this->session->userdata('departemen') == 'IT') : ?>
+                    <!-- Content Header (Page header) -->
+                    <div class="content-header">
+                        <div class="container-fluid">
+                            <div class="row mb-2">
+                                <div class="col-sm-6">
+                                </div><!-- /.col -->
+                            </div><!-- /.row -->
+                        </div><!-- /.container-fluid -->
+                    </div>
+                    <!-- /.content-header -->
+                    <section class="content">
+                        <div class="container-fluid">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <h3 class="card-title font-weight-bold">Tamu Masuk</h3>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <table id="tb_list_order" class="table table-bordered table-striped" style="text-align: center;">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama Tamu</th>
+                                                <th>Perushaan</th>
+                                                <th>Alamat</th>
+                                                <th>Jumlah Personil</th>
+                                                <th>Tujuan</th>
+                                                <th>Keterangan</th>
+                                                <th>#</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($tamu as $d) : ?>
+                                                <tr>
+                                                    <th><?= $d->nama ?></th>
+                                                    <th><?= $d->perusahaan ?></th>
+                                                    <th><?= $d->alamat ?></th>
+                                                    <th><?= $d->jumlahpersonil ?></th>
+                                                    <th><?= $d->tujuan ?></th>
+                                                    <th><?= $d->keterangan ?></th>
+                                                    <th>
+                                                        <a href="#" class="btn btn-success btn-sm " data-toggle="modal" data-target="#edittamu<?= $d->id ?>">
+                                                            <i class="fa fa-solid fa-check"></i>
+                                                        </a>
+                                                    </th>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
 
-                </section>
-            <?php endif; ?>
+
+                    </section>
+                <?php endif; ?>
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">

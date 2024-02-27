@@ -186,6 +186,7 @@ class C_Hrd extends CI_Controller
     }
 
     // FUNGSI CRUD
+
     public function tambah_lap_tamu()
     {
         $tanggal = $this->input->post('tanggal');
@@ -197,7 +198,6 @@ class C_Hrd extends CI_Controller
         $jammasuk = $this->input->post('jammasuk');
         $jamkeluar = $this->input->post('jamkeluar');
         $keterangan = $this->input->post('keterangan');
-
 
         $data = array(
             'tanggal' => $tanggal,
@@ -214,6 +214,7 @@ class C_Hrd extends CI_Controller
         $this->M_Hrd->addlaptamuhrd($data);
         redirect('hrd_lap_tamu');
     }
+   
     public function edit_lap_tamu()
     {
         $id = $this->input->post('id');
@@ -466,7 +467,7 @@ class C_Hrd extends CI_Controller
     {
         $id     = $this->input->post('id_isi');
 
-        $this->M_Hrd->hapuslapissue($id);
+        $this->M_Inventaris->hapuslapissue($id);
         redirect('hrd_lap_issue');
     }
     public function search_lap_distribusi()

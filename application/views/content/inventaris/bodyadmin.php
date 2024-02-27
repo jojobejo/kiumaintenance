@@ -31,22 +31,21 @@
                         <div class="ml-2">
                             <button type="button" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#addInventaris">
                                 <i class="fas fa-shopping-cart"></i>
-                                Pembelian Inventaris Baru
+                                Inventaris Baru
                             </button>
                         </div>
                         <div class="card-body">
                             <table id="tb_inventaris" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>PIC</th>
+                                        <th>id</th>
                                         <th>Kode Inventaris</th>
-                                        <th>Departemen</th>
-                                        <th>Komputer</th>
-                                        <th>Descripsi</th>
+                                        <th>PIC</th>
+                                        <th>Departement</th>
+                                        <th>Type Barang</th>
+                                        <th>Deskripsi</th>
                                         <th>Tanggal Beli</th>
-                                        <th>Harga Beli</th>
                                         <th>Status</th>
-                                        <th>History</th>
                                         <th>#</th>
                                     </tr>
                                 </thead>
@@ -54,15 +53,22 @@
                                     <?php foreach ($datainventaris as $d) : ?>
                                         <tr>
                                             <th><?= $d->id ?></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
+                                            <th><?= $d->kdinventaris ?></th>
+                                            <th><?= $d->kdpic ?></th>
+                                            <th><?= $d->departement ?></th>
+                                            <th><?= $d->typebarang ?></th>
+                                            <th><?= $d->deskripsi ?></th>
+                                            <th><?= $d->tglbeli ?></th>
+                                            <th><?= $d->status ?></th>
+                                            <th>
+                                                <div class="row">
+                          <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editinventaris<?= $d->id ?>">
+                            <i class="fa fa-solid fa-pencil-alt"></i>
+                          </a>
+                          <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapusinventaris<?= $d->id ?>">
+                            <i class="fa fa-solid fa-trash-alt"></i>
+                          </a>
+                        </div></th>                                          
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
