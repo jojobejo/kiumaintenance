@@ -20,6 +20,21 @@ class C_Hrd extends CI_Controller
         $this->load->view('content/body.php', $data);
         $this->load->view('partial/main/footer.php');
     }
+
+    // TAMPILAN HALAMAN ADD
+
+    public function hrd_add_tamu()
+    {
+        $data['page_title'] = 'KARISMA';
+        $data['tamu'] = $this->M_Hrd->getalltamulb()->result();
+        $data['laporan']    = $this->M_Hrd->get_all_tamu_lb()->result();
+
+        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('content/hrd/v_add_tamu.php', $data);
+        $this->load->view('partial/main/footer.php');
+    }
+
+
     // TAMPILAN HALAMAN LAP DISTRIBUSI
     public function lap_distribusi()
     {
@@ -189,6 +204,38 @@ class C_Hrd extends CI_Controller
 
     public function tambah_lap_tamu()
     {
+
+        date_default_timezone_set('Asia/Jakarta');
+        $tgl = date("Y-m-d");
+        $jm  = date("H:i");
+        $nama = $this->input->post('nama');
+        $perusahaan = $this->input->post('perusahaan');
+        $alamat = $this->input->post('alamat');
+        $jumlahpersonil = $this->input->post('jumlahpersonil');
+        $tujuan = $this->input->post('tujuan');
+        $keterangan = $this->input->post('keterangan');
+
+        $data = array(
+            'tanggal' => $tgl,
+            'nama' => $nama,
+            'perusahaan' => $perusahaan,
+            'alamat' => $alamat,
+            'jumlahpersonil' => $jumlahpersonil,
+            'tujuan' => $tujuan,
+            'jammasuk' => $jm,
+            'keterangan' => $keterangan,
+        );
+
+        $this->M_Hrd->addlaptamuhrd($data);
+        redirect('hrd_add_tamu');
+    }
+
+    public function konfirm_buku_tamu()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $jm  = date("H:i");
+
+        $id = $this->input->post('id');
         $tanggal = $this->input->post('tanggal');
         $nama = $this->input->post('nama');
         $perusahaan = $this->input->post('perusahaan');
@@ -196,7 +243,6 @@ class C_Hrd extends CI_Controller
         $jumlahpersonil = $this->input->post('jumlahpersonil');
         $tujuan = $this->input->post('tujuan');
         $jammasuk = $this->input->post('jammasuk');
-        $jamkeluar = $this->input->post('jamkeluar');
         $keterangan = $this->input->post('keterangan');
 
         $data = array(
@@ -207,14 +253,15 @@ class C_Hrd extends CI_Controller
             'jumlahpersonil' => $jumlahpersonil,
             'tujuan' => $tujuan,
             'jammasuk' => $jammasuk,
-            'jamkeluar' => $jamkeluar,
+            'jamkeluar' => $jm,
             'keterangan' => $keterangan,
-
         );
-        $this->M_Hrd->addlaptamuhrd($data);
-        redirect('hrd_lap_tamu');
+        
+        $this->M_Hrd->konfirmtamulb($data);
+        $this->M_Hrd->hapus_lap_tamu_lb($id);
+        redirect('hrd_add_tamu');
     }
-   
+
     public function edit_lap_tamu()
     {
         $id = $this->input->post('id');

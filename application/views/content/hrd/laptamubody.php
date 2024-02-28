@@ -71,10 +71,10 @@
                 <h3 class="card-title">LAPORAN HRD TAMU</h3>
               </div>
               <div class="ml-2">
-                <button type="button" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#addtamu">
+                <a href="<?= base_url('hrd_add_tamu') ?>" type="button" class="btn btn-primary">
                   <i class="fas fa-pen"></i>
-                  Input Laporan Baru
-                </button>
+                  Input Tamu Masuk
+                </a>
               </div>
               <div class="card-body">
                 <table id="tb_lap_distribusi" class="table table-bordered table-striped">

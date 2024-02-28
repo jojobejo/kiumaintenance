@@ -198,7 +198,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?php echo base_url('hrd_lap_tamu') ?>" class="nav-link">
+              <a href="<?php echo base_url('hrd_add_tamu') ?>" class="nav-link">
                 <i class="nav-icon fa fa-id-badge"></i>
                 <p>
                   Laporan Tamu

@@ -150,29 +150,29 @@
                                     <table id="tb_list_order" class="table table-bordered table-striped" style="text-align: center;">
                                         <thead>
                                             <tr>
+                                                <th>No</th>
                                                 <th>Nama Tamu</th>
                                                 <th>Perushaan</th>
                                                 <th>Alamat</th>
                                                 <th>Jumlah Personil</th>
                                                 <th>Tujuan</th>
+                                                <th>Jam Masuk</th>
                                                 <th>Keterangan</th>
-                                                <th>#</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($tamu as $d) : ?>
+                                            <?php
+                                            $no = 1;
+                                            foreach ($tamu as $d) : ?>
                                                 <tr>
+                                                    <th><?= $no++ ?></th>
                                                     <th><?= $d->nama ?></th>
                                                     <th><?= $d->perusahaan ?></th>
                                                     <th><?= $d->alamat ?></th>
                                                     <th><?= $d->jumlahpersonil ?></th>
                                                     <th><?= $d->tujuan ?></th>
+                                                    <th><?= $d->jammasuk ?></th>
                                                     <th><?= $d->keterangan ?></th>
-                                                    <th>
-                                                        <a href="#" class="btn btn-success btn-sm " data-toggle="modal" data-target="#edittamu<?= $d->id ?>">
-                                                            <i class="fa fa-solid fa-check"></i>
-                                                        </a>
-                                                    </th>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
@@ -201,3 +201,8 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+    <script>
+        setTimeout(function() {
+            window.location.reload(1);
+        }, 30000);
+    </script>
