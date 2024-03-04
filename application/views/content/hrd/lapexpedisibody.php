@@ -29,12 +29,13 @@
             <div class="card-header">
               <h3 class="card-title">LAPORAN EXPEDISI</h3>
             </div>
-            <div class="ml-2">
+            <?php if ($this->session->userdata('akses_lv') == '1' && $this->session->userdata('departemen') == 'LOGISTIK') : ?>
+            <?php elseif ($this->session->userdata('departemen') != 'LOGISTIK') : ?>
               <button type="button" class="btn btn-primary m-2 ml-3" data-toggle="modal" data-target="#addexpedisi">
                 <i class="fas fa-pen"></i>
                 Input Laporan Baru
               </button>
-            </div>
+            <?php endif; ?>
             <div class="card-body">
               <table id="tb_lap_distribusi" class="table table-bordered table-striped">
                 <thead>
@@ -50,7 +51,10 @@
                     <th>Nama Barang</th>
                     <th>Jumlah Barang</th>
                     <th>Keterangan</th>
-                    <th>#</th>
+                    <?php if ($this->session->userdata('akses_lv') == '1' && $this->session->userdata('departemen') == 'LOGISTIK') : ?>
+                    <?php elseif ($this->session->userdata('departemen') != 'LOGISTIK') : ?>
+                      <th>#</th>
+                    <?php endif; ?>
                   </tr>
                 </thead>
                 <tbody>
@@ -68,16 +72,19 @@
                       <th><?= $l->namabarang ?></th>
                       <th><?= $l->jumlahbarang ?></th>
                       <th><?= $l->keterangan ?></th>
-                      <th>
-                        <div class="row">
-                          <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editexpedisi<?= $l->id ?>">
-                            <i class="fa fa-solid fa-pencil-alt"></i>
-                          </a>
-                          <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapuslapexpedisi<?= $l->id ?>">
-                            <i class="fa fa-solid fa-trash-alt"></i>
-                          </a>
-                        </div>
-                      </th>
+                      <?php if ($this->session->userdata('akses_lv') == '1' && $this->session->userdata('departemen') == 'LOGISTIK') : ?>
+                      <?php elseif ($this->session->userdata('departemen') != 'LOGISTIK') : ?>
+                        <th>
+                          <div class="row">
+                            <a href="#" class="btn btn-warning btn-sm " data-toggle="modal" data-target="#editexpedisi<?= $l->id ?>">
+                              <i class="fa fa-solid fa-pencil-alt"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#hapuslapexpedisi<?= $l->id ?>">
+                              <i class="fa fa-solid fa-trash-alt"></i>
+                            </a>
+                          </div>
+                        </th>
+                      <?php endif; ?>
                     </tr>
                   <?php endforeach; ?>
                 </tbody>
