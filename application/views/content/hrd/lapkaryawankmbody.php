@@ -34,6 +34,7 @@
                 <i class="fas fa-pen"></i>
                 Input Laporan Baru
               </button>
+              <a href="<?= base_url('ex_lap_kar') ?>" class="btn btn-success"><i class="fas fa-file"></i> Export Excel</a>
             </div>
             <div class="card-body">
               <table id="tb_lap_distribusi" class="table table-bordered table-striped">

@@ -152,6 +152,7 @@ $route['updatekmsebelum'] = 'hrd/C_Hrd/update_km_past_service_truk';
 $route['edit_karyawan'] = 'hrd/C_Hrd/edit_karyawan';
 $route['add_karyawan'] = 'hrd/C_Hrd/add_karyawan';
 $route['export_laporan_issue'] = 'hrd/C_Hrd/export_laporan_issue';
+$route['ex_lap_kar'] = 'hrd/C_Hrd/export_laporan_karyawan';
 
 //KPI
 $route['dashboardkpi'] = 'kpi/C_Kpi';

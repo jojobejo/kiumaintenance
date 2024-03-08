@@ -133,6 +133,10 @@ class M_Hrd extends CI_Model
     {
         return $this->db->get('tb_issue')->result();
     }
+    public function export_lap_km_karyawan()
+    {
+        return $this->db->get('tb_karyawan_keluarmasuk')->result();
+    }
     public function addlapissue($data)
     {
         return $this->db->insert('tb_issue', $data);
