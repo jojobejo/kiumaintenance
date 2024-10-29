@@ -168,3 +168,11 @@ $route['addUser']   = 'User/Admin/addUser';
 $route['kepuasan_pelanggan'] = 'Pelanggan/C_Pelanggan';
 $route['nilai_ipkp/(:any)'] = 'Pelanggan/C_Pelanggan/input_nilai/$1';
 $route['ratingreview'] = 'Pelanggan/C_Pelanggan/rating_review';
+
+//RequestDesign
+$route['requestdesign']        = 'requestdesign/C_requestdesign';
+$route['addinventaris']     = 'inventaris/C_Inventaris/addinventaris';
+$route['editinventaris']    = 'inventaris/C_Inventaris/editinventaris';
+$route['hapusinventaris1']   = 'inventaris/C_Inventaris/hapusinventaris';
+$route['changeowner']       = 'inventaris/C_Inventaris/changeowner';
+$route['selectowner']       = 'inventaris/C_Inventaris/selectowner';
