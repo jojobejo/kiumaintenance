@@ -143,10 +143,11 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="row">
-                                        <h3 class="card-title font-weight-bold">Tamu Masuk</h3>
+                                        <h3 class="card-title font-weight-bold ">Tamu Masuk - Kantor</h3>
+                                        <a href="<?= base_url('schedule_direktur'); ?>" class="btn btn-primary btn-sm ml-3"><i class="fa fa-calendar"></i><b style="text-transform:uppercase"> Schedule Direktur</b></a>
                                     </div>
                                 </div>
-                                <div class="card-body">
+                                <div class=" card-body">
                                     <table id="tb_list_order" class="table table-bordered table-striped" style="text-align: center;">
                                         <thead>
                                             <tr>
@@ -180,8 +181,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </section>
                 <?php endif; ?>
         </div>

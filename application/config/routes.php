@@ -116,7 +116,6 @@ $route['tmp_logistik_distribusi'] = 'logistik/C_Logistik/tmp_lap_distribusi/';
 $route['edit_laporan_tmp_dis'] = 'logistik/C_Logistik/edit_laporan_tmp_dis/';
 $route['insert_laporan_tmp_dis'] = 'logistik/C_Logistik/insert_laporan_tmp_dis/';
 
-
 // HRD 
 $route['hrd_lap_distribusi'] = 'hrd/C_Hrd/lap_distribusi';
 $route['get_server_lap_dis'] = 'hrd/C_Hrd/get_lap_distribusi';
@@ -176,3 +175,7 @@ $route['editinventaris']    = 'inventaris/C_Inventaris/editinventaris';
 $route['hapusinventaris1']   = 'inventaris/C_Inventaris/hapusinventaris';
 $route['changeowner']       = 'inventaris/C_Inventaris/changeowner';
 $route['selectowner']       = 'inventaris/C_Inventaris/selectowner';
+
+//scedule_direktur
+$route['schedule_direktur'] = 'schedule/C_Schedule';
+$route['addschedule']       = 'schedule/C_Schedule/addschedule';

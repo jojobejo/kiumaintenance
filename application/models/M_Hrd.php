@@ -246,4 +246,14 @@ class M_Hrd extends CI_Model
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
+    public function insertchedule($data)
+    {
+        return $this->db->insert('tb_schedule_dirut', $data);
+    }
+    public function getdataschedule()
+    {
+        return $this->db->query("SELECT a.*
+        FROM tb_schedule_dirut a
+        ");
+    }
 }
