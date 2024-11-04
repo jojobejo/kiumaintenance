@@ -41,4 +41,50 @@ class C_Schedule extends CI_Controller
         $this->M_Hrd->insertchedule($addschedule);
         redirect('schedule_direktur');
     }
+    public function editchedule()
+    {
+        $id             = $this->input->post('id');
+        $tanggal        = $this->input->post('tgl');
+        $jam            = $this->input->post('jam');
+        $instansi       = $this->input->post('instansi');
+        $pic            = $this->input->post('pic');
+        $estimasiwaktu  = $this->input->post('estimasi');
+        $tujuan         = $this->input->post('tujuan');
+
+        $addschedule = array(
+            'tanggal'       => $tanggal,
+            'jam'           => $jam,
+            'suplier'       => $instansi,
+            'pic'           => $pic,
+            'estimasi_end'  => $estimasiwaktu,
+            'tujuan'        => $tujuan,
+            'status'        => '2',
+            'keterangan'    => 'EDITED_BY_ADMIN_LOBY',
+        );
+        $this->M_Hrd->editchedule($id, $addschedule);
+        redirect('schedule_direktur');
+    }
+    public function reschedule()
+    {
+        $id             = $this->input->post('id');
+        $tanggal        = $this->input->post('tgl');
+        $jam            = $this->input->post('jam');
+
+        $addschedule = array(
+            'tanggal'       => $tanggal,
+            'jam'           => $jam,
+            'status'        => '3',
+            'keterangan'    => 'RE-SCHEDULE',
+        );
+        $this->M_Hrd->reschedule($id, $addschedule);
+        redirect('schedule_direktur');
+    }
+    public function deleteschedule()
+    {
+        $id             = $this->input->post('id');
+
+        $this->M_Hrd->deleteschedule($id);
+
+        redirect('schedule_direktur');
+    }
 }

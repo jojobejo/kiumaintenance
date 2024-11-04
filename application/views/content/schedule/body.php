@@ -55,18 +55,42 @@
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    foreach ($getschedule as $get) : ?>
+                                    foreach ($getschedule as $get) :
+                                        $status = "";
+                                        if ($get->status == '0') {
+                                            $status = 'NO STATUS';
+                                        } else if ($get->status == '1') {
+                                            $status = '1';
+                                        } else if ($get->status == '2') {
+                                            $status = '2';
+                                        } else if ($get->status == '3') {
+                                            $status = '3';
+                                        }
+                                    ?>
+
                                         <tr>
                                             <th><?= $no++ ?></th>
-                                            <th><?= $get->tanggal ?></th>
+                                            <th><?= format_indo($get->tanggal)  ?></th>
                                             <th><?= $get->jam ?></th>
                                             <th><?= $get->suplier ?></th>
                                             <th><?= $get->pic ?></th>
                                             <th><?= $get->estimasi_end ?></th>
                                             <th><?= $get->tujuan ?></th>
-                                            <th><?= $get->status ?></th>
+                                            <th><?= $status ?></th>
                                             <th><?= $get->keterangan ?></th>
-                                            <th><?= $get->keterangan ?></th>
+                                            <th>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <a href="" class="btn btn-sm btn-warning btn-block" data-toggle="modal" data-target="#editedschedule<?= $get->id ?>"><i class="fas fa-pencil-alt"></i></a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <a href="" class="btn btn-sm btn-danger btn-block" data-toggle="modal" data-target="#deleteschedule<?= $get->id ?>"><i class="fas fa-trash-alt"></i></a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <a href="" class="btn btn-sm btn-info btn-block" data-toggle="modal" data-target="#reschedule<?= $get->id ?>"><i class="fas fa-sync-alt"></i></a>
+                                                    </div>
+                                                </div>
+                                            </th>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
