@@ -14,13 +14,19 @@ class Dashboard extends CI_Controller
 
     public function index()
     {
-        $data['page_title'] = 'KARISMA';
-        $data['logistik'] = $this->M_Logistik->get_all_do()->result();
-        $data['tamu'] = $this->M_Hrd->getalltamulb()->result();
-
-        $this->load->view('partial/main/header.php', $data);
-        $this->load->view('content/body.php', $data);
-        $this->load->view('partial/main/footer.php');
+        if ($this->session->userdata('akses_lv') == '3') {
+            $data['page_title'] = 'KARISMA';
+            $this->load->view('partial/main/header.php', $data);
+            $this->load->view('content/body-karyawan.php', $data);
+            $this->load->view('partial/main/footer.php');
+        } else {
+            $data['page_title'] = 'KARISMA';
+            $data['logistik'] = $this->M_Logistik->get_all_do()->result();
+            $data['tamu'] = $this->M_Hrd->getalltamulb()->result();
+            $this->load->view('partial/main/header.php', $data);
+            $this->load->view('content/body.php', $data);
+            $this->load->view('partial/main/footer.php');
+        }
     }
 
     public function konfirm_tamu()

@@ -155,9 +155,7 @@ $route['ex_lap_kar'] = 'hrd/C_Hrd/export_laporan_karyawan';
 
 //KPI
 $route['dashboardkpi'] = 'kpi/C_Kpi';
-$route['dashboardkpiwhat'] = 'kpi/C_Kpi/what';
-$route['add_kpi_baru'] = 'kpi/C_Kpi/addkpi';
-$route['detail_kpi/(:any)/(:any)'] = 'kpi/C_Kpi/detail_kpi/$1/$2';
+$route['indikator_kpi'] = 'kpi/C_Kpi/indikator_kpi';
 
 //UserAccount
 $route['userAdmin'] = 'User/Admin';
