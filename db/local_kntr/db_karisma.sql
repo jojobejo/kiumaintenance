@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 29 Okt 2024 pada 09.35
+-- Waktu pembuatan: 01 Nov 2024 pada 10.01
 -- Versi server: 10.4.17-MariaDB
 -- Versi PHP: 8.0.1
 
@@ -530,6 +530,34 @@ INSERT INTO `tb_order_tracking_driver` (`id`, `kd_order`, `tgl_jalan`, `create_a
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `tb_schedule_dirut`
+--
+
+CREATE TABLE `tb_schedule_dirut` (
+  `id` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `jam` text NOT NULL,
+  `suplier` text NOT NULL,
+  `pic` text NOT NULL,
+  `estimasi_end` text NOT NULL,
+  `tujuan` text NOT NULL,
+  `status` int(2) NOT NULL,
+  `keterangan` text NOT NULL,
+  `create_at` text NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_schedule_dirut`
+--
+
+INSERT INTO `tb_schedule_dirut` (`id`, `tanggal`, `jam`, `suplier`, `pic`, `estimasi_end`, `tujuan`, `status`, `keterangan`, `create_at`, `updated_at`) VALUES
+(1, '2024-11-01', '15:56', 'Bisi', 'Bram', '-', '-', 1, '-', '', '2024-11-01 08:57:07'),
+(2, '2024-11-01', '15:59', '111', '111', '111', '111', 1, '-', '', '2024-11-01 08:59:31');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `tb_service_truk`
 --
 
@@ -881,7 +909,9 @@ INSERT INTO `tb_user` (`id`, `nik`, `kode_user`, `nama_user`, `nama_lengkap`, `d
 (148, 'QIU2306219', 'KIU2208230144', 'MUHAMMAD AGUNG PRASETYO', 'MUHAMMAD AGUNG PRASETYO', 'SALES', 'DUSUN KRAJAN, RT 002, RW 001, DESA LUMBANG, KECAMATAN LUMBANG, KABUPATEN PROBOLINGGO', '2000-03-16', 'karisma141', '$2y$10$8zo4Hf7Z3tOS66AJHgKu1OTACGRpTjYwOd.Mpr1t4PR0HWcUH3.2.', 2, '2023-08-22 05:58:36'),
 (150, '', 'KIU2308230001', 'KIUTC', '', 'KEUANGAN', '', '', 'KIUTC', '$2y$10$NHS4Aa/jP0GA3tvU8dIuJexSBma4WUkt0/6ypMHSb.T/IWF/vN5PC', 2, '2023-08-23 03:49:16'),
 (151, '', 'KIU2602240001', 'admsales', '', 'SALES', '', '', 'admsales', '$2y$10$KpxpWJc81Y3/v3A0wmtUEuVCIUw2cxebunxKuFEscAW7Uj7DU4SF.', 2, '2024-02-26 03:59:26'),
-(152, '', 'KIU2006240001', 'admsales', '', 'SALES', '', '', 'admsales', '$2y$10$.xAZu8QGLrYkkNpUYTkruesZvupQ3WxlRnylR9gaiTvaT07FRCsWW', 2, '2024-02-26 03:59:26');
+(152, '', 'KIU2006240001', 'admsales', '', 'SALES', '', '', 'admsales', '$2y$10$.xAZu8QGLrYkkNpUYTkruesZvupQ3WxlRnylR9gaiTvaT07FRCsWW', 2, '2024-02-26 03:59:26'),
+(153, '', 'KIU0111240001', 'Admin Loby', '', 'SALES', '', '', 'admloby', '$2y$10$vwu6O2IXhcEXybrH3X6aRuw/CZe5k0b/c3P8Ao5txXelr0DjBO2My', 2, '2024-11-01 02:33:15'),
+(154, '', 'KIU0111240002', 'admadm', '', 'KEUANGAN', '', '', 'admadm', '$2y$10$vwu6O2IXhcEXybrH3X6aRuw/CZe5k0b/c3P8Ao5txXelr0DjBO2My', 2, '2024-11-01 02:32:37');
 
 --
 -- Indexes for dumped tables
@@ -987,6 +1017,12 @@ ALTER TABLE `tb_op_plat`
 -- Indeks untuk tabel `tb_order_tracking_driver`
 --
 ALTER TABLE `tb_order_tracking_driver`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `tb_schedule_dirut`
+--
+ALTER TABLE `tb_schedule_dirut`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1132,6 +1168,12 @@ ALTER TABLE `tb_order_tracking_driver`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT untuk tabel `tb_schedule_dirut`
+--
+ALTER TABLE `tb_schedule_dirut`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT untuk tabel `tb_service_truk`
 --
 ALTER TABLE `tb_service_truk`
@@ -1165,7 +1207,7 @@ ALTER TABLE `tb_truck`
 -- AUTO_INCREMENT untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
