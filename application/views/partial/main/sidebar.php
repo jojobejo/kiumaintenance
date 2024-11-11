@@ -250,7 +250,7 @@
             <!-- START AKSES LV2 USER ADMLOBY -->
           <?php elseif ($this->session->userdata('akses_lv') == '2' && $this->session->userdata('departemen') == 'SALES') : ?>
             <li class="nav-item">
-              <a href="<?php echo base_url('scedule_direktur') ?>" class="nav-link">
+              <a href="<?php echo base_url('schedule_direktur') ?>" class="nav-link">
                 <i class="nav-icon fa fa-id-badge"></i>
                 <p>
                   Laporan Tamu Direktur
