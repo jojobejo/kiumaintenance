@@ -79,7 +79,9 @@ class C_Schedule extends CI_Controller
         $this->M_Hrd->reschedule($id, $addschedule);
         redirect('schedule_direktur');
     }
+
     public function deleteschedule()
+
     {
         $id             = $this->input->post('id');
 
