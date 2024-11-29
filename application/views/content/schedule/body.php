@@ -45,7 +45,7 @@
                                         <td>Jam</td>
                                         <td>Instansi</td>
                                         <td>PIC</td>
-                                        <td>Estimasi Waktu</td>
+                                        <td>Estimasi</td>
                                         <td>Tujuan</td>
                                         <td>Status</td>
                                         <td>Keterangan</td>
@@ -65,51 +65,38 @@
                                             $status = '2';
                                         } else if ($get->status == '3') {
                                             $status = '3';
+                                        } else if ($get->status == '4') {
+                                            $status = '4';
                                         }
                                     ?>
                                         <tr>
                                             <th><?= $no++ ?></th>
-                                            <th><?= format_indo($get->tanggal)  ?></th>
-                                            <th><?= $get->jam ?></th>
+                                            <th><?= format_tgl_lahir($get->tanggal)  ?></th>
+                                            <th style="width: 5%;text-align: center;"><?= $get->jam ?></th>
                                             <th><?= $get->suplier ?></th>
                                             <th><?= $get->pic ?></th>
-                                            <th><?= $get->estimasi_end ?></th>
+                                            <th style="width: 7%;text-align: center;"><?= $get->estimasi_end ?></th>
                                             <th><?= $get->tujuan ?></th>
-                                            <th>
+                                            <th style="width: 5%;text-align: center;">
                                                 <?php if ($status == '1') : ?>
-                                                    <a href="#" class="btn btn-warning btn-block"><i class="far fa-thumbs-up"></i>&nbsp;<b>ON PROGRESS</b></a>
+                                                    <a href="#" class="btn btn-warning btn-sm btn-block"><i class="fas fa-business-time"></i></a>
                                                 <?php elseif ($status == '2') : ?>
-                                                    <a href="#" class="btn btn-warning btn-block"><i class="far fa-thumbs-up"></i><b>ON PROGRESS</b></a>
+                                                    <a href="#" class="btn btn-danger btn-sm btn-block"><i class="fas fa-times-circle"></i></a>
                                                 <?php elseif ($status == '3') : ?>
-                                                    <a href="#" class="btn btn-primary btn-block"><i class="fas fa-sync-alt"></i>&nbsp;<b>RE-SCHEDULE</b></a>
+                                                    <a href="#" class="btn btn-success btn-sm btn-block"><i class="fas fa-check-circle"></i></a>
                                                 <?php endif; ?>
                                             </th>
                                             <th><?= $get->keterangan ?></th>
-                                            <th>
+                                            <th style="width: 13%;text-align: center;">
                                                 <?php if ($status == '1') : ?>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <a href="" class="btn btn-sm btn-warning btn-block" data-toggle="modal" data-target="#editedschedule<?= $get->id ?>"><i class="fas fa-pencil-alt"></i></a>
-                                                        </div>
-                                                        <div class="col">
-                                                            <a href="" class="btn btn-sm btn-danger btn-block" data-toggle="modal" data-target="#deleteschedule<?= $get->id ?>"><i class="fas fa-trash-alt"></i></a>
-                                                        </div>
-                                                        <div class="col">
-                                                            <a href="" class="btn btn-sm btn-info btn-block" data-toggle="modal" data-target="#reschedule<?= $get->id ?>"><i class="fas fa-sync-alt"></i></a>
-                                                        </div>
-                                                    </div>
+                                                    <a href="#" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editedschedule<?= $get->id ?>"><i class="fas fa-pencil-alt"></i></a>
+                                                    <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#cancelschedule<?= $get->id ?>"><i class="fas fa-times-circle"></i></a>
+                                                    <a href="#" class="btn btn-sm btn-info" data-toggle="modal" data-target="#reschedule<?= $get->id ?>"><i class="fas fa-sync-alt"></i></a>
+                                                    <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#scheduledone<?= $get->id ?>"><i class="fas fa-check-circle"></i></a>
+                                                <?php elseif ($status == '2') : ?>
+                                                    <a href="#" class="btn btn-sm btn-danger btn-block" data-toggle="modal" data-target="#deleteschedule<?= $get->id ?>"><i class="fas fa-trash-alt"></i></a>
                                                 <?php elseif ($status == '3') : ?>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <a href="" class="btn btn-sm btn-warning btn-block" data-toggle="modal" data-target="#editedschedule<?= $get->id ?>"><i class="fas fa-pencil-alt"></i></a>
-                                                        </div>
-                                                        <div class="col">
-                                                            <a href="" class="btn btn-sm btn-danger btn-block" data-toggle="modal" data-target="#deleteschedule<?= $get->id ?>"><i class="fas fa-trash-alt"></i></a>
-                                                        </div>
-                                                        <div class="col">
-                                                            <a href="" class="btn btn-sm btn-success btn-block" data-toggle="modal" data-target="#reschedule<?= $get->id ?>"><i class="fas fa-plus-circle"></i></a>
-                                                        </div>
-                                                    </div>
+                                                    <a href="#" class="btn btn-sm btn-success btn-block" data-toggle="modal" data-target="#archived<?= $get->id ?>"><i class="fas fa-check-circle"></i></a>
                                                 <?php endif; ?>
                                             </th>
                                         </tr>

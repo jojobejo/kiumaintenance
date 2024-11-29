@@ -19,74 +19,114 @@ class C_Schedule extends CI_Controller
         $this->load->view('content/schedule/ajaxschedule.php', $data);
         $this->load->view('partial/main/footer.php');
     }
-    public function addschedule()
+
+    public function act_schedule($act)
     {
-        $tanggal        = $this->input->post('tgl');
-        $jam            = $this->input->post('jam');
-        $instansi       = $this->input->post('instansi');
-        $pic            = $this->input->post('pic');
-        $estimasiwaktu  = $this->input->post('estimasi');
-        $tujuan         = $this->input->post('tujuan');
+        switch ($act) {
+            case 'addschedule':
 
-        $addschedule = array(
-            'tanggal'       => $tanggal,
-            'jam'           => $jam,
-            'suplier'       => $instansi,
-            'pic'           => $pic,
-            'estimasi_end'  => $estimasiwaktu,
-            'tujuan'        => $tujuan,
-            'status'        => '1',
-            'keterangan'    => '-',
-        );
-        $this->M_Hrd->insertchedule($addschedule);
-        redirect('schedule_direktur');
-    }
-    public function editchedule()
-    {
-        $id             = $this->input->post('id');
-        $tanggal        = $this->input->post('tgl');
-        $jam            = $this->input->post('jam');
-        $instansi       = $this->input->post('instansi');
-        $pic            = $this->input->post('pic');
-        $estimasiwaktu  = $this->input->post('estimasi');
-        $tujuan         = $this->input->post('tujuan');
+                $tanggal        = $this->input->post('tgl');
+                $jam            = $this->input->post('jam');
+                $instansi       = $this->input->post('instansi');
+                $pic            = $this->input->post('pic');
+                $estimasiwaktu  = $this->input->post('estimasi');
+                $tujuan         = $this->input->post('tujuan');
+                $keterangan     = $this->input->post('keterangan');
 
-        $addschedule = array(
-            'tanggal'       => $tanggal,
-            'jam'           => $jam,
-            'suplier'       => $instansi,
-            'pic'           => $pic,
-            'estimasi_end'  => $estimasiwaktu,
-            'tujuan'        => $tujuan,
-            'status'        => '2',
-            'keterangan'    => 'EDITED_BY_ADMIN_LOBY',
-        );
-        $this->M_Hrd->editchedule($id, $addschedule);
-        redirect('schedule_direktur');
-    }
-    public function reschedule()
-    {
-        $id             = $this->input->post('id');
-        $tanggal        = $this->input->post('tgl');
-        $jam            = $this->input->post('jam');
+                $addschedule = array(
+                    'tanggal'       => $tanggal,
+                    'jam'           => $jam,
+                    'suplier'       => $instansi,
+                    'pic'           => $pic,
+                    'estimasi_end'  => $estimasiwaktu,
+                    'tujuan'        => $tujuan,
+                    'status'        => '1',
+                    'keterangan'    => $keterangan,
+                );
+                $this->M_Hrd->insertchedule($addschedule);
+                redirect('schedule_direktur');
+                break;
 
-        $addschedule = array(
-            'tanggal'       => $tanggal,
-            'jam'           => $jam,
-            'status'        => '3',
-            'keterangan'    => 'RE-SCHEDULE',
-        );
-        $this->M_Hrd->reschedule($id, $addschedule);
-        redirect('schedule_direktur');
-    }
+            case 'editschedule':
+                $id             = $this->input->post('id');
+                $tanggal        = $this->input->post('tgl');
+                $jam            = $this->input->post('jam');
+                $instansi       = $this->input->post('instansi');
+                $pic            = $this->input->post('pic');
+                $estimasiwaktu  = $this->input->post('estimasi');
+                $tujuan         = $this->input->post('tujuan');
+                $keterangan     = $this->input->post('keterangan');
 
-    public function deleteschedule()
+                $addschedule = array(
+                    'tanggal'       => $tanggal,
+                    'jam'           => $jam,
+                    'suplier'       => $instansi,
+                    'pic'           => $pic,
+                    'estimasi_end'  => $estimasiwaktu,
+                    'tujuan'        => $tujuan,
+                    'status'        => '1',
+                    'keterangan'    => $keterangan
+                );
+                $this->M_Hrd->editchedule($id, $addschedule);
+                redirect('schedule_direktur');
+                break;
 
-    {
-        $id             = $this->input->post('id');
+            case 'reschedule':
+                $id             = $this->input->post('id');
+                $tanggal        = $this->input->post('tgl');
+                $jam            = $this->input->post('jam');
+                $keterangan     = $this->input->post('keterangan');
 
-        $this->M_Hrd->deleteschedule($id);
+                $addschedule = array(
+                    'tanggal'       => $tanggal,
+                    'jam'           => $jam,
+                    'status'        => '1',
+                    'keterangan'    => $keterangan,
+                );
+                $this->M_Hrd->reschedule($id, $addschedule);
+                redirect('schedule_direktur');
+                break;
 
-        redirect('schedule_direktur');
+            case 'cancelschedule':
+                $id             = $this->input->post('id');
+
+                $addschedule = array(
+                    'status'        => '2',
+                    'keterangan'    => 'cancel',
+                );
+                $this->M_Hrd->reschedule($id, $addschedule);
+                redirect('schedule_direktur');
+                break;
+
+            case 'deleteschedule':
+                $id             = $this->input->post('id');
+
+                $this->M_Hrd->deleteschedule($id);
+
+                redirect('schedule_direktur');
+                break;
+
+            case 'scheduledone':
+                $id             = $this->input->post('id');
+
+                $addschedule = array(
+                    'status'        => '3',
+                    'keterangan'    => 'DONE',
+                );
+                $this->M_Hrd->reschedule($id, $addschedule);
+                redirect('schedule_direktur');
+                break;
+
+            case 'archived':
+                $id             = $this->input->post('id');
+
+                $addschedule = array(
+                    'status'        => '4',
+                    'keterangan'    => 'DONE-ARCHIVED',
+                );
+                $this->M_Hrd->reschedule($id, $addschedule);
+                redirect('schedule_direktur');
+                break;
+        }
     }
 }

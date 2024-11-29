@@ -175,8 +175,5 @@ $route['changeowner']       = 'inventaris/C_Inventaris/changeowner';
 $route['selectowner']       = 'inventaris/C_Inventaris/selectowner';
 
 //scedule_direktur
-$route['schedule_direktur'] = 'schedule/C_Schedule';
-$route['addschedule']       = 'schedule/C_Schedule/addschedule';
-$route['editchedule']       = 'schedule/C_Schedule/editchedule';
-$route['reschedule']        = 'schedule/C_Schedule/reschedule';
-$route['deleteschedule']        = 'schedule/C_Schedule/deleteschedule';
+$route['schedule_direktur']         = 'schedule/C_Schedule';
+$route['act_schedule/(:any)']       = 'schedule/C_Schedule/act_schedule/$1';
