@@ -10,14 +10,26 @@ class Dashboard extends CI_Controller
         parent::__construct();
         $this->load->model('M_Logistik');
         $this->load->model('M_Hrd');
+        $this->load->model(array(
+            'M_Hrd' => 'hrd'
+        ));
     }
 
     public function index()
     {
-        if ($this->session->userdata('akses_lv') == '3') {
+        $kduser     = $this->session->userdata('kduser');
+        $lvuser     = $this->session->userdata('akses_lv');
+
+        if ($lvuser == '3') {
             $data['page_title'] = 'KARISMA';
             $this->load->view('partial/main/header.php', $data);
             $this->load->view('content/body-karyawan.php', $data);
+            $this->load->view('partial/main/footer.php');
+        } elseif ($lvuser == '5') {
+            $data['page_title'] = 'KARISMA';
+            $data['tamu']   = $this->hrd->getdataschedule()->result();
+            $this->load->view('partial/main/header.php', $data);
+            $this->load->view('content/list_tamu_dirut.php', $data);
             $this->load->view('partial/main/footer.php');
         } else {
             $data['page_title'] = 'KARISMA';
@@ -28,6 +40,7 @@ class Dashboard extends CI_Controller
             $this->load->view('partial/main/footer.php');
         }
     }
+
 
     public function konfirm_tamu()
     {
