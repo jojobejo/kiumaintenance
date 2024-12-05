@@ -78,7 +78,7 @@
         </div>
     </div>
 
-    <?php foreach ($getschedule as $g) : ?>
+    <?php foreach ($tamu as $g) : ?>
         <!-- MODAL EDIT -->
         <div class="modal fade" id="editedschedule<?= $g->id ?>">
             <div class="modal-dialog modal-lg">
@@ -162,7 +162,7 @@
     <?php endforeach; ?>
 
     <!-- MODAL schedule -->
-    <?php foreach ($getschedule as $g) : ?>
+    <?php foreach ($tamu as $g) : ?>
         <div class="modal fade" id="reschedule<?= $g->id ?>">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -212,7 +212,7 @@
             </div>
         </div>
     <?php endforeach; ?>
-    <?php foreach ($getschedule as $g) : ?>
+    <?php foreach ($tamu as $g) : ?>
         <div class="modal fade" id="deleteschedule<?= $g->id ?>">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -246,7 +246,7 @@
         </div>
     <?php endforeach; ?>
 
-    <?php foreach ($getschedule as $g) : ?>
+    <?php foreach ($tamu as $g) : ?>
         <div class="modal fade" id="cancelschedule<?= $g->id ?>">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -278,7 +278,7 @@
             </div>
         </div>
     <?php endforeach; ?>
-    <?php foreach ($getschedule as $g) : ?>
+    <?php foreach ($tamu as $g) : ?>
         <div class="modal fade" id="scheduledone<?= $g->id ?>">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -311,7 +311,7 @@
         </div>
     <?php endforeach; ?>
 
-    <?php foreach ($getschedule as $g) : ?>
+    <?php foreach ($tamu as $g) : ?>
         <div class="modal fade" id="archived<?= $g->id ?>">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">

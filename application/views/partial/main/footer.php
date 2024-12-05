@@ -37,6 +37,21 @@
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/dist/js/adminlte.js') ?>"></script>
 
+
+<script>
+  $(function() {
+    $('#tb_schedule').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": false,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
+
 </body>
 
 </html>

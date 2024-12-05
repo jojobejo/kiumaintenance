@@ -4,7 +4,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Dashboard extends CI_Controller
 {
 
-
     function __construct()
     {
         parent::__construct();
@@ -31,6 +30,12 @@ class Dashboard extends CI_Controller
             $this->load->view('partial/main/header.php', $data);
             $this->load->view('content/list_tamu_dirut.php', $data);
             $this->load->view('partial/main/footer.php');
+        } elseif ($lvuser == '2') {
+            $data['page_title']     = 'KARISMA';
+            $data['tamu']           = $this->hrd->getdataschedule()->result();
+            $this->load->view('partial/main/header.php', $data);
+            $this->load->view('content/list_tamu_diruts.php', $data);
+            $this->load->view('partial/main/footer.php');
         } else {
             $data['page_title'] = 'KARISMA';
             $data['logistik'] = $this->M_Logistik->get_all_do()->result();
@@ -41,10 +46,8 @@ class Dashboard extends CI_Controller
         }
     }
 
-
     public function konfirm_tamu()
     {
-
         $id = $this->input->post('id');
         $tanggal = $this->input->post('tanggal');
         $nama = $this->input->post('nama');

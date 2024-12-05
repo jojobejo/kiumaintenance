@@ -44,7 +44,7 @@ class C_Schedule extends CI_Controller
                     'keterangan'    => $keterangan,
                 );
                 $this->M_Hrd->insertchedule($addschedule);
-                redirect('schedule_direktur');
+                redirect('dashboard');
                 break;
 
             case 'editschedule':
@@ -68,7 +68,7 @@ class C_Schedule extends CI_Controller
                     'keterangan'    => $keterangan
                 );
                 $this->M_Hrd->editchedule($id, $addschedule);
-                redirect('schedule_direktur');
+                redirect('dashboard');
                 break;
 
             case 'reschedule':
@@ -84,7 +84,7 @@ class C_Schedule extends CI_Controller
                     'keterangan'    => $keterangan,
                 );
                 $this->M_Hrd->reschedule($id, $addschedule);
-                redirect('schedule_direktur');
+                redirect('dashboard');
                 break;
 
             case 'cancelschedule':
@@ -95,7 +95,7 @@ class C_Schedule extends CI_Controller
                     'keterangan'    => 'cancel',
                 );
                 $this->M_Hrd->reschedule($id, $addschedule);
-                redirect('schedule_direktur');
+                redirect('dashboard');
                 break;
 
             case 'deleteschedule':
@@ -103,7 +103,7 @@ class C_Schedule extends CI_Controller
 
                 $this->M_Hrd->deleteschedule($id);
 
-                redirect('schedule_direktur');
+                redirect('dashboard');
                 break;
 
             case 'scheduledone':
@@ -114,7 +114,7 @@ class C_Schedule extends CI_Controller
                     'keterangan'    => 'DONE',
                 );
                 $this->M_Hrd->reschedule($id, $addschedule);
-                redirect('schedule_direktur');
+                redirect('dashboard');
                 break;
 
             case 'archived':
@@ -125,7 +125,7 @@ class C_Schedule extends CI_Controller
                     'keterangan'    => 'DONE-ARCHIVED',
                 );
                 $this->M_Hrd->reschedule($id, $addschedule);
-                redirect('schedule_direktur');
+                redirect('dashboard');
                 break;
         }
     }
