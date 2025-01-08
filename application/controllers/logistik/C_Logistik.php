@@ -557,7 +557,7 @@ class C_Logistik extends CI_Controller
         $excel->getActiveSheet()->getStyle('K3')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('L3')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('M3')->applyFromArray($style_col);
- 
+
         $export = $this->M_Logistik->export_lap_distribusi();
 
         $no = 1;
@@ -922,5 +922,15 @@ class C_Logistik extends CI_Controller
         $this->M_Logistik->insert_lap_distribusi($datatmp);
         $this->M_Logistik->delete_tmp_lap_dis($id);
         redirect('tmp_logistik_distribusi');
+    }
+
+    public function delivery_order()
+    {
+        $data['page_title'] = 'KARISMA - LOGISTIK';
+        $data['datazahir']  = $this->M_Logistik->get_data_penjualan_zahir();
+
+        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('content/logistik/body.php', $data);
+        $this->load->view('partial/main/footer.php');
     }
 }

@@ -8,12 +8,14 @@ class Auth extends CI_Controller
         parent::__construct();
         $this->load->model('M_Auth');
     }
+
     function index()
     {
         $this->load->view("partial/login/header");
         $this->load->view("content/login/body");
         $this->load->view("partial/login/footer");
     }
+
     function process()
     {
         $username = $this->input->post('user_isi');
@@ -27,17 +29,17 @@ class Auth extends CI_Controller
             foreach ($check_password as $key) {
                 if ($key->username == $username && password_verify($password, $key->password)) {
                     $data_session = array(
-                        'id'          => $key->id,
-                        'username'    => $key->username,
-                        'kduser'      => $key->kode_user,
-                        'subdepartemen' => $key->sub_departemen,
-                        'nama_user'   => $key->nama_user,
-                        'akses_lv'    => $key->akses_lv,
-                        'departemen'  => $key->departemen,
-                        'status'      => "is_login"
+                        'id'            => $key->id,
+                        'nik'           => $key->nik,
+                        'departemen'    => $key->departemen,
+                        'lv'            => $key->akses_lv,
+                        'jobdesk'       => $key->jobdesk,
+                        'nama'          => $key->nm_karyawan
                     );
                     $this->session->set_userdata($data_session);
-                    redirect('dashboard');
+                    if ($key->jobdesk == 'LOGISTIK') {
+                        redirect('logistik');
+                    }
                 } else {
                     $this->session->set_flashdata("gagal", "username / password salah!!!");
                     redirect('Auth');

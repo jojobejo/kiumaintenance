@@ -133,7 +133,7 @@ class M_Logistik extends CI_Model
         GROUP BY a.kd_order
         ORDER BY a.id
         ");
-    } 
+    }
     function get_all_do()
     {
         return $this->db->query("SELECT 
@@ -326,5 +326,12 @@ class M_Logistik extends CI_Model
     public function delete_tmp_lap_dis($id)
     {
         return $this->db->delete('tb_tmp_lap_distribusi', array('id_lap_dis' => $id));
+    }
+
+    public function get_data_penjualan_zahir()
+    {
+        return $this->db->query("
+        
+        ")->result();
     }
 }
