@@ -927,7 +927,7 @@ class C_Logistik extends CI_Controller
     public function delivery_order()
     {
         $data['page_title'] = 'KARISMA - LOGISTIK';
-        $data['datazahir']  = $this->M_Logistik->get_data_penjualan_zahir();
+        // $data['datazahir']  = $this->M_Logistik->get_data_penjualan_zahir();
 
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/logistik/body.php', $data);

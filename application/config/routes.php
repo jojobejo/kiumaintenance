@@ -60,4 +60,4 @@ $route['process']       = 'Auth/process';
 $route['logout']        = 'Auth/logout';
 $route['dashboard']     = 'Dashboard';
 $route['logistik']      = 'logistik/C_Logistik/delivery_order';
-
+$route['keuangan']      = 'keuangan/C_Keuangan';
