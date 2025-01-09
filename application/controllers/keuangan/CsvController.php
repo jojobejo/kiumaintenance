@@ -1,64 +1,55 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class C_Keuangan extends CI_Controller
-{
+class CsvController extends CI_Controller {
 
-
-    function __construct()
-    {
+    public function __construct() {
         parent::__construct();
-        $this->load->model('M_Keuangan');
         $this->load->helper(array('form', 'url'));
         $this->load->library('upload');
         $this->load->database();
     }
 
-    public function index()
-    {
-        $data['page_title']     = 'KARISMA - KEUANGAN';
-        $data['stock']          = $this->M_Keuangan->daily_stock();
-
-        $this->load->view('partial/main/header.php', $data);
-        $this->load->view('content/keuangan/body.php', $data);
-        $this->load->view('partial/main/footer.php');
+    // Tampilkan form upload
+    public function index() {
+        $this->load->view('upload_csv');
     }
 
-    public function upload()
-    {
-
+    // Proses file CSV
+    public function upload() {
+        // Konfigurasi upload file
         $config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'csv';
-        $config['max_size'] = 2048;
+        $config['max_size'] = 2048; // Maksimal ukuran file dalam KB
 
         $this->upload->initialize($config);
 
         if (!$this->upload->do_upload('csv_file')) {
+            // Tampilkan error jika upload gagal
             $error = array('error' => $this->upload->display_errors());
-            // $data['page_title'] = 'KARISMA - KEUANGAN';
-            // $this->load->view('content/keuangan/body.php', $error, $data);
+            $this->load->view('upload_csv', $error);
         } else {
+            // Ambil data file yang diupload
             $fileData = $this->upload->data();
             $filePath = './uploads/' . $fileData['file_name'];
 
+            // Panggil fungsi untuk memproses CSV
             $this->processCSV($filePath);
 
-            // $data['success'] = 'File berhasil diupload dan diproses.';
-
-            // $data['page_title'] = 'KARISMA - KEUANGAN';
-            // $this->load->view('partial/main/header.php', $data);
-            // $this->load->view('content/keuangan/body.php', $data);
-            // $this->load->view('partial/main/footer.php');
-            redirect('keuangan');
+            // Berikan feedback sukses
+            $data['success'] = 'File berhasil diupload dan diproses.';
+            $this->load->view('upload_csv', $data);
         }
     }
-    private function processCSV($filePath)
-    {
+
+    // Fungsi untuk memproses file CSV
+    private function processCSV($filePath) {
         $handle = fopen($filePath, "r");
         if ($handle !== FALSE) {
-
+            // Lewati baris pertama jika itu header
             fgetcsv($handle);
 
+            // Iterasi baris CSV
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                 $csvData = array(
                     'nm_suplier' => $data[0],
@@ -67,10 +58,15 @@ class C_Keuangan extends CI_Controller
                     'qty'        => $data[3],
                     'dimensi'    => $data[4]
                 );
+
+                // Masukkan data ke database
                 $this->db->insert('tb_dailystock', $csvData);
             }
+
             fclose($handle);
         }
+
+        // Hapus file setelah diproses
         unlink($filePath);
     }
 }

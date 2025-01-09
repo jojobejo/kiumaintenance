@@ -25,11 +25,26 @@
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-body">
+                            <div class="col mb-2">
+                                <h2>Upload CSV</h2>
+                                <?php if (isset($error)) { ?>
+                                    <p style="color: red;"><?php echo $error; ?></p>
+                                <?php } ?>
+
+                                <?php if (isset($success)) { ?>
+                                    <p style="color: green;"><?php echo $success; ?></p>
+                                <?php } ?>
+
+                                <?php echo form_open_multipart('process-csv'); ?>
+                                <input type="file" name="csv_file" required>
+                                <button type="submit">Upload</button>
+                                <?php echo form_close(); ?>
+                            </div>
                             <table class="table table-bordered table-striped mb-2 ">
                                 <thead style="background-color: #212529; color:white;">
                                     <tr>
-                                        <td>Nama Barang</td>
                                         <td>Nama Suplier</td>
+                                        <td>Nama Barang</td>
                                         <td>Satuan Unit</td>
                                         <td>QTY</td>
                                         <td>QTY-MINIMUM</td>
@@ -38,15 +53,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>a</td>
-                                        <td>b</td>
-                                        <td>c</td>
-                                        <td>d</td>
-                                        <td>e</td>
-                                        <td>f</td>
-                                        <td>f</td>
-                                    </tr>
+                                    <?php foreach ($stock as $s) : ?>
+                                        <tr>
+                                            <td><?= $s->suplier ?></td>
+                                            <td><?= $s->namabarang ?></td>
+                                            <td><?= $s->satuan ?></td>
+                                            <td><?= $s->qty ?></td>
+                                            <td>0</td>
+                                            <td><?= $s->qty_box ?></td>
+                                            <td><?= $s->qty_pcs ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
