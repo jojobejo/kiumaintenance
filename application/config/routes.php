@@ -60,5 +60,7 @@ $route['process']                   = 'Auth/process';
 $route['logout']                    = 'Auth/logout';
 $route['dashboard']                 = 'Dashboard';
 $route['logistik']                  = 'logistik/C_Logistik/delivery_order';
+
 $route['keuangan']                  = 'keuangan/C_Keuangan';
 $route['process-csv']               = 'keuangan/C_Keuangan/upload';
+$route['truncateitm/(:any)']        = 'keuangan/C_Keuangan/truncateitm/$1';

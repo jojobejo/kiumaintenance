@@ -3,7 +3,11 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="<?php echo base_url('assets/images/Karisma.png') ?>" alt="AdminLTELogo" height="150" width="300">
+            <img class="animation__shake" src="<?php
+
+                                                use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Floor;
+
+                                                echo base_url('assets/images/Karisma.png') ?>" alt="AdminLTELogo" height="150" width="300">
         </div>
 
         <?php $this->load->view('partial/main/navbar') ?>
@@ -25,21 +29,59 @@
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-body">
-                            <div class="col mb-2">
-                                <h2>Upload CSV</h2>
-                                <?php if (isset($error)) { ?>
-                                    <p style="color: red;"><?php echo $error; ?></p>
-                                <?php } ?>
+                            <?php foreach ($count as $c) :
+                                $total = $c->jumlah; ?>
+                                <?php if ($total == 0) : ?>
+                                    <div class="col mb-2">
+                                        <h2>Upload CSV</h2>
+                                        <?php if (isset($error)) { ?>
+                                            <p style="color: red;"><?php echo $error; ?></p>
+                                        <?php } ?>
+                                        <?php if (isset($success)) { ?>
+                                            <p style="color: green;"><?php echo $success; ?></p>
+                                        <?php } ?>
+                                        <?php echo form_open_multipart('process-csv');
+                                        date_default_timezone_set("Asia/Jakarta");
+                                        $now = date('Y-m-d H:i:s'); ?>
 
-                                <?php if (isset($success)) { ?>
-                                    <p style="color: green;"><?php echo $success; ?></p>
-                                <?php } ?>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="exampleInputFile" name="csv_file">
+                                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                </div>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">Upload</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="file" name="csv_file">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="exampleInputPassword1" name="kdgenerates" value="<?= $kd ?>" hidden>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="exampleInputPassword1" name="dateupload" value="<?= $now ?>" hidden>
+                                        </div>
+                                        <button type="submit" class="btn btn-success btn-sm btn-block">Upload</button>
 
-                                <?php echo form_open_multipart('process-csv'); ?>
-                                <input type="file" name="csv_file" required>
-                                <button type="submit">Upload</button>
-                                <?php echo form_close(); ?>
-                            </div>
+                                        <?php echo form_close(); ?>
+                                    </div>
+                                <?php else : ?>
+                                    <?php foreach ($updated as $u) :
+                                        date_default_timezone_set("Asia/Jakarta");
+                                        $date_c = date_create($u->lastupdated);
+                                        $date = date_format($date_c, "Y-m-d H:i:s");
+                                    ?>
+                                        <h2>Last Updated : <?= format_indo($date) ?></h2>
+                                        <a href="<?= base_url('truncateitm/' . $u->kd) ?>" class="btn btn-sm btn-primary">Delete</a>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
                             <table class="table table-bordered table-striped mb-2 ">
                                 <thead style="background-color: #212529; color:white;">
                                     <tr>
@@ -53,15 +95,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($stock as $s) : ?>
+                                    <?php foreach ($stock as $s) :
+                                        $p = $s->p;
+                                        $l = $s->l;
+                                        $t = $s->t;
+                                        $qty = $s->qty;
+                                        $dimensi = $p * $l * $t;
+                                        $qty_box = Floor($qty / $dimensi);
+                                        $qty_pcs = $qty - ($qty_box * $dimensi);
+                                    ?>
                                         <tr>
-                                            <td><?= $s->suplier ?></td>
-                                            <td><?= $s->namabarang ?></td>
+                                            <td><?= $s->nmsuplier ?></td>
+                                            <td><?= $s->nmbarang ?></td>
                                             <td><?= $s->satuan ?></td>
                                             <td><?= $s->qty ?></td>
-                                            <td>0</td>
-                                            <td><?= $s->qty_box ?></td>
-                                            <td><?= $s->qty_pcs ?></td>
+                                            <td><?= $s->qtymin ?></td>
+                                            <td><?= $qty_box ?></td>
+                                            <td><?= $qty_pcs ?></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
