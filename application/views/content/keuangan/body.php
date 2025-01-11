@@ -3,11 +3,7 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="<?php
-
-                                                use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Floor;
-
-                                                echo base_url('assets/images/Karisma.png') ?>" alt="AdminLTELogo" height="150" width="300">
+            <img class="animation__shake" src="<?php echo base_url('assets/images/Karisma.png') ?>" alt="AdminLTELogo" height="150" width="300">
         </div>
 
         <?php $this->load->view('partial/main/navbar') ?>
@@ -31,7 +27,7 @@
                         <div class="card-body">
                             <?php foreach ($count as $c) :
                                 $total = $c->jumlah; ?>
-                                <?php if ($total == 0) : ?>
+                                <?php if ($total != 0) : ?>
                                     <div class="col mb-2">
                                         <h2>Upload CSV</h2>
                                         <?php if (isset($error)) { ?>
@@ -55,7 +51,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="file" name="csv_file">
                                         <div class="form-group">
                                             <input type="text" class="form-control" id="exampleInputPassword1" name="kdgenerates" value="<?= $kd ?>" hidden>
                                         </div>
@@ -80,44 +75,7 @@
                         </div>
                     </div>
 
-                    <div class="card">
-                        <div class="card-body">
-                            <table class="table table-bordered table-striped mb-2 ">
-                                <thead style="background-color: #212529; color:white;">
-                                    <tr>
-                                        <td>Nama Suplier</td>
-                                        <td>Nama Barang</td>
-                                        <td>Satuan Unit</td>
-                                        <td>QTY</td>
-                                        <td>QTY-MINIMUM</td>
-                                        <td>BOX</td>
-                                        <td>PCS</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($stock as $s) :
-                                        $p = $s->p;
-                                        $l = $s->l;
-                                        $t = $s->t;
-                                        $qty = $s->qty;
-                                        $dimensi = $p * $l * $t;
-                                        $qty_box = Floor($qty / $dimensi);
-                                        $qty_pcs = $qty - ($qty_box * $dimensi);
-                                    ?>
-                                        <tr>
-                                            <td><?= $s->nmsuplier ?></td>
-                                            <td><?= $s->nmbarang ?></td>
-                                            <td><?= $s->satuan ?></td>
-                                            <td><?= $s->qty ?></td>
-                                            <td><?= $s->qtymin ?></td>
-                                            <td><?= $qty_box ?></td>
-                                            <td><?= $qty_pcs ?></td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                
                 </div>
             </section>
         </div>

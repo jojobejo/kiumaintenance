@@ -4,7 +4,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class C_Keuangan extends CI_Controller
 {
 
-
     function __construct()
     {
         parent::__construct();
@@ -22,6 +21,7 @@ class C_Keuangan extends CI_Controller
         date_default_timezone_set("Asia/Jakarta");
         $data['kd']             = $this->M_Keuangan->generate_update();
         $data['updated']        = $this->M_Keuangan->get_last_update();
+        // $data['status']         = $this->M_Keuangan->countbygudang();
 
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/keuangan/body.php', $data);
@@ -41,7 +41,7 @@ class C_Keuangan extends CI_Controller
         } else {
             $fileData = $this->upload->data();
             $filePath = './uploads/' . $fileData['file_name'];
-            
+
             $this->processCSV($filePath);
             $this->update_data();
 
@@ -69,8 +69,9 @@ class C_Keuangan extends CI_Controller
 
             while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                 $csvData = array(
-                    'kd_suplier' => $data[1],
-                    'kd_barang'  => $data[2],
+                    'kd_suplier' => $data[0],
+                    'kd_barang'  => $data[1],
+                    'gudang'     => $data[2],
                     'qty'        => $data[3],
                 );
                 $this->db->insert('tb_dailystock', $csvData);
