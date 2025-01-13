@@ -21,7 +21,6 @@ class C_Keuangan extends CI_Controller
         date_default_timezone_set("Asia/Jakarta");
         $data['kd']             = $this->M_Keuangan->generate_update();
         $data['updated']        = $this->M_Keuangan->get_last_update();
-        // $data['status']         = $this->M_Keuangan->countbygudang();
 
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/keuangan/body.php', $data);
@@ -37,17 +36,22 @@ class C_Keuangan extends CI_Controller
         $this->upload->initialize($config);
 
         if (!$this->upload->do_upload('csv_file')) {
-            $error = array('error' => $this->upload->display_errors());
+
+            $data = array('error' => $this->upload->display_errors());
+            $this->load->view('content/keuangan/body.php', $data);
         } else {
+
             $fileData = $this->upload->data();
             $filePath = './uploads/' . $fileData['file_name'];
 
             $this->processCSV($filePath);
             $this->update_data();
 
-            redirect('keuangan');
+            $data['success'] = 'File berhasil diupload dan diproses.';
+            $this->load->view('content/keuangan/body.php', $data);
         }
     }
+
     private function update_data()
     {
         $kd     = $this->input->post('kdgenerates');
@@ -57,9 +61,10 @@ class C_Keuangan extends CI_Controller
             'kd_update'     => $kd,
             'last_update'   => $date
         );
-
         $this->M_Keuangan->insertupdate($data);
+        redirect('keuangan');
     }
+
     private function processCSV($filePath)
     {
         $handle = fopen($filePath, "r");
@@ -72,7 +77,7 @@ class C_Keuangan extends CI_Controller
                     'kd_suplier' => $data[0],
                     'kd_barang'  => $data[1],
                     'gudang'     => $data[2],
-                    'qty'        => $data[3],
+                    'qty'        => $data[3]
                 );
                 $this->db->insert('tb_dailystock', $csvData);
             }

@@ -1,3 +1,5 @@
+
+
 <body class="hold-transition sidebar-mini sidebar-collapse">
     <div class="wrapper">
 
@@ -51,10 +53,15 @@
                                                     <span class="input-group-text">Upload</span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" name="kdgenerates" value="<?= $kd ?>">
-                                            <input type="text" class="form-control" name="dateupload" value="<?= $now ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="kdgenerates" value="<?= $kd ?>" hidden>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="dateupload" value="<?= $now ?>" hidden>
                                         </div>
                                         <button type="submit" class="btn btn-success btn-sm btn-block">Upload</button>
+
                                         <?php echo form_close(); ?>
                                     </div>
                                 <?php else : ?>
@@ -91,3 +98,6 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+
+
+    
