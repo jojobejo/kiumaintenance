@@ -68,4 +68,8 @@ class M_Keuangan extends CI_Model
     {
         $this->db->empty_table('tb_dailystock');
     }
+    public function insert_batch($data)
+    {
+        $this->db->insert_batch('tb_dailystock', $data);
+    }
 }

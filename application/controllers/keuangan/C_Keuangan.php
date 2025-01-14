@@ -27,14 +27,36 @@ class C_Keuangan extends CI_Controller
         $this->load->view('partial/main/footer.php');
     }
 
-    public function indexinsert()
+    public function insertmodule()
     {
         $data['page_title']     = 'KARISMA - KEUANGAN';
-        $data['stock']          = $this->M_Keuangan->daily_stock();
 
         $this->load->view('partial/main/header.php', $data);
-        $this->load->view('content/keuangan/bodycoba.php', $data);
+        $this->load->view('content/keuangan/coba1.php', $data);
         $this->load->view('partial/main/footer.php');
+    }
+
+    public function import()
+    {
+        $file_data = fopen($_FILES['csv_file']['tmp_name'], 'r');
+        fgetcsv($file_data); // Skip header row
+
+        $data = [];
+        while ($row = fgetcsv($file_data)) {
+            $data[] = [
+                'kd_suplier'    => $row[0],
+                'kd_barang'     => $row[1],
+                'gudang'        => $row[2],
+                'qty'           => $row[3]
+            ];
+        }
+        if (!empty($data)) {
+            $this->M_Keuangan->insert_batch($data);
+            $this->session->set_flashdata('message', 'Data imported successfully.');
+        } else {
+            $this->session->set_flashdata('message', 'Failed to import data.');
+        }
+        redirect('insertmodule');
     }
 
     public function upload()

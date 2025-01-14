@@ -27,7 +27,7 @@
                         <div class="card-body">
                             <?php foreach ($count as $c) :
                                 $total = $c->jumlah; ?>
-                                <?php if ($total == 0) : ?>
+                                <?php if ($total != 0) : ?>
                                     <div class="col mb-2">
                                         <h2>Upload CSV</h2>
                                         <?php if (isset($error)) { ?>
@@ -51,9 +51,10 @@
                                                     <span class="input-group-text">Upload</span>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" name="kdgenerates" value="<?= $kd ?>">
-                                            <input type="text" class="form-control" name="dateupload" value="<?= $now ?>">
+                                            <input type="text" class="form-control" name="kdgenerates" value="<?= $kd ?>" hidden>
+                                            <input type="text" class="form-control" name="dateupload" value="<?= $now ?>" hidden>
                                         </div>
+
                                         <button type="submit" class="btn btn-success btn-sm btn-block">Upload</button>
                                         <?php echo form_close(); ?>
                                     </div>
