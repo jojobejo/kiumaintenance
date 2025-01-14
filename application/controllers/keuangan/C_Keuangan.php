@@ -16,14 +16,24 @@ class C_Keuangan extends CI_Controller
     public function index()
     {
         $data['page_title']     = 'KARISMA - KEUANGAN';
+        date_default_timezone_set("Asia/Jakarta");
         $data['stock']          = $this->M_Keuangan->daily_stock();
         $data['count']          = $this->M_Keuangan->countbarang();
-        date_default_timezone_set("Asia/Jakarta");
         $data['kd']             = $this->M_Keuangan->generate_update();
         $data['updated']        = $this->M_Keuangan->get_last_update();
 
         $this->load->view('partial/main/header.php', $data);
         $this->load->view('content/keuangan/body.php', $data);
+        $this->load->view('partial/main/footer.php');
+    }
+
+    public function indexinsert()
+    {
+        $data['page_title']     = 'KARISMA - KEUANGAN';
+        $data['stock']          = $this->M_Keuangan->daily_stock();
+
+        $this->load->view('partial/main/header.php', $data);
+        $this->load->view('content/keuangan/bodycoba.php', $data);
         $this->load->view('partial/main/footer.php');
     }
 
@@ -38,7 +48,7 @@ class C_Keuangan extends CI_Controller
         if (!$this->upload->do_upload('csv_file')) {
 
             $data = array('error' => $this->upload->display_errors());
-            $this->load->view('content/keuangan/body.php', $data);
+            redirect('keuangan1', $data);
         } else {
 
             $fileData = $this->upload->data();
@@ -47,8 +57,7 @@ class C_Keuangan extends CI_Controller
             $this->processCSV($filePath);
             $this->update_data();
 
-            $data['success'] = 'File berhasil diupload dan diproses.';
-            $this->load->view('content/keuangan/body.php', $data);
+            redirect('keuangan1');
         }
     }
 
@@ -62,34 +71,41 @@ class C_Keuangan extends CI_Controller
             'last_update'   => $date
         );
         $this->M_Keuangan->insertupdate($data);
-        redirect('keuangan');
     }
 
     private function processCSV($filePath)
     {
         $handle = fopen($filePath, "r");
-        if ($handle !== FALSE) {
+        if ($handle) {
+            $header = fgetcsv($handle);  // Read header row
+            $batch_data = [];
+            $batch_size = 500;  // Adjust batch size for better performance
 
-            fgetcsv($handle);
+            while (($row = fgetcsv($handle)) !== FALSE) {
+                $data = array_combine($header, $row);
+                $batch_data[] = $data;
 
-            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                $csvData = array(
-                    'kd_suplier' => $data[0],
-                    'kd_barang'  => $data[1],
-                    'gudang'     => $data[2],
-                    'qty'        => $data[3]
-                );
-                $this->db->insert('tb_dailystock', $csvData);
+                if (count($batch_data) >= $batch_size) {
+                    $this->db->insert_batch('tb_dailystock', $batch_data);
+                    $batch_data = [];  // Clear the batch data after insert
+                }
             }
+
+            if (!empty($batch_data)) {
+                $this->db->insert_batch('tb_dailystock', $batch_data);
+            }
+
             fclose($handle);
+            echo "Data imported successfully!";
+        } else {
+            echo "Error opening the file.";
         }
-        unlink($filePath);
     }
 
     public function truncateitm($kd)
     {
         $this->M_Keuangan->truncateitm();
         $this->M_Keuangan->deleteupdateed($kd);
-        redirect('keuangan');
+        redirect('keuangan1');
     }
 }

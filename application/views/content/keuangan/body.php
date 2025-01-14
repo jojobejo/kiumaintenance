@@ -65,6 +65,29 @@
                                     ?>
                                         <h2>Last Updated : <?= format_indo($date) ?></h2>
                                         <a href="<?= base_url('truncateitm/' . $u->kd) ?>" class="btn btn-sm btn-primary">Delete</a>
+
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <table id="tb_inventaris" class="table table-bordered table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <td>a</td>
+                                                            <td>b</td>
+                                                            <td>c</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php foreach ($stock as $s) : ?>
+                                                            <tr>
+                                                                <td><?= $s->nmsuplier ?></td>
+                                                                <td><?= $s->nmbarang ?></td>
+                                                                <td><?= $s->qty ?></td>
+                                                            </tr>
+                                                        <?php endforeach; ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>
