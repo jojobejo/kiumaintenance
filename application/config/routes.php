@@ -62,11 +62,9 @@ $route['dashboard']                 = 'Dashboard';
 $route['logistik']                  = 'logistik/C_Logistik/delivery_order';
 
 $route['keuangan']                  = 'keuangan/C_Keuangan';
-
 $route['insertmodule']              = 'keuangan/C_Keuangan/insertmodule';
 $route['csv_import']                = 'keuangan/C_Keuangan/import';
+$route['get_data_a']                = 'keuangan/C_Keuangan/get_stock_a';
+$route['gudang/(:any)']             = 'keuangan/C_Keuangan/gudang/$1';
 
-
-$route['keuangan1']                 = 'keuangan/C_Keuangan/indexinsert';
-$route['process-csv']               = 'keuangan/C_Keuangan/upload';
 $route['truncateitm/(:any)']        = 'keuangan/C_Keuangan/truncateitm/$1';

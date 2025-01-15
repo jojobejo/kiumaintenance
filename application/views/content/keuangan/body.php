@@ -23,78 +23,42 @@
             <!-- /.content-header -->
             <section class="content">
                 <div class="container-fluid">
+                    <?php if ($this->session->userdata('lv') == 1) : ?>
+                        <a href="<?= base_url('insertmodule') ?>" class="btn btn-primary mb-2">Update Data Stock</a>
+
+                        <a href="<?= base_url('gudang/2') ?>" class="btn btn-success mb-2">Gudang Global</a>
+                        <a href="<?= base_url('gudang/1') ?>" class="btn btn-success mb-2">Gudang Induk</a>
+                        <a href="<?= base_url('gudang/3') ?>" class="btn btn-success mb-2">Gudang Rusak</a>
+
+                        <a href="<?= base_url('getdatastockmin') ?>" class="btn btn-warning mb-2">Minimal Stock</a>
+                    <?php else : ?>
+                        <a href="<?= base_url('getdatastockmin') ?>" class="btn btn-primary mb-2">Minimal Stock</a>
+                    <?php endif; ?>
+
                     <div class="card">
                         <div class="card-body">
-                            <?php foreach ($count as $c) :
-                                $total = $c->jumlah; ?>
-                                <?php if ($total != 0) : ?>
-                                    <div class="col mb-2">
-                                        <h2>Upload CSV</h2>
-                                        <?php if (isset($error)) { ?>
-                                            <p style="color: red;"><?php echo $error; ?></p>
-                                        <?php } ?>
-                                        <?php if (isset($success)) { ?>
-                                            <p style="color: green;"><?php echo $success; ?></p>
-                                        <?php } ?>
-
-                                        <?php echo form_open_multipart('process-csv');
-                                        date_default_timezone_set("Asia/Jakarta");
-                                        $now = date('Y-m-d H:i:s'); ?>
-
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="exampleInputFile" name="csv_file">
-                                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                                </div>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">Upload</span>
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control" name="kdgenerates" value="<?= $kd ?>" hidden>
-                                            <input type="text" class="form-control" name="dateupload" value="<?= $now ?>" hidden>
-                                        </div>
-
-                                        <button type="submit" class="btn btn-success btn-sm btn-block">Upload</button>
-                                        <?php echo form_close(); ?>
-                                    </div>
-                                <?php else : ?>
-                                    <?php foreach ($updated as $u) :
-                                        date_default_timezone_set("Asia/Jakarta");
-                                        $date_c = date_create($u->lastupdated);
-                                        $date = date_format($date_c, "Y-m-d H:i:s");
-                                    ?>
-                                        <h2>Last Updated : <?= format_indo($date) ?></h2>
-                                        <a href="<?= base_url('truncateitm/' . $u->kd) ?>" class="btn btn-sm btn-primary">Delete</a>
-
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <table id="tb_inventaris" class="table table-bordered table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <td>a</td>
-                                                            <td>b</td>
-                                                            <td>c</td>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php foreach ($stock as $s) : ?>
-                                                            <tr>
-                                                                <td><?= $s->nmsuplier ?></td>
-                                                                <td><?= $s->nmbarang ?></td>
-                                                                <td><?= $s->qty ?></td>
-                                                            </tr>
-                                                        <?php endforeach; ?>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
+                            <table id="tbgudang" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <td>Total Data</td>
+                                        <td>Gdg.Global</td>
+                                        <td>Gdg.Induk</td>
+                                        <td>Gdg.Rusak</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($count_gudang as $c) : ?>
+                                        <tr>
+                                            <td><?= $c->total_data ?></td>
+                                            <td><?= $c->global ?></td>
+                                            <td><?= $c->induk ?></td>
+                                            <td><?= $c->rusak ?></td>
+                                        </tr>
                                     <?php endforeach; ?>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-
 
                 </div>
             </section>

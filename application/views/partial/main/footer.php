@@ -50,12 +50,30 @@
       "autoWidth": false,
       "responsive": true,
     });
-    $("#tb_inventaris").DataTable({
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     bsCustomFileInput.init();
+  });
+</script>
+
+<script type="text/javascript">
+  var table;
+  $(document).ready(function() {
+
+    //datatables
+    table = $('#tb_qty').DataTable({
+
+      "processing": true,
+      "serverSide": true,
+      "order": [],
+      "ajax": {
+        "url": "<?= base_url('get_data_a') ?>",
+        "type": "POST"
+      },
+      "columnDefs": [{
+        "targets": [0],
+        "orderable": false,
+      }, ],
+    });
+
   });
 </script>
 
